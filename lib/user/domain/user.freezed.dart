@@ -139,13 +139,14 @@ class __$$_UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res, _$_User>
 
 /// @nodoc
 
-class _$_User implements _User {
+class _$_User extends _User {
   const _$_User(
       {required this.fName,
       required this.lName,
       required this.username,
       required this.email,
-      required this.password});
+      required this.password})
+      : super._();
 
   @override
   final String fName;
@@ -188,13 +189,14 @@ class _$_User implements _User {
       __$$_UserCopyWithImpl<_$_User>(this, _$identity);
 }
 
-abstract class _User implements User {
+abstract class _User extends User {
   const factory _User(
       {required final String fName,
       required final String lName,
       required final String username,
       required final String email,
       required final String password}) = _$_User;
+  const _User._() : super._();
 
   @override
   String get fName;

@@ -19,8 +19,7 @@ mixin _$UserBlocState {
   User? get user => throw _privateConstructorUsedError;
   List<User> get users => throw _privateConstructorUsedError;
   @optionalTypeArgs
-  TResult when<TResult extends Object?>(
-    TResult Function(User? user, List<User> users) $default, {
+  TResult when<TResult extends Object?>({
     required TResult Function(User? user, List<User> users) initialState,
     required TResult Function(User? user, List<User> users) loadingState,
     required TResult Function(User? user, List<User> users) loadedState,
@@ -29,8 +28,7 @@ mixin _$UserBlocState {
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>(
-    TResult? Function(User? user, List<User> users)? $default, {
+  TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(User? user, List<User> users)? initialState,
     TResult? Function(User? user, List<User> users)? loadingState,
     TResult? Function(User? user, List<User> users)? loadedState,
@@ -39,8 +37,7 @@ mixin _$UserBlocState {
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>(
-    TResult Function(User? user, List<User> users)? $default, {
+  TResult maybeWhen<TResult extends Object?>({
     TResult Function(User? user, List<User> users)? initialState,
     TResult Function(User? user, List<User> users)? loadingState,
     TResult Function(User? user, List<User> users)? loadedState,
@@ -50,8 +47,7 @@ mixin _$UserBlocState {
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
-  TResult map<TResult extends Object?>(
-    TResult Function(_UserBlocState value) $default, {
+  TResult map<TResult extends Object?>({
     required TResult Function(InitialState value) initialState,
     required TResult Function(LoadingState value) loadingState,
     required TResult Function(LoadedState value) loadedState,
@@ -59,8 +55,7 @@ mixin _$UserBlocState {
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>(
-    TResult? Function(_UserBlocState value)? $default, {
+  TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(InitialState value)? initialState,
     TResult? Function(LoadingState value)? loadingState,
     TResult? Function(LoadedState value)? loadedState,
@@ -68,8 +63,7 @@ mixin _$UserBlocState {
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>(
-    TResult Function(_UserBlocState value)? $default, {
+  TResult maybeMap<TResult extends Object?>({
     TResult Function(InitialState value)? initialState,
     TResult Function(LoadingState value)? loadingState,
     TResult Function(LoadedState value)? loadedState,
@@ -136,187 +130,6 @@ class _$UserBlocStateCopyWithImpl<$Res, $Val extends UserBlocState>
 }
 
 /// @nodoc
-abstract class _$$_UserBlocStateCopyWith<$Res>
-    implements $UserBlocStateCopyWith<$Res> {
-  factory _$$_UserBlocStateCopyWith(
-          _$_UserBlocState value, $Res Function(_$_UserBlocState) then) =
-      __$$_UserBlocStateCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call({User? user, List<User> users});
-
-  @override
-  $UserCopyWith<$Res>? get user;
-}
-
-/// @nodoc
-class __$$_UserBlocStateCopyWithImpl<$Res>
-    extends _$UserBlocStateCopyWithImpl<$Res, _$_UserBlocState>
-    implements _$$_UserBlocStateCopyWith<$Res> {
-  __$$_UserBlocStateCopyWithImpl(
-      _$_UserBlocState _value, $Res Function(_$_UserBlocState) _then)
-      : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? user = freezed,
-    Object? users = null,
-  }) {
-    return _then(_$_UserBlocState(
-      user: freezed == user
-          ? _value.user
-          : user // ignore: cast_nullable_to_non_nullable
-              as User?,
-      users: null == users
-          ? _value._users
-          : users // ignore: cast_nullable_to_non_nullable
-              as List<User>,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$_UserBlocState extends _UserBlocState {
-  const _$_UserBlocState({this.user, required final List<User> users})
-      : _users = users,
-        super._();
-
-  @override
-  final User? user;
-  final List<User> _users;
-  @override
-  List<User> get users {
-    if (_users is EqualUnmodifiableListView) return _users;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_users);
-  }
-
-  @override
-  String toString() {
-    return 'UserBlocState(user: $user, users: $users)';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$_UserBlocState &&
-            (identical(other.user, user) || other.user == user) &&
-            const DeepCollectionEquality().equals(other._users, _users));
-  }
-
-  @override
-  int get hashCode => Object.hash(
-      runtimeType, user, const DeepCollectionEquality().hash(_users));
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$_UserBlocStateCopyWith<_$_UserBlocState> get copyWith =>
-      __$$_UserBlocStateCopyWithImpl<_$_UserBlocState>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>(
-    TResult Function(User? user, List<User> users) $default, {
-    required TResult Function(User? user, List<User> users) initialState,
-    required TResult Function(User? user, List<User> users) loadingState,
-    required TResult Function(User? user, List<User> users) loadedState,
-    required TResult Function(User? user, List<User> users, Failure failure)
-        failureState,
-  }) {
-    return $default(user, users);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>(
-    TResult? Function(User? user, List<User> users)? $default, {
-    TResult? Function(User? user, List<User> users)? initialState,
-    TResult? Function(User? user, List<User> users)? loadingState,
-    TResult? Function(User? user, List<User> users)? loadedState,
-    TResult? Function(User? user, List<User> users, Failure failure)?
-        failureState,
-  }) {
-    return $default?.call(user, users);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>(
-    TResult Function(User? user, List<User> users)? $default, {
-    TResult Function(User? user, List<User> users)? initialState,
-    TResult Function(User? user, List<User> users)? loadingState,
-    TResult Function(User? user, List<User> users)? loadedState,
-    TResult Function(User? user, List<User> users, Failure failure)?
-        failureState,
-    required TResult orElse(),
-  }) {
-    if ($default != null) {
-      return $default(user, users);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>(
-    TResult Function(_UserBlocState value) $default, {
-    required TResult Function(InitialState value) initialState,
-    required TResult Function(LoadingState value) loadingState,
-    required TResult Function(LoadedState value) loadedState,
-    required TResult Function(FailureState value) failureState,
-  }) {
-    return $default(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>(
-    TResult? Function(_UserBlocState value)? $default, {
-    TResult? Function(InitialState value)? initialState,
-    TResult? Function(LoadingState value)? loadingState,
-    TResult? Function(LoadedState value)? loadedState,
-    TResult? Function(FailureState value)? failureState,
-  }) {
-    return $default?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>(
-    TResult Function(_UserBlocState value)? $default, {
-    TResult Function(InitialState value)? initialState,
-    TResult Function(LoadingState value)? loadingState,
-    TResult Function(LoadedState value)? loadedState,
-    TResult Function(FailureState value)? failureState,
-    required TResult orElse(),
-  }) {
-    if ($default != null) {
-      return $default(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _UserBlocState extends UserBlocState {
-  const factory _UserBlocState(
-      {final User? user, required final List<User> users}) = _$_UserBlocState;
-  const _UserBlocState._() : super._();
-
-  @override
-  User? get user;
-  @override
-  List<User> get users;
-  @override
-  @JsonKey(ignore: true)
-  _$$_UserBlocStateCopyWith<_$_UserBlocState> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
 abstract class _$$InitialStateCopyWith<$Res>
     implements $UserBlocStateCopyWith<$Res> {
   factory _$$InitialStateCopyWith(
@@ -359,10 +172,9 @@ class __$$InitialStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$InitialState extends InitialState {
+class _$InitialState implements InitialState {
   const _$InitialState({this.user, required final List<User> users})
-      : _users = users,
-        super._();
+      : _users = users;
 
   @override
   final User? user;
@@ -400,8 +212,7 @@ class _$InitialState extends InitialState {
 
   @override
   @optionalTypeArgs
-  TResult when<TResult extends Object?>(
-    TResult Function(User? user, List<User> users) $default, {
+  TResult when<TResult extends Object?>({
     required TResult Function(User? user, List<User> users) initialState,
     required TResult Function(User? user, List<User> users) loadingState,
     required TResult Function(User? user, List<User> users) loadedState,
@@ -413,8 +224,7 @@ class _$InitialState extends InitialState {
 
   @override
   @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>(
-    TResult? Function(User? user, List<User> users)? $default, {
+  TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(User? user, List<User> users)? initialState,
     TResult? Function(User? user, List<User> users)? loadingState,
     TResult? Function(User? user, List<User> users)? loadedState,
@@ -426,8 +236,7 @@ class _$InitialState extends InitialState {
 
   @override
   @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>(
-    TResult Function(User? user, List<User> users)? $default, {
+  TResult maybeWhen<TResult extends Object?>({
     TResult Function(User? user, List<User> users)? initialState,
     TResult Function(User? user, List<User> users)? loadingState,
     TResult Function(User? user, List<User> users)? loadedState,
@@ -443,8 +252,7 @@ class _$InitialState extends InitialState {
 
   @override
   @optionalTypeArgs
-  TResult map<TResult extends Object?>(
-    TResult Function(_UserBlocState value) $default, {
+  TResult map<TResult extends Object?>({
     required TResult Function(InitialState value) initialState,
     required TResult Function(LoadingState value) loadingState,
     required TResult Function(LoadedState value) loadedState,
@@ -455,8 +263,7 @@ class _$InitialState extends InitialState {
 
   @override
   @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>(
-    TResult? Function(_UserBlocState value)? $default, {
+  TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(InitialState value)? initialState,
     TResult? Function(LoadingState value)? loadingState,
     TResult? Function(LoadedState value)? loadedState,
@@ -467,8 +274,7 @@ class _$InitialState extends InitialState {
 
   @override
   @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>(
-    TResult Function(_UserBlocState value)? $default, {
+  TResult maybeMap<TResult extends Object?>({
     TResult Function(InitialState value)? initialState,
     TResult Function(LoadingState value)? loadingState,
     TResult Function(LoadedState value)? loadedState,
@@ -482,10 +288,9 @@ class _$InitialState extends InitialState {
   }
 }
 
-abstract class InitialState extends UserBlocState {
+abstract class InitialState implements UserBlocState {
   const factory InitialState(
       {final User? user, required final List<User> users}) = _$InitialState;
-  const InitialState._() : super._();
 
   @override
   User? get user;
@@ -540,10 +345,9 @@ class __$$LoadingStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$LoadingState extends LoadingState {
+class _$LoadingState implements LoadingState {
   const _$LoadingState({this.user, required final List<User> users})
-      : _users = users,
-        super._();
+      : _users = users;
 
   @override
   final User? user;
@@ -581,8 +385,7 @@ class _$LoadingState extends LoadingState {
 
   @override
   @optionalTypeArgs
-  TResult when<TResult extends Object?>(
-    TResult Function(User? user, List<User> users) $default, {
+  TResult when<TResult extends Object?>({
     required TResult Function(User? user, List<User> users) initialState,
     required TResult Function(User? user, List<User> users) loadingState,
     required TResult Function(User? user, List<User> users) loadedState,
@@ -594,8 +397,7 @@ class _$LoadingState extends LoadingState {
 
   @override
   @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>(
-    TResult? Function(User? user, List<User> users)? $default, {
+  TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(User? user, List<User> users)? initialState,
     TResult? Function(User? user, List<User> users)? loadingState,
     TResult? Function(User? user, List<User> users)? loadedState,
@@ -607,8 +409,7 @@ class _$LoadingState extends LoadingState {
 
   @override
   @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>(
-    TResult Function(User? user, List<User> users)? $default, {
+  TResult maybeWhen<TResult extends Object?>({
     TResult Function(User? user, List<User> users)? initialState,
     TResult Function(User? user, List<User> users)? loadingState,
     TResult Function(User? user, List<User> users)? loadedState,
@@ -624,8 +425,7 @@ class _$LoadingState extends LoadingState {
 
   @override
   @optionalTypeArgs
-  TResult map<TResult extends Object?>(
-    TResult Function(_UserBlocState value) $default, {
+  TResult map<TResult extends Object?>({
     required TResult Function(InitialState value) initialState,
     required TResult Function(LoadingState value) loadingState,
     required TResult Function(LoadedState value) loadedState,
@@ -636,8 +436,7 @@ class _$LoadingState extends LoadingState {
 
   @override
   @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>(
-    TResult? Function(_UserBlocState value)? $default, {
+  TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(InitialState value)? initialState,
     TResult? Function(LoadingState value)? loadingState,
     TResult? Function(LoadedState value)? loadedState,
@@ -648,8 +447,7 @@ class _$LoadingState extends LoadingState {
 
   @override
   @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>(
-    TResult Function(_UserBlocState value)? $default, {
+  TResult maybeMap<TResult extends Object?>({
     TResult Function(InitialState value)? initialState,
     TResult Function(LoadingState value)? loadingState,
     TResult Function(LoadedState value)? loadedState,
@@ -663,10 +461,9 @@ class _$LoadingState extends LoadingState {
   }
 }
 
-abstract class LoadingState extends UserBlocState {
+abstract class LoadingState implements UserBlocState {
   const factory LoadingState(
       {final User? user, required final List<User> users}) = _$LoadingState;
-  const LoadingState._() : super._();
 
   @override
   User? get user;
@@ -721,10 +518,9 @@ class __$$LoadedStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$LoadedState extends LoadedState {
+class _$LoadedState implements LoadedState {
   const _$LoadedState({this.user, required final List<User> users})
-      : _users = users,
-        super._();
+      : _users = users;
 
   @override
   final User? user;
@@ -762,8 +558,7 @@ class _$LoadedState extends LoadedState {
 
   @override
   @optionalTypeArgs
-  TResult when<TResult extends Object?>(
-    TResult Function(User? user, List<User> users) $default, {
+  TResult when<TResult extends Object?>({
     required TResult Function(User? user, List<User> users) initialState,
     required TResult Function(User? user, List<User> users) loadingState,
     required TResult Function(User? user, List<User> users) loadedState,
@@ -775,8 +570,7 @@ class _$LoadedState extends LoadedState {
 
   @override
   @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>(
-    TResult? Function(User? user, List<User> users)? $default, {
+  TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(User? user, List<User> users)? initialState,
     TResult? Function(User? user, List<User> users)? loadingState,
     TResult? Function(User? user, List<User> users)? loadedState,
@@ -788,8 +582,7 @@ class _$LoadedState extends LoadedState {
 
   @override
   @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>(
-    TResult Function(User? user, List<User> users)? $default, {
+  TResult maybeWhen<TResult extends Object?>({
     TResult Function(User? user, List<User> users)? initialState,
     TResult Function(User? user, List<User> users)? loadingState,
     TResult Function(User? user, List<User> users)? loadedState,
@@ -805,8 +598,7 @@ class _$LoadedState extends LoadedState {
 
   @override
   @optionalTypeArgs
-  TResult map<TResult extends Object?>(
-    TResult Function(_UserBlocState value) $default, {
+  TResult map<TResult extends Object?>({
     required TResult Function(InitialState value) initialState,
     required TResult Function(LoadingState value) loadingState,
     required TResult Function(LoadedState value) loadedState,
@@ -817,8 +609,7 @@ class _$LoadedState extends LoadedState {
 
   @override
   @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>(
-    TResult? Function(_UserBlocState value)? $default, {
+  TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(InitialState value)? initialState,
     TResult? Function(LoadingState value)? loadingState,
     TResult? Function(LoadedState value)? loadedState,
@@ -829,8 +620,7 @@ class _$LoadedState extends LoadedState {
 
   @override
   @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>(
-    TResult Function(_UserBlocState value)? $default, {
+  TResult maybeMap<TResult extends Object?>({
     TResult Function(InitialState value)? initialState,
     TResult Function(LoadingState value)? loadingState,
     TResult Function(LoadedState value)? loadedState,
@@ -844,10 +634,9 @@ class _$LoadedState extends LoadedState {
   }
 }
 
-abstract class LoadedState extends UserBlocState {
+abstract class LoadedState implements UserBlocState {
   const factory LoadedState(
       {final User? user, required final List<User> users}) = _$LoadedState;
-  const LoadedState._() : super._();
 
   @override
   User? get user;
@@ -916,11 +705,10 @@ class __$$FailureStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$FailureState extends FailureState {
+class _$FailureState implements FailureState {
   const _$FailureState(
       {this.user, required final List<User> users, required this.failure})
-      : _users = users,
-        super._();
+      : _users = users;
 
   @override
   final User? user;
@@ -962,8 +750,7 @@ class _$FailureState extends FailureState {
 
   @override
   @optionalTypeArgs
-  TResult when<TResult extends Object?>(
-    TResult Function(User? user, List<User> users) $default, {
+  TResult when<TResult extends Object?>({
     required TResult Function(User? user, List<User> users) initialState,
     required TResult Function(User? user, List<User> users) loadingState,
     required TResult Function(User? user, List<User> users) loadedState,
@@ -975,8 +762,7 @@ class _$FailureState extends FailureState {
 
   @override
   @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>(
-    TResult? Function(User? user, List<User> users)? $default, {
+  TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(User? user, List<User> users)? initialState,
     TResult? Function(User? user, List<User> users)? loadingState,
     TResult? Function(User? user, List<User> users)? loadedState,
@@ -988,8 +774,7 @@ class _$FailureState extends FailureState {
 
   @override
   @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>(
-    TResult Function(User? user, List<User> users)? $default, {
+  TResult maybeWhen<TResult extends Object?>({
     TResult Function(User? user, List<User> users)? initialState,
     TResult Function(User? user, List<User> users)? loadingState,
     TResult Function(User? user, List<User> users)? loadedState,
@@ -1005,8 +790,7 @@ class _$FailureState extends FailureState {
 
   @override
   @optionalTypeArgs
-  TResult map<TResult extends Object?>(
-    TResult Function(_UserBlocState value) $default, {
+  TResult map<TResult extends Object?>({
     required TResult Function(InitialState value) initialState,
     required TResult Function(LoadingState value) loadingState,
     required TResult Function(LoadedState value) loadedState,
@@ -1017,8 +801,7 @@ class _$FailureState extends FailureState {
 
   @override
   @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>(
-    TResult? Function(_UserBlocState value)? $default, {
+  TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(InitialState value)? initialState,
     TResult? Function(LoadingState value)? loadingState,
     TResult? Function(LoadedState value)? loadedState,
@@ -1029,8 +812,7 @@ class _$FailureState extends FailureState {
 
   @override
   @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>(
-    TResult Function(_UserBlocState value)? $default, {
+  TResult maybeMap<TResult extends Object?>({
     TResult Function(InitialState value)? initialState,
     TResult Function(LoadingState value)? loadingState,
     TResult Function(LoadedState value)? loadedState,
@@ -1044,12 +826,11 @@ class _$FailureState extends FailureState {
   }
 }
 
-abstract class FailureState extends UserBlocState {
+abstract class FailureState implements UserBlocState {
   const factory FailureState(
       {final User? user,
       required final List<User> users,
       required final Failure failure}) = _$FailureState;
-  const FailureState._() : super._();
 
   @override
   User? get user;

@@ -12,7 +12,7 @@ import 'package:ryan_pujo_app/user/infrastructure/user_dto.dart';
 class UserRepo implements UserRepositoryContract {
   final UserRemoteDatasourceContract _remmoteDatasource;
 
-  UserRepo({required remmoteDatasource})
+  UserRepo({required UserRemoteDatasourceContract remmoteDatasource})
       : _remmoteDatasource = remmoteDatasource;
 
   @override

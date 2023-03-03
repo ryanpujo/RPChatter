@@ -15,7 +15,7 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 UserDto _$UserDtoFromJson(Map<String, dynamic> json) {
-  return __UserDto.fromJson(json);
+  return _UserDto.fromJson(json);
 }
 
 /// @nodoc
@@ -89,10 +89,10 @@ class _$UserDtoCopyWithImpl<$Res, $Val extends UserDto>
 }
 
 /// @nodoc
-abstract class _$$__UserDtoCopyWith<$Res> implements $UserDtoCopyWith<$Res> {
-  factory _$$__UserDtoCopyWith(
-          _$__UserDto value, $Res Function(_$__UserDto) then) =
-      __$$__UserDtoCopyWithImpl<$Res>;
+abstract class _$$_UserDtoCopyWith<$Res> implements $UserDtoCopyWith<$Res> {
+  factory _$$_UserDtoCopyWith(
+          _$_UserDto value, $Res Function(_$_UserDto) then) =
+      __$$_UserDtoCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -104,11 +104,10 @@ abstract class _$$__UserDtoCopyWith<$Res> implements $UserDtoCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$__UserDtoCopyWithImpl<$Res>
-    extends _$UserDtoCopyWithImpl<$Res, _$__UserDto>
-    implements _$$__UserDtoCopyWith<$Res> {
-  __$$__UserDtoCopyWithImpl(
-      _$__UserDto _value, $Res Function(_$__UserDto) _then)
+class __$$_UserDtoCopyWithImpl<$Res>
+    extends _$UserDtoCopyWithImpl<$Res, _$_UserDto>
+    implements _$$_UserDtoCopyWith<$Res> {
+  __$$_UserDtoCopyWithImpl(_$_UserDto _value, $Res Function(_$_UserDto) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -120,7 +119,7 @@ class __$$__UserDtoCopyWithImpl<$Res>
     Object? email = null,
     Object? password = null,
   }) {
-    return _then(_$__UserDto(
+    return _then(_$_UserDto(
       fName: null == fName
           ? _value.fName
           : fName // ignore: cast_nullable_to_non_nullable
@@ -147,8 +146,8 @@ class __$$__UserDtoCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$__UserDto extends __UserDto {
-  const _$__UserDto(
+class _$_UserDto extends _UserDto {
+  const _$_UserDto(
       {required this.fName,
       required this.lName,
       required this.username,
@@ -156,8 +155,8 @@ class _$__UserDto extends __UserDto {
       required this.password})
       : super._();
 
-  factory _$__UserDto.fromJson(Map<String, dynamic> json) =>
-      _$$__UserDtoFromJson(json);
+  factory _$_UserDto.fromJson(Map<String, dynamic> json) =>
+      _$$_UserDtoFromJson(json);
 
   @override
   final String fName;
@@ -179,7 +178,7 @@ class _$__UserDto extends __UserDto {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$__UserDto &&
+            other is _$_UserDto &&
             (identical(other.fName, fName) || other.fName == fName) &&
             (identical(other.lName, lName) || other.lName == lName) &&
             (identical(other.username, username) ||
@@ -197,27 +196,27 @@ class _$__UserDto extends __UserDto {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$__UserDtoCopyWith<_$__UserDto> get copyWith =>
-      __$$__UserDtoCopyWithImpl<_$__UserDto>(this, _$identity);
+  _$$_UserDtoCopyWith<_$_UserDto> get copyWith =>
+      __$$_UserDtoCopyWithImpl<_$_UserDto>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$__UserDtoToJson(
+    return _$$_UserDtoToJson(
       this,
     );
   }
 }
 
-abstract class __UserDto extends UserDto {
-  const factory __UserDto(
+abstract class _UserDto extends UserDto {
+  const factory _UserDto(
       {required final String fName,
       required final String lName,
       required final String username,
       required final String email,
-      required final String password}) = _$__UserDto;
-  const __UserDto._() : super._();
+      required final String password}) = _$_UserDto;
+  const _UserDto._() : super._();
 
-  factory __UserDto.fromJson(Map<String, dynamic> json) = _$__UserDto.fromJson;
+  factory _UserDto.fromJson(Map<String, dynamic> json) = _$_UserDto.fromJson;
 
   @override
   String get fName;
@@ -231,6 +230,6 @@ abstract class __UserDto extends UserDto {
   String get password;
   @override
   @JsonKey(ignore: true)
-  _$$__UserDtoCopyWith<_$__UserDto> get copyWith =>
+  _$$_UserDtoCopyWith<_$_UserDto> get copyWith =>
       throw _privateConstructorUsedError;
 }

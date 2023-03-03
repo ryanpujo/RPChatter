@@ -14,7 +14,7 @@ class UserRemoteDatasource implements UserRemoteDatasourceContract {
 
   @override
   Future<int> registerUser(UserDto user) async {
-    String uri = "localhost:4001/user";
+    String uri = "http://10.0.2.2:4001/user";
     try {
       final res = await _dio.post(uri, data: user.toJson());
       Map<String, dynamic> result;

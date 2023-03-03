@@ -8,15 +8,16 @@ import 'user_bloc_event.dart';
 class UserBlocBloc extends Bloc<UserBlocEvent, UserBlocState> {
   UserBlocBloc(this.repository)
       : super(const UserBlocState.initialState(user: null, users: [])) {
-    on<UserBlocEvent>((event, emit) {
-      event.map(
-        register: (event) async => _registerUser(event, emit),
+    on<UserBlocEvent>((event, emit) async {
+      await event.map(
+        register: (event) async => await _registerUser(event, emit),
       );
     });
   }
   final UserRepositoryContract repository;
 
-  void _registerUser(RegisterEvent event, Emitter<UserBlocState> emit) async {
+  Future<void> _registerUser(
+      RegisterEvent event, Emitter<UserBlocState> emit) async {
     emit(UserBlocState.loadingState(user: state.user, users: state.users));
     final failureOrSuccess =
         await repository.registerUser(UserDto.fromDomain(event.user));

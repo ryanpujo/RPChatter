@@ -12,7 +12,7 @@ class UserDto with _$UserDto {
     required String username,
     required String email,
     required String password,
-  }) = __UserDto;
+  }) = _UserDto;
 
   factory UserDto.fromJson(Map<String, dynamic> json) =>
       _$UserDtoFromJson(json);

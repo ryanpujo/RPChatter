@@ -6,9 +6,6 @@ part 'user_bloc_state.freezed.dart';
 
 @freezed
 class UserBlocState with _$UserBlocState {
-  const UserBlocState._();
-  const factory UserBlocState({User? user, required List<User> users}) =
-      _UserBlocState;
   const factory UserBlocState.initialState(
       {User? user, required List<User> users}) = InitialState;
   const factory UserBlocState.loadingState(
