@@ -2,9 +2,11 @@ import 'dart:io';
 
 import 'package:ryan_pujo_app/core/infrastructure/exceptions/failed_precondition_exception.dart';
 import 'package:ryan_pujo_app/core/infrastructure/exceptions/user_exist_exception.dart';
+import 'package:ryan_pujo_app/core/infrastructure/exceptions/validation_exception.dart';
 import 'package:ryan_pujo_app/core/infrastructure/failure/failure.dart';
 import 'package:dartz/dartz.dart';
 import 'package:ryan_pujo_app/core/infrastructure/exceptions/network_exception.dart';
+import 'package:ryan_pujo_app/user/domain/user.dart';
 import 'package:ryan_pujo_app/user/infrastructure/datasource/user_remote_datasource_contract.dart';
 import 'package:ryan_pujo_app/user/infrastructure/repository/user_repo_contract.dart';
 import 'package:ryan_pujo_app/user/infrastructure/user_dto.dart';
@@ -16,10 +18,10 @@ class UserRepo implements UserRepositoryContract {
       : _remmoteDatasource = remmoteDatasource;
 
   @override
-  Future<Either<Failure, int>> registerUser(UserDto dto) async {
+  Future<Either<Failure, User>> registerUser(UserDto dto) async {
     try {
       final result = await _remmoteDatasource.registerUser(dto);
-      return right(result);
+      return right(result.toUser());
     } on RestApiException {
       return left(const Failure.serverFailure("something went wrong"));
     } on UserAlreadyExistException {
@@ -30,6 +32,8 @@ class UserRepo implements UserRepositoryContract {
       return left(Failure.serverFailure(e.message));
     } on FailePreconditionException {
       return left(const Failure.serverFailure("something went wrong"));
+    } on ValidationException catch (e) {
+      return left(Failure.validation(errors: e.errors));
     }
   }
 }

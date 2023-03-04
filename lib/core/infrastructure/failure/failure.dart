@@ -8,4 +8,6 @@ class Failure with _$Failure {
   const factory Failure.serverFailure(String message) = _ServerFailure;
   const factory Failure.userAlreadyExist() = _UserAlreadyExist;
   const factory Failure.noInternetConnection() = _NoInternetConnection;
+  const factory Failure.validation({required Map<String, String> errors}) =
+      _Validation;
 }

@@ -36,11 +36,11 @@ void main() {
 
     test("should return right with int", () async {
       when(remoteDatasourceContract.registerUser(any))
-          .thenAnswer((realInvocation) async => 2);
+          .thenAnswer((realInvocation) async => user);
 
       final actual = await repository.registerUser(user);
 
-      expect(actual, equals(right(2)));
+      expect(actual, equals(right(user.toUser())));
     });
 
     test("should return left with userAlradyExist union", () async {

@@ -79,7 +79,7 @@ void main() {
       act: (bloc) {
         bloc.add(RegisterEvent(user));
         when(repository.registerUser(any))
-            .thenAnswer((realInvocation) async => right(1));
+            .thenAnswer((realInvocation) async => right(user));
       },
       expect: () => const <UserBlocState>[
         UserBlocState.loadingState(user: null, users: []),

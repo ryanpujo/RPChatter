@@ -7,6 +7,7 @@ import 'package:mockito/mockito.dart';
 import 'package:ryan_pujo_app/core/infrastructure/exceptions/failed_precondition_exception.dart';
 import 'package:ryan_pujo_app/core/infrastructure/exceptions/network_exception.dart';
 import 'package:ryan_pujo_app/core/infrastructure/exceptions/user_exist_exception.dart';
+import 'package:ryan_pujo_app/core/infrastructure/exceptions/validation_exception.dart';
 import 'package:ryan_pujo_app/user/infrastructure/datasource/user_remote_datasource.dart';
 import 'package:ryan_pujo_app/user/infrastructure/datasource/user_remote_datasource_contract.dart';
 import 'package:ryan_pujo_app/user/infrastructure/user_dto.dart';
@@ -35,19 +36,19 @@ void main() {
       when(dio.post(any, data: anyNamed("data"))).thenAnswer(
           (realInvocation) async => Response(
               requestOptions: RequestOptions(),
-              data: {"data": 2},
+              data: {"data": user.toJson()},
               statusCode: 201));
 
       final actual = await dataSource.registerUser(user);
 
-      expect(actual, 2);
+      expect(actual, equals(user));
     });
 
     test("should throw alreadyexistException", () async {
       when(dio.post(any, data: anyNamed("data"))).thenAnswer(
           (realInvocation) async => Response(
               requestOptions: RequestOptions(),
-              data: {"code": 6},
+              data: {"grpcCode": 6},
               statusCode: 400));
 
       final result = dataSource.registerUser;
@@ -56,11 +57,26 @@ void main() {
           throwsA(const TypeMatcher<UserAlreadyExistException>()));
     });
 
+    test("should throw validationexception", () async {
+      when(dio.post(any, data: anyNamed("data")))
+          .thenAnswer((realInvocation) async => Response(
+              requestOptions: RequestOptions(),
+              data: {
+                "errors": {"fname": "required"}
+              },
+              statusCode: 400));
+
+      final result = dataSource.registerUser;
+
+      expect(() => result(user),
+          throwsA(const TypeMatcher<ValidationException>()));
+    });
+
     test("should throw failed precondition exception", () async {
       when(dio.post(any, data: anyNamed("data"))).thenAnswer(
           (realInvocation) async => Response(
               requestOptions: RequestOptions(),
-              data: {"code": 3},
+              data: {"grpcCode": 3},
               statusCode: 400));
 
       final result = dataSource.registerUser;

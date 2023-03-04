@@ -45,6 +45,12 @@ class UserRegisterForm extends StatelessWidget {
               onSaved: (value) {
                 form = form.copyWith(fName: value);
               },
+              validator: (value) {
+                if (value != null && value.length < 3) {
+                  return "first name should be at least 3 characters";
+                }
+                return null;
+              },
             ),
             const SizedBox(
               height: 15,
@@ -54,6 +60,12 @@ class UserRegisterForm extends StatelessWidget {
               icon: const Icon(Icons.person_2),
               onSaved: (value) {
                 form = form.copyWith(lName: value);
+              },
+              validator: (value) {
+                if (value != null && value.length < 3) {
+                  return "first name should be at least 3 characters";
+                }
+                return null;
               },
             ),
             const SizedBox(
@@ -65,6 +77,12 @@ class UserRegisterForm extends StatelessWidget {
               onSaved: (value) {
                 form = form.copyWith(username: value);
               },
+              validator: (value) {
+                if (value != null && value.length < 7) {
+                  return "username should be at least 7 characters";
+                }
+                return null;
+              },
             ),
             const SizedBox(
               height: 15,
@@ -75,15 +93,30 @@ class UserRegisterForm extends StatelessWidget {
               onSaved: (value) {
                 form = form.copyWith(email: value);
               },
+              validator: (value) {
+                if (value != null && value.length < 10) {
+                  return "email should be at least 10 characters";
+                }
+                return null;
+              },
             ),
             const SizedBox(
               height: 15,
             ),
             CustomTextFormField(
               label: "Password",
+              obscureText: true,
+              enableSuggestions: false,
+              autoCorrect: false,
               icon: const Icon(Icons.password),
               onSaved: (value) {
                 form = form.copyWith(password: value);
+              },
+              validator: (value) {
+                if (value != null && value.length < 12) {
+                  return "first name should be at least 12 characters";
+                }
+                return null;
               },
             ),
             const SizedBox(
@@ -99,6 +132,9 @@ class UserRegisterForm extends StatelessWidget {
                 }),
               ),
               onPressed: () {
+                if (!_formKey.currentState!.validate()) {
+                  return;
+                }
                 _formKey.currentState?.save();
                 final user = User(
                   fName: form.fName!,

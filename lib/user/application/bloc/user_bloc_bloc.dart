@@ -30,6 +30,8 @@ class UserBlocBloc extends Bloc<UserBlocEvent, UserBlocState> {
             UserBlocState.failureState(users: state.users, failure: value)),
         noInternetConnection: (value) => emit(
             UserBlocState.failureState(users: state.users, failure: value)),
+        validation: (value) => emit(
+            UserBlocState.failureState(users: state.users, failure: value)),
       );
     }, (r) => emit(UserBlocState.loadedState(users: state.users)));
   }

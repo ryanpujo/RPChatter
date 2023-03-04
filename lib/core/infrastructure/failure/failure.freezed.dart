@@ -21,6 +21,7 @@ mixin _$Failure {
     required TResult Function(String message) serverFailure,
     required TResult Function() userAlreadyExist,
     required TResult Function() noInternetConnection,
+    required TResult Function(Map<String, String> errors) validation,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -28,6 +29,7 @@ mixin _$Failure {
     TResult? Function(String message)? serverFailure,
     TResult? Function()? userAlreadyExist,
     TResult? Function()? noInternetConnection,
+    TResult? Function(Map<String, String> errors)? validation,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -35,6 +37,7 @@ mixin _$Failure {
     TResult Function(String message)? serverFailure,
     TResult Function()? userAlreadyExist,
     TResult Function()? noInternetConnection,
+    TResult Function(Map<String, String> errors)? validation,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -43,6 +46,7 @@ mixin _$Failure {
     required TResult Function(_ServerFailure value) serverFailure,
     required TResult Function(_UserAlreadyExist value) userAlreadyExist,
     required TResult Function(_NoInternetConnection value) noInternetConnection,
+    required TResult Function(_Validation value) validation,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -50,6 +54,7 @@ mixin _$Failure {
     TResult? Function(_ServerFailure value)? serverFailure,
     TResult? Function(_UserAlreadyExist value)? userAlreadyExist,
     TResult? Function(_NoInternetConnection value)? noInternetConnection,
+    TResult? Function(_Validation value)? validation,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -57,6 +62,7 @@ mixin _$Failure {
     TResult Function(_ServerFailure value)? serverFailure,
     TResult Function(_UserAlreadyExist value)? userAlreadyExist,
     TResult Function(_NoInternetConnection value)? noInternetConnection,
+    TResult Function(_Validation value)? validation,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -146,6 +152,7 @@ class _$_ServerFailure extends _ServerFailure {
     required TResult Function(String message) serverFailure,
     required TResult Function() userAlreadyExist,
     required TResult Function() noInternetConnection,
+    required TResult Function(Map<String, String> errors) validation,
   }) {
     return serverFailure(message);
   }
@@ -156,6 +163,7 @@ class _$_ServerFailure extends _ServerFailure {
     TResult? Function(String message)? serverFailure,
     TResult? Function()? userAlreadyExist,
     TResult? Function()? noInternetConnection,
+    TResult? Function(Map<String, String> errors)? validation,
   }) {
     return serverFailure?.call(message);
   }
@@ -166,6 +174,7 @@ class _$_ServerFailure extends _ServerFailure {
     TResult Function(String message)? serverFailure,
     TResult Function()? userAlreadyExist,
     TResult Function()? noInternetConnection,
+    TResult Function(Map<String, String> errors)? validation,
     required TResult orElse(),
   }) {
     if (serverFailure != null) {
@@ -180,6 +189,7 @@ class _$_ServerFailure extends _ServerFailure {
     required TResult Function(_ServerFailure value) serverFailure,
     required TResult Function(_UserAlreadyExist value) userAlreadyExist,
     required TResult Function(_NoInternetConnection value) noInternetConnection,
+    required TResult Function(_Validation value) validation,
   }) {
     return serverFailure(this);
   }
@@ -190,6 +200,7 @@ class _$_ServerFailure extends _ServerFailure {
     TResult? Function(_ServerFailure value)? serverFailure,
     TResult? Function(_UserAlreadyExist value)? userAlreadyExist,
     TResult? Function(_NoInternetConnection value)? noInternetConnection,
+    TResult? Function(_Validation value)? validation,
   }) {
     return serverFailure?.call(this);
   }
@@ -200,6 +211,7 @@ class _$_ServerFailure extends _ServerFailure {
     TResult Function(_ServerFailure value)? serverFailure,
     TResult Function(_UserAlreadyExist value)? userAlreadyExist,
     TResult Function(_NoInternetConnection value)? noInternetConnection,
+    TResult Function(_Validation value)? validation,
     required TResult orElse(),
   }) {
     if (serverFailure != null) {
@@ -260,6 +272,7 @@ class _$_UserAlreadyExist extends _UserAlreadyExist {
     required TResult Function(String message) serverFailure,
     required TResult Function() userAlreadyExist,
     required TResult Function() noInternetConnection,
+    required TResult Function(Map<String, String> errors) validation,
   }) {
     return userAlreadyExist();
   }
@@ -270,6 +283,7 @@ class _$_UserAlreadyExist extends _UserAlreadyExist {
     TResult? Function(String message)? serverFailure,
     TResult? Function()? userAlreadyExist,
     TResult? Function()? noInternetConnection,
+    TResult? Function(Map<String, String> errors)? validation,
   }) {
     return userAlreadyExist?.call();
   }
@@ -280,6 +294,7 @@ class _$_UserAlreadyExist extends _UserAlreadyExist {
     TResult Function(String message)? serverFailure,
     TResult Function()? userAlreadyExist,
     TResult Function()? noInternetConnection,
+    TResult Function(Map<String, String> errors)? validation,
     required TResult orElse(),
   }) {
     if (userAlreadyExist != null) {
@@ -294,6 +309,7 @@ class _$_UserAlreadyExist extends _UserAlreadyExist {
     required TResult Function(_ServerFailure value) serverFailure,
     required TResult Function(_UserAlreadyExist value) userAlreadyExist,
     required TResult Function(_NoInternetConnection value) noInternetConnection,
+    required TResult Function(_Validation value) validation,
   }) {
     return userAlreadyExist(this);
   }
@@ -304,6 +320,7 @@ class _$_UserAlreadyExist extends _UserAlreadyExist {
     TResult? Function(_ServerFailure value)? serverFailure,
     TResult? Function(_UserAlreadyExist value)? userAlreadyExist,
     TResult? Function(_NoInternetConnection value)? noInternetConnection,
+    TResult? Function(_Validation value)? validation,
   }) {
     return userAlreadyExist?.call(this);
   }
@@ -314,6 +331,7 @@ class _$_UserAlreadyExist extends _UserAlreadyExist {
     TResult Function(_ServerFailure value)? serverFailure,
     TResult Function(_UserAlreadyExist value)? userAlreadyExist,
     TResult Function(_NoInternetConnection value)? noInternetConnection,
+    TResult Function(_Validation value)? validation,
     required TResult orElse(),
   }) {
     if (userAlreadyExist != null) {
@@ -369,6 +387,7 @@ class _$_NoInternetConnection extends _NoInternetConnection {
     required TResult Function(String message) serverFailure,
     required TResult Function() userAlreadyExist,
     required TResult Function() noInternetConnection,
+    required TResult Function(Map<String, String> errors) validation,
   }) {
     return noInternetConnection();
   }
@@ -379,6 +398,7 @@ class _$_NoInternetConnection extends _NoInternetConnection {
     TResult? Function(String message)? serverFailure,
     TResult? Function()? userAlreadyExist,
     TResult? Function()? noInternetConnection,
+    TResult? Function(Map<String, String> errors)? validation,
   }) {
     return noInternetConnection?.call();
   }
@@ -389,6 +409,7 @@ class _$_NoInternetConnection extends _NoInternetConnection {
     TResult Function(String message)? serverFailure,
     TResult Function()? userAlreadyExist,
     TResult Function()? noInternetConnection,
+    TResult Function(Map<String, String> errors)? validation,
     required TResult orElse(),
   }) {
     if (noInternetConnection != null) {
@@ -403,6 +424,7 @@ class _$_NoInternetConnection extends _NoInternetConnection {
     required TResult Function(_ServerFailure value) serverFailure,
     required TResult Function(_UserAlreadyExist value) userAlreadyExist,
     required TResult Function(_NoInternetConnection value) noInternetConnection,
+    required TResult Function(_Validation value) validation,
   }) {
     return noInternetConnection(this);
   }
@@ -413,6 +435,7 @@ class _$_NoInternetConnection extends _NoInternetConnection {
     TResult? Function(_ServerFailure value)? serverFailure,
     TResult? Function(_UserAlreadyExist value)? userAlreadyExist,
     TResult? Function(_NoInternetConnection value)? noInternetConnection,
+    TResult? Function(_Validation value)? validation,
   }) {
     return noInternetConnection?.call(this);
   }
@@ -423,6 +446,7 @@ class _$_NoInternetConnection extends _NoInternetConnection {
     TResult Function(_ServerFailure value)? serverFailure,
     TResult Function(_UserAlreadyExist value)? userAlreadyExist,
     TResult Function(_NoInternetConnection value)? noInternetConnection,
+    TResult Function(_Validation value)? validation,
     required TResult orElse(),
   }) {
     if (noInternetConnection != null) {
@@ -435,4 +459,159 @@ class _$_NoInternetConnection extends _NoInternetConnection {
 abstract class _NoInternetConnection extends Failure {
   const factory _NoInternetConnection() = _$_NoInternetConnection;
   const _NoInternetConnection._() : super._();
+}
+
+/// @nodoc
+abstract class _$$_ValidationCopyWith<$Res> {
+  factory _$$_ValidationCopyWith(
+          _$_Validation value, $Res Function(_$_Validation) then) =
+      __$$_ValidationCopyWithImpl<$Res>;
+  @useResult
+  $Res call({Map<String, String> errors});
+}
+
+/// @nodoc
+class __$$_ValidationCopyWithImpl<$Res>
+    extends _$FailureCopyWithImpl<$Res, _$_Validation>
+    implements _$$_ValidationCopyWith<$Res> {
+  __$$_ValidationCopyWithImpl(
+      _$_Validation _value, $Res Function(_$_Validation) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? errors = null,
+  }) {
+    return _then(_$_Validation(
+      errors: null == errors
+          ? _value._errors
+          : errors // ignore: cast_nullable_to_non_nullable
+              as Map<String, String>,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_Validation extends _Validation {
+  const _$_Validation({required final Map<String, String> errors})
+      : _errors = errors,
+        super._();
+
+  final Map<String, String> _errors;
+  @override
+  Map<String, String> get errors {
+    if (_errors is EqualUnmodifiableMapView) return _errors;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableMapView(_errors);
+  }
+
+  @override
+  String toString() {
+    return 'Failure.validation(errors: $errors)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_Validation &&
+            const DeepCollectionEquality().equals(other._errors, _errors));
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(_errors));
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_ValidationCopyWith<_$_Validation> get copyWith =>
+      __$$_ValidationCopyWithImpl<_$_Validation>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String message) serverFailure,
+    required TResult Function() userAlreadyExist,
+    required TResult Function() noInternetConnection,
+    required TResult Function(Map<String, String> errors) validation,
+  }) {
+    return validation(errors);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String message)? serverFailure,
+    TResult? Function()? userAlreadyExist,
+    TResult? Function()? noInternetConnection,
+    TResult? Function(Map<String, String> errors)? validation,
+  }) {
+    return validation?.call(errors);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String message)? serverFailure,
+    TResult Function()? userAlreadyExist,
+    TResult Function()? noInternetConnection,
+    TResult Function(Map<String, String> errors)? validation,
+    required TResult orElse(),
+  }) {
+    if (validation != null) {
+      return validation(errors);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_ServerFailure value) serverFailure,
+    required TResult Function(_UserAlreadyExist value) userAlreadyExist,
+    required TResult Function(_NoInternetConnection value) noInternetConnection,
+    required TResult Function(_Validation value) validation,
+  }) {
+    return validation(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_ServerFailure value)? serverFailure,
+    TResult? Function(_UserAlreadyExist value)? userAlreadyExist,
+    TResult? Function(_NoInternetConnection value)? noInternetConnection,
+    TResult? Function(_Validation value)? validation,
+  }) {
+    return validation?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_ServerFailure value)? serverFailure,
+    TResult Function(_UserAlreadyExist value)? userAlreadyExist,
+    TResult Function(_NoInternetConnection value)? noInternetConnection,
+    TResult Function(_Validation value)? validation,
+    required TResult orElse(),
+  }) {
+    if (validation != null) {
+      return validation(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _Validation extends Failure {
+  const factory _Validation({required final Map<String, String> errors}) =
+      _$_Validation;
+  const _Validation._() : super._();
+
+  Map<String, String> get errors;
+  @JsonKey(ignore: true)
+  _$$_ValidationCopyWith<_$_Validation> get copyWith =>
+      throw _privateConstructorUsedError;
 }

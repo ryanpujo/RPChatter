@@ -8,9 +8,10 @@ import 'dart:async' as _i4;
 import 'package:dartz/dartz.dart' as _i2;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:ryan_pujo_app/core/infrastructure/failure/failure.dart' as _i5;
+import 'package:ryan_pujo_app/user/domain/user.dart' as _i6;
 import 'package:ryan_pujo_app/user/infrastructure/repository/user_repo_contract.dart'
     as _i3;
-import 'package:ryan_pujo_app/user/infrastructure/user_dto.dart' as _i6;
+import 'package:ryan_pujo_app/user/infrastructure/user_dto.dart' as _i7;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -39,14 +40,15 @@ class _FakeEither_0<L, R> extends _i1.SmartFake implements _i2.Either<L, R> {
 class MockUserRepositoryContract extends _i1.Mock
     implements _i3.UserRepositoryContract {
   @override
-  _i4.Future<_i2.Either<_i5.Failure, int>> registerUser(_i6.UserDto? dto) =>
+  _i4.Future<_i2.Either<_i5.Failure, _i6.User>> registerUser(
+          _i7.UserDto? dto) =>
       (super.noSuchMethod(
         Invocation.method(
           #registerUser,
           [dto],
         ),
-        returnValue: _i4.Future<_i2.Either<_i5.Failure, int>>.value(
-            _FakeEither_0<_i5.Failure, int>(
+        returnValue: _i4.Future<_i2.Either<_i5.Failure, _i6.User>>.value(
+            _FakeEither_0<_i5.Failure, _i6.User>(
           this,
           Invocation.method(
             #registerUser,
@@ -54,13 +56,13 @@ class MockUserRepositoryContract extends _i1.Mock
           ),
         )),
         returnValueForMissingStub:
-            _i4.Future<_i2.Either<_i5.Failure, int>>.value(
-                _FakeEither_0<_i5.Failure, int>(
+            _i4.Future<_i2.Either<_i5.Failure, _i6.User>>.value(
+                _FakeEither_0<_i5.Failure, _i6.User>(
           this,
           Invocation.method(
             #registerUser,
             [dto],
           ),
         )),
-      ) as _i4.Future<_i2.Either<_i5.Failure, int>>);
+      ) as _i4.Future<_i2.Either<_i5.Failure, _i6.User>>);
 }

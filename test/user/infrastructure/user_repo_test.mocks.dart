@@ -3,12 +3,12 @@
 // Do not manually edit this file.
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'dart:async' as _i3;
+import 'dart:async' as _i4;
 
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:ryan_pujo_app/user/infrastructure/datasource/user_remote_datasource_contract.dart'
-    as _i2;
-import 'package:ryan_pujo_app/user/infrastructure/user_dto.dart' as _i4;
+    as _i3;
+import 'package:ryan_pujo_app/user/infrastructure/user_dto.dart' as _i2;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -21,18 +21,40 @@ import 'package:ryan_pujo_app/user/infrastructure/user_dto.dart' as _i4;
 // ignore_for_file: camel_case_types
 // ignore_for_file: subtype_of_sealed_class
 
+class _FakeUserDto_0 extends _i1.SmartFake implements _i2.UserDto {
+  _FakeUserDto_0(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
 /// A class which mocks [UserRemoteDatasourceContract].
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockUserRemoteDatasourceContract extends _i1.Mock
-    implements _i2.UserRemoteDatasourceContract {
+    implements _i3.UserRemoteDatasourceContract {
   @override
-  _i3.Future<int> registerUser(_i4.UserDto? dto) => (super.noSuchMethod(
+  _i4.Future<_i2.UserDto> registerUser(_i2.UserDto? dto) => (super.noSuchMethod(
         Invocation.method(
           #registerUser,
           [dto],
         ),
-        returnValue: _i3.Future<int>.value(0),
-        returnValueForMissingStub: _i3.Future<int>.value(0),
-      ) as _i3.Future<int>);
+        returnValue: _i4.Future<_i2.UserDto>.value(_FakeUserDto_0(
+          this,
+          Invocation.method(
+            #registerUser,
+            [dto],
+          ),
+        )),
+        returnValueForMissingStub: _i4.Future<_i2.UserDto>.value(_FakeUserDto_0(
+          this,
+          Invocation.method(
+            #registerUser,
+            [dto],
+          ),
+        )),
+      ) as _i4.Future<_i2.UserDto>);
 }
