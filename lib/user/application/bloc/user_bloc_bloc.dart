@@ -11,6 +11,8 @@ class UserBlocBloc extends Bloc<UserBlocEvent, UserBlocState> {
     on<UserBlocEvent>((event, emit) async {
       await event.map(
         register: (event) async => await _registerUser(event, emit),
+        isUsernameAvailable: (event) async =>
+            await _isUsernameAvailable(event, emit),
       );
     });
   }
@@ -24,15 +26,19 @@ class UserBlocBloc extends Bloc<UserBlocEvent, UserBlocState> {
 
     failureOrSuccess.fold((l) {
       l.map(
-        serverFailure: (value) => emit(
-            UserBlocState.failureState(users: state.users, failure: value)),
-        userAlreadyExist: (value) => emit(
-            UserBlocState.failureState(users: state.users, failure: value)),
-        noInternetConnection: (value) => emit(
-            UserBlocState.failureState(users: state.users, failure: value)),
-        validation: (value) => emit(
-            UserBlocState.failureState(users: state.users, failure: value)),
-      );
-    }, (r) => emit(UserBlocState.loadedState(users: state.users)));
+          serverFailure: (value) => emit(
+              UserBlocState.failureState(users: state.users, failure: value)));
+    },
+        (r) => emit(UserBlocState.loadedState(
+              users: state.users,
+              user: r,
+            )));
+  }
+
+  Future<void> _isUsernameAvailable(
+      IsUsernameAvailableEvent event, Emitter<UserBlocState> emit) async {
+    final isAvailable = await repository.isUsernameAvailable(event.username);
+    emit(UserBlocState.loadedState(
+        users: state.users, isUsernameAvailable: isAvailable));
   }
 }

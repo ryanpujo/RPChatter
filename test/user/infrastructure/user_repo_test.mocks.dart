@@ -3,11 +3,12 @@
 // Do not manually edit this file.
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'dart:async' as _i4;
+import 'dart:async' as _i5;
 
 import 'package:mockito/mockito.dart' as _i1;
+import 'package:ryan_pujo_app/core/infrastructure/remote_response.dart' as _i3;
 import 'package:ryan_pujo_app/user/infrastructure/datasource/user_remote_datasource_contract.dart'
-    as _i3;
+    as _i4;
 import 'package:ryan_pujo_app/user/infrastructure/user_dto.dart' as _i2;
 
 // ignore_for_file: type=lint
@@ -31,30 +32,66 @@ class _FakeUserDto_0 extends _i1.SmartFake implements _i2.UserDto {
         );
 }
 
+class _FakeRemoteResponse_1<T> extends _i1.SmartFake
+    implements _i3.RemoteResponse<T> {
+  _FakeRemoteResponse_1(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
 /// A class which mocks [UserRemoteDatasourceContract].
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockUserRemoteDatasourceContract extends _i1.Mock
-    implements _i3.UserRemoteDatasourceContract {
+    implements _i4.UserRemoteDatasourceContract {
   @override
-  _i4.Future<_i2.UserDto> registerUser(_i2.UserDto? dto) => (super.noSuchMethod(
+  _i5.Future<_i2.UserDto> registerUser(_i2.UserDto? dto) => (super.noSuchMethod(
         Invocation.method(
           #registerUser,
           [dto],
         ),
-        returnValue: _i4.Future<_i2.UserDto>.value(_FakeUserDto_0(
+        returnValue: _i5.Future<_i2.UserDto>.value(_FakeUserDto_0(
           this,
           Invocation.method(
             #registerUser,
             [dto],
           ),
         )),
-        returnValueForMissingStub: _i4.Future<_i2.UserDto>.value(_FakeUserDto_0(
+        returnValueForMissingStub: _i5.Future<_i2.UserDto>.value(_FakeUserDto_0(
           this,
           Invocation.method(
             #registerUser,
             [dto],
           ),
         )),
-      ) as _i4.Future<_i2.UserDto>);
+      ) as _i5.Future<_i2.UserDto>);
+  @override
+  _i5.Future<_i3.RemoteResponse<_i2.UserDto>> getByUsername(String? username) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #getByUsername,
+          [username],
+        ),
+        returnValue: _i5.Future<_i3.RemoteResponse<_i2.UserDto>>.value(
+            _FakeRemoteResponse_1<_i2.UserDto>(
+          this,
+          Invocation.method(
+            #getByUsername,
+            [username],
+          ),
+        )),
+        returnValueForMissingStub:
+            _i5.Future<_i3.RemoteResponse<_i2.UserDto>>.value(
+                _FakeRemoteResponse_1<_i2.UserDto>(
+          this,
+          Invocation.method(
+            #getByUsername,
+            [username],
+          ),
+        )),
+      ) as _i5.Future<_i3.RemoteResponse<_i2.UserDto>>);
 }

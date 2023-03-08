@@ -4,10 +4,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
-import 'package:ryan_pujo_app/core/infrastructure/exceptions/failed_precondition_exception.dart';
 import 'package:ryan_pujo_app/core/infrastructure/exceptions/network_exception.dart';
-import 'package:ryan_pujo_app/core/infrastructure/exceptions/user_exist_exception.dart';
-import 'package:ryan_pujo_app/core/infrastructure/exceptions/validation_exception.dart';
 import 'package:ryan_pujo_app/user/infrastructure/datasource/user_remote_datasource.dart';
 import 'package:ryan_pujo_app/user/infrastructure/datasource/user_remote_datasource_contract.dart';
 import 'package:ryan_pujo_app/user/infrastructure/user_dto.dart';
@@ -44,47 +41,6 @@ void main() {
       expect(actual, equals(user));
     });
 
-    test("should throw alreadyexistException", () async {
-      when(dio.post(any, data: anyNamed("data"))).thenAnswer(
-          (realInvocation) async => Response(
-              requestOptions: RequestOptions(),
-              data: {"grpcCode": 6},
-              statusCode: 400));
-
-      final result = dataSource.registerUser;
-
-      expect(() => result(user),
-          throwsA(const TypeMatcher<UserAlreadyExistException>()));
-    });
-
-    test("should throw validationexception", () async {
-      when(dio.post(any, data: anyNamed("data")))
-          .thenAnswer((realInvocation) async => Response(
-              requestOptions: RequestOptions(),
-              data: {
-                "errors": {"fname": "required"}
-              },
-              statusCode: 400));
-
-      final result = dataSource.registerUser;
-
-      expect(() => result(user),
-          throwsA(const TypeMatcher<ValidationException>()));
-    });
-
-    test("should throw failed precondition exception", () async {
-      when(dio.post(any, data: anyNamed("data"))).thenAnswer(
-          (realInvocation) async => Response(
-              requestOptions: RequestOptions(),
-              data: {"grpcCode": 3},
-              statusCode: 400));
-
-      final result = dataSource.registerUser;
-
-      expect(() => result(user),
-          throwsA(const TypeMatcher<FailePreconditionException>()));
-    });
-
     test("should throw socket exception", () async {
       when(dio.post(any, data: anyNamed("data"))).thenThrow(DioError(
           requestOptions: RequestOptions(),
@@ -96,28 +52,112 @@ void main() {
       expect(() => result(user), throwsA(const TypeMatcher<SocketException>()));
     });
 
-    test("should throw httpexception", () async {
-      when(dio.post(any, data: anyNamed("data"))).thenThrow(DioError(
+    test("should throw RestApiException", () {
+      when(dio.post(any, data: anyNamed("data"))).thenThrow(
+        DioError(
           requestOptions: RequestOptions(),
-          type: DioErrorType.badResponse,
-          response: Response(requestOptions: RequestOptions())));
-
-      final result = dataSource.registerUser;
-
-      expect(() => result(user), throwsA(const TypeMatcher<HttpException>()));
-    });
-
-    test("should throw restapiexception", () async {
-      when(dio.post(any, data: anyNamed("data"))).thenAnswer(
-          (realInvocation) async => Response(
-              requestOptions: RequestOptions(),
-              data: {"code": 6},
-              statusCode: 500));
+          response: Response(
+            requestOptions: RequestOptions(),
+            data: {"error": "got an error"},
+            statusCode: 400,
+          ),
+        ),
+      );
 
       final result = dataSource.registerUser;
 
       expect(
           () => result(user), throwsA(const TypeMatcher<RestApiException>()));
+    });
+  });
+
+  group("getByUsername", () {
+    UserDto user = const UserDto(
+      fName: "sdsds",
+      lName: "Dfsdfsd",
+      username: "sdfdsfds",
+      email: "sdfs",
+      password: "Sdfsffsf",
+    );
+
+    test("should return an existing user", () async {
+      when(dio.get(any)).thenAnswer((realInvocation) async => Response(
+          requestOptions: RequestOptions(),
+          statusCode: 200,
+          data: {"data": user.toJson()}));
+
+      final actual = await dataSource.getByUsername("");
+
+      actual.map(
+        noConnection: (value) {},
+        withData: (value) {
+          expect(value, isNotNull);
+          expect(value.data, equals(user));
+        },
+        noDataFound: (value) {},
+        badRequest: (value) {},
+      );
+    });
+
+    test("should return NoConnection response", () async {
+      when(dio.get(any)).thenThrow(DioError(
+        requestOptions: RequestOptions(),
+        error: const SocketException("no internet"),
+        type: DioErrorType.connectionError,
+      ));
+
+      final actual = await dataSource.getByUsername("");
+
+      actual.map(
+        noConnection: (value) {
+          expect(value, isNotNull);
+        },
+        withData: (value) {},
+        noDataFound: (value) {},
+        badRequest: (value) {},
+      );
+    });
+
+    test("should return NoDataFound response", () async {
+      when(dio.get(any)).thenThrow(DioError(
+        requestOptions: RequestOptions(),
+        response: Response(
+          requestOptions: RequestOptions(),
+          data: {"code": 5},
+        ),
+      ));
+
+      final actual = await dataSource.getByUsername("");
+
+      actual.map(
+        noConnection: (value) {},
+        withData: (value) {},
+        noDataFound: (value) {
+          expect(value, isNotNull);
+        },
+        badRequest: (value) {},
+      );
+    });
+
+    test("should return BadRequest response", () async {
+      when(dio.get(any)).thenThrow(DioError(
+        requestOptions: RequestOptions(),
+        response: Response(
+          requestOptions: RequestOptions(),
+          data: {"error": "got an error"},
+        ),
+      ));
+
+      final actual = await dataSource.getByUsername("");
+
+      actual.map(
+        noConnection: (value) {},
+        withData: (value) {},
+        noDataFound: (value) {},
+        badRequest: (value) {
+          expect(value, isNotNull);
+        },
+      );
     });
   });
 }

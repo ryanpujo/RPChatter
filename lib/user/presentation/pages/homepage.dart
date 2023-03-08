@@ -8,7 +8,8 @@ import 'package:ryan_pujo_app/user/application/bloc/user_bloc_state.dart';
 import '../widgets/user_register_form.dart';
 
 class Homepage extends StatelessWidget {
-  const Homepage({super.key});
+  Homepage({super.key});
+  Widget? registrationResponse;
 
   @override
   Widget build(BuildContext context) {
@@ -17,18 +18,14 @@ class Homepage extends StatelessWidget {
         child: SafeArea(
           child: BlocBuilder<UserBlocBloc, UserBlocState>(
             builder: (context, state) {
-              late Widget stateMessage;
-              state.map(
+              return state.map(
+                initialState: (value) => UserRegisterForm(),
+                loadingState: (value) => const Center(
+                  child: CircularProgressIndicator(),
+                ),
+                loadedState: (value) => const Text("successfuly registered"),
                 failureState: (value) =>
-                    stateMessage = const Text("failed to register"),
-                initialState: (value) => stateMessage = const Text(""),
-                loadedState: (value) =>
-                    stateMessage = const Text("Succesfully Registered"),
-                loadingState: (value) =>
-                    stateMessage = const CircularProgressIndicator(),
-              );
-              return UserRegisterForm(
-                warningMessage: stateMessage,
+                    Text("${value.failure.errorCode} ${value.failure.message}"),
               );
             },
           ),

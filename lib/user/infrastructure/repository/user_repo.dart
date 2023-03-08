@@ -1,8 +1,3 @@
-import 'dart:io';
-
-import 'package:ryan_pujo_app/core/infrastructure/exceptions/failed_precondition_exception.dart';
-import 'package:ryan_pujo_app/core/infrastructure/exceptions/user_exist_exception.dart';
-import 'package:ryan_pujo_app/core/infrastructure/exceptions/validation_exception.dart';
 import 'package:ryan_pujo_app/core/infrastructure/failure/failure.dart';
 import 'package:dartz/dartz.dart';
 import 'package:ryan_pujo_app/core/infrastructure/exceptions/network_exception.dart';
@@ -22,18 +17,19 @@ class UserRepo implements UserRepositoryContract {
     try {
       final result = await _remmoteDatasource.registerUser(dto);
       return right(result.toUser());
-    } on RestApiException {
-      return left(const Failure.serverFailure("something went wrong"));
-    } on UserAlreadyExistException {
-      return left(const Failure.userAlreadyExist());
-    } on SocketException {
-      return left(const Failure.noInternetConnection());
-    } on HttpException catch (e) {
-      return left(Failure.serverFailure(e.message));
-    } on FailePreconditionException {
-      return left(const Failure.serverFailure("something went wrong"));
-    } on ValidationException catch (e) {
-      return left(Failure.validation(errors: e.errors));
+    } on RestApiException catch (e) {
+      return left(Failure.serverFailure(e.message, e.errorCode));
     }
+  }
+
+  @override
+  Future<bool> isUsernameAvailable(String username) async {
+    final isAvailable = await _remmoteDatasource.getByUsername(username);
+    return isAvailable.map(
+      noConnection: (value) => false,
+      withData: (value) => false,
+      noDataFound: (value) => true,
+      badRequest: (value) => false,
+    );
   }
 }

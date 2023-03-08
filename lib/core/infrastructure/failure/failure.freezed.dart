@@ -16,62 +16,51 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$Failure {
+  String get message => throw _privateConstructorUsedError;
+  int get errorCode => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String message) serverFailure,
-    required TResult Function() userAlreadyExist,
-    required TResult Function() noInternetConnection,
-    required TResult Function(Map<String, String> errors) validation,
+    required TResult Function(String message, int errorCode) serverFailure,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String message)? serverFailure,
-    TResult? Function()? userAlreadyExist,
-    TResult? Function()? noInternetConnection,
-    TResult? Function(Map<String, String> errors)? validation,
+    TResult? Function(String message, int errorCode)? serverFailure,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String message)? serverFailure,
-    TResult Function()? userAlreadyExist,
-    TResult Function()? noInternetConnection,
-    TResult Function(Map<String, String> errors)? validation,
+    TResult Function(String message, int errorCode)? serverFailure,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_ServerFailure value) serverFailure,
-    required TResult Function(_UserAlreadyExist value) userAlreadyExist,
-    required TResult Function(_NoInternetConnection value) noInternetConnection,
-    required TResult Function(_Validation value) validation,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_ServerFailure value)? serverFailure,
-    TResult? Function(_UserAlreadyExist value)? userAlreadyExist,
-    TResult? Function(_NoInternetConnection value)? noInternetConnection,
-    TResult? Function(_Validation value)? validation,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_ServerFailure value)? serverFailure,
-    TResult Function(_UserAlreadyExist value)? userAlreadyExist,
-    TResult Function(_NoInternetConnection value)? noInternetConnection,
-    TResult Function(_Validation value)? validation,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
+
+  @JsonKey(ignore: true)
+  $FailureCopyWith<Failure> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $FailureCopyWith<$Res> {
   factory $FailureCopyWith(Failure value, $Res Function(Failure) then) =
       _$FailureCopyWithImpl<$Res, Failure>;
+  @useResult
+  $Res call({String message, int errorCode});
 }
 
 /// @nodoc
@@ -83,15 +72,35 @@ class _$FailureCopyWithImpl<$Res, $Val extends Failure>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? message = null,
+    Object? errorCode = null,
+  }) {
+    return _then(_value.copyWith(
+      message: null == message
+          ? _value.message
+          : message // ignore: cast_nullable_to_non_nullable
+              as String,
+      errorCode: null == errorCode
+          ? _value.errorCode
+          : errorCode // ignore: cast_nullable_to_non_nullable
+              as int,
+    ) as $Val);
+  }
 }
 
 /// @nodoc
-abstract class _$$_ServerFailureCopyWith<$Res> {
+abstract class _$$_ServerFailureCopyWith<$Res>
+    implements $FailureCopyWith<$Res> {
   factory _$$_ServerFailureCopyWith(
           _$_ServerFailure value, $Res Function(_$_ServerFailure) then) =
       __$$_ServerFailureCopyWithImpl<$Res>;
+  @override
   @useResult
-  $Res call({String message});
+  $Res call({String message, int errorCode});
 }
 
 /// @nodoc
@@ -106,12 +115,17 @@ class __$$_ServerFailureCopyWithImpl<$Res>
   @override
   $Res call({
     Object? message = null,
+    Object? errorCode = null,
   }) {
     return _then(_$_ServerFailure(
       null == message
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
               as String,
+      null == errorCode
+          ? _value.errorCode
+          : errorCode // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -119,14 +133,16 @@ class __$$_ServerFailureCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_ServerFailure extends _ServerFailure {
-  const _$_ServerFailure(this.message) : super._();
+  const _$_ServerFailure(this.message, this.errorCode) : super._();
 
   @override
   final String message;
+  @override
+  final int errorCode;
 
   @override
   String toString() {
-    return 'Failure.serverFailure(message: $message)';
+    return 'Failure.serverFailure(message: $message, errorCode: $errorCode)';
   }
 
   @override
@@ -134,11 +150,13 @@ class _$_ServerFailure extends _ServerFailure {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_ServerFailure &&
-            (identical(other.message, message) || other.message == message));
+            (identical(other.message, message) || other.message == message) &&
+            (identical(other.errorCode, errorCode) ||
+                other.errorCode == errorCode));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, message);
+  int get hashCode => Object.hash(runtimeType, message, errorCode);
 
   @JsonKey(ignore: true)
   @override
@@ -149,36 +167,27 @@ class _$_ServerFailure extends _ServerFailure {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String message) serverFailure,
-    required TResult Function() userAlreadyExist,
-    required TResult Function() noInternetConnection,
-    required TResult Function(Map<String, String> errors) validation,
+    required TResult Function(String message, int errorCode) serverFailure,
   }) {
-    return serverFailure(message);
+    return serverFailure(message, errorCode);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String message)? serverFailure,
-    TResult? Function()? userAlreadyExist,
-    TResult? Function()? noInternetConnection,
-    TResult? Function(Map<String, String> errors)? validation,
+    TResult? Function(String message, int errorCode)? serverFailure,
   }) {
-    return serverFailure?.call(message);
+    return serverFailure?.call(message, errorCode);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String message)? serverFailure,
-    TResult Function()? userAlreadyExist,
-    TResult Function()? noInternetConnection,
-    TResult Function(Map<String, String> errors)? validation,
+    TResult Function(String message, int errorCode)? serverFailure,
     required TResult orElse(),
   }) {
     if (serverFailure != null) {
-      return serverFailure(message);
+      return serverFailure(message, errorCode);
     }
     return orElse();
   }
@@ -187,9 +196,6 @@ class _$_ServerFailure extends _ServerFailure {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_ServerFailure value) serverFailure,
-    required TResult Function(_UserAlreadyExist value) userAlreadyExist,
-    required TResult Function(_NoInternetConnection value) noInternetConnection,
-    required TResult Function(_Validation value) validation,
   }) {
     return serverFailure(this);
   }
@@ -198,9 +204,6 @@ class _$_ServerFailure extends _ServerFailure {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_ServerFailure value)? serverFailure,
-    TResult? Function(_UserAlreadyExist value)? userAlreadyExist,
-    TResult? Function(_NoInternetConnection value)? noInternetConnection,
-    TResult? Function(_Validation value)? validation,
   }) {
     return serverFailure?.call(this);
   }
@@ -209,9 +212,6 @@ class _$_ServerFailure extends _ServerFailure {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_ServerFailure value)? serverFailure,
-    TResult Function(_UserAlreadyExist value)? userAlreadyExist,
-    TResult Function(_NoInternetConnection value)? noInternetConnection,
-    TResult Function(_Validation value)? validation,
     required TResult orElse(),
   }) {
     if (serverFailure != null) {
@@ -222,396 +222,16 @@ class _$_ServerFailure extends _ServerFailure {
 }
 
 abstract class _ServerFailure extends Failure {
-  const factory _ServerFailure(final String message) = _$_ServerFailure;
+  const factory _ServerFailure(final String message, final int errorCode) =
+      _$_ServerFailure;
   const _ServerFailure._() : super._();
 
+  @override
   String get message;
+  @override
+  int get errorCode;
+  @override
   @JsonKey(ignore: true)
   _$$_ServerFailureCopyWith<_$_ServerFailure> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class _$$_UserAlreadyExistCopyWith<$Res> {
-  factory _$$_UserAlreadyExistCopyWith(
-          _$_UserAlreadyExist value, $Res Function(_$_UserAlreadyExist) then) =
-      __$$_UserAlreadyExistCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$$_UserAlreadyExistCopyWithImpl<$Res>
-    extends _$FailureCopyWithImpl<$Res, _$_UserAlreadyExist>
-    implements _$$_UserAlreadyExistCopyWith<$Res> {
-  __$$_UserAlreadyExistCopyWithImpl(
-      _$_UserAlreadyExist _value, $Res Function(_$_UserAlreadyExist) _then)
-      : super(_value, _then);
-}
-
-/// @nodoc
-
-class _$_UserAlreadyExist extends _UserAlreadyExist {
-  const _$_UserAlreadyExist() : super._();
-
-  @override
-  String toString() {
-    return 'Failure.userAlreadyExist()';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_UserAlreadyExist);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(String message) serverFailure,
-    required TResult Function() userAlreadyExist,
-    required TResult Function() noInternetConnection,
-    required TResult Function(Map<String, String> errors) validation,
-  }) {
-    return userAlreadyExist();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String message)? serverFailure,
-    TResult? Function()? userAlreadyExist,
-    TResult? Function()? noInternetConnection,
-    TResult? Function(Map<String, String> errors)? validation,
-  }) {
-    return userAlreadyExist?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String message)? serverFailure,
-    TResult Function()? userAlreadyExist,
-    TResult Function()? noInternetConnection,
-    TResult Function(Map<String, String> errors)? validation,
-    required TResult orElse(),
-  }) {
-    if (userAlreadyExist != null) {
-      return userAlreadyExist();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_ServerFailure value) serverFailure,
-    required TResult Function(_UserAlreadyExist value) userAlreadyExist,
-    required TResult Function(_NoInternetConnection value) noInternetConnection,
-    required TResult Function(_Validation value) validation,
-  }) {
-    return userAlreadyExist(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_ServerFailure value)? serverFailure,
-    TResult? Function(_UserAlreadyExist value)? userAlreadyExist,
-    TResult? Function(_NoInternetConnection value)? noInternetConnection,
-    TResult? Function(_Validation value)? validation,
-  }) {
-    return userAlreadyExist?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_ServerFailure value)? serverFailure,
-    TResult Function(_UserAlreadyExist value)? userAlreadyExist,
-    TResult Function(_NoInternetConnection value)? noInternetConnection,
-    TResult Function(_Validation value)? validation,
-    required TResult orElse(),
-  }) {
-    if (userAlreadyExist != null) {
-      return userAlreadyExist(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _UserAlreadyExist extends Failure {
-  const factory _UserAlreadyExist() = _$_UserAlreadyExist;
-  const _UserAlreadyExist._() : super._();
-}
-
-/// @nodoc
-abstract class _$$_NoInternetConnectionCopyWith<$Res> {
-  factory _$$_NoInternetConnectionCopyWith(_$_NoInternetConnection value,
-          $Res Function(_$_NoInternetConnection) then) =
-      __$$_NoInternetConnectionCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$$_NoInternetConnectionCopyWithImpl<$Res>
-    extends _$FailureCopyWithImpl<$Res, _$_NoInternetConnection>
-    implements _$$_NoInternetConnectionCopyWith<$Res> {
-  __$$_NoInternetConnectionCopyWithImpl(_$_NoInternetConnection _value,
-      $Res Function(_$_NoInternetConnection) _then)
-      : super(_value, _then);
-}
-
-/// @nodoc
-
-class _$_NoInternetConnection extends _NoInternetConnection {
-  const _$_NoInternetConnection() : super._();
-
-  @override
-  String toString() {
-    return 'Failure.noInternetConnection()';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_NoInternetConnection);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(String message) serverFailure,
-    required TResult Function() userAlreadyExist,
-    required TResult Function() noInternetConnection,
-    required TResult Function(Map<String, String> errors) validation,
-  }) {
-    return noInternetConnection();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String message)? serverFailure,
-    TResult? Function()? userAlreadyExist,
-    TResult? Function()? noInternetConnection,
-    TResult? Function(Map<String, String> errors)? validation,
-  }) {
-    return noInternetConnection?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String message)? serverFailure,
-    TResult Function()? userAlreadyExist,
-    TResult Function()? noInternetConnection,
-    TResult Function(Map<String, String> errors)? validation,
-    required TResult orElse(),
-  }) {
-    if (noInternetConnection != null) {
-      return noInternetConnection();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_ServerFailure value) serverFailure,
-    required TResult Function(_UserAlreadyExist value) userAlreadyExist,
-    required TResult Function(_NoInternetConnection value) noInternetConnection,
-    required TResult Function(_Validation value) validation,
-  }) {
-    return noInternetConnection(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_ServerFailure value)? serverFailure,
-    TResult? Function(_UserAlreadyExist value)? userAlreadyExist,
-    TResult? Function(_NoInternetConnection value)? noInternetConnection,
-    TResult? Function(_Validation value)? validation,
-  }) {
-    return noInternetConnection?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_ServerFailure value)? serverFailure,
-    TResult Function(_UserAlreadyExist value)? userAlreadyExist,
-    TResult Function(_NoInternetConnection value)? noInternetConnection,
-    TResult Function(_Validation value)? validation,
-    required TResult orElse(),
-  }) {
-    if (noInternetConnection != null) {
-      return noInternetConnection(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _NoInternetConnection extends Failure {
-  const factory _NoInternetConnection() = _$_NoInternetConnection;
-  const _NoInternetConnection._() : super._();
-}
-
-/// @nodoc
-abstract class _$$_ValidationCopyWith<$Res> {
-  factory _$$_ValidationCopyWith(
-          _$_Validation value, $Res Function(_$_Validation) then) =
-      __$$_ValidationCopyWithImpl<$Res>;
-  @useResult
-  $Res call({Map<String, String> errors});
-}
-
-/// @nodoc
-class __$$_ValidationCopyWithImpl<$Res>
-    extends _$FailureCopyWithImpl<$Res, _$_Validation>
-    implements _$$_ValidationCopyWith<$Res> {
-  __$$_ValidationCopyWithImpl(
-      _$_Validation _value, $Res Function(_$_Validation) _then)
-      : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? errors = null,
-  }) {
-    return _then(_$_Validation(
-      errors: null == errors
-          ? _value._errors
-          : errors // ignore: cast_nullable_to_non_nullable
-              as Map<String, String>,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$_Validation extends _Validation {
-  const _$_Validation({required final Map<String, String> errors})
-      : _errors = errors,
-        super._();
-
-  final Map<String, String> _errors;
-  @override
-  Map<String, String> get errors {
-    if (_errors is EqualUnmodifiableMapView) return _errors;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableMapView(_errors);
-  }
-
-  @override
-  String toString() {
-    return 'Failure.validation(errors: $errors)';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$_Validation &&
-            const DeepCollectionEquality().equals(other._errors, _errors));
-  }
-
-  @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(_errors));
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$_ValidationCopyWith<_$_Validation> get copyWith =>
-      __$$_ValidationCopyWithImpl<_$_Validation>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(String message) serverFailure,
-    required TResult Function() userAlreadyExist,
-    required TResult Function() noInternetConnection,
-    required TResult Function(Map<String, String> errors) validation,
-  }) {
-    return validation(errors);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String message)? serverFailure,
-    TResult? Function()? userAlreadyExist,
-    TResult? Function()? noInternetConnection,
-    TResult? Function(Map<String, String> errors)? validation,
-  }) {
-    return validation?.call(errors);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String message)? serverFailure,
-    TResult Function()? userAlreadyExist,
-    TResult Function()? noInternetConnection,
-    TResult Function(Map<String, String> errors)? validation,
-    required TResult orElse(),
-  }) {
-    if (validation != null) {
-      return validation(errors);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_ServerFailure value) serverFailure,
-    required TResult Function(_UserAlreadyExist value) userAlreadyExist,
-    required TResult Function(_NoInternetConnection value) noInternetConnection,
-    required TResult Function(_Validation value) validation,
-  }) {
-    return validation(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_ServerFailure value)? serverFailure,
-    TResult? Function(_UserAlreadyExist value)? userAlreadyExist,
-    TResult? Function(_NoInternetConnection value)? noInternetConnection,
-    TResult? Function(_Validation value)? validation,
-  }) {
-    return validation?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_ServerFailure value)? serverFailure,
-    TResult Function(_UserAlreadyExist value)? userAlreadyExist,
-    TResult Function(_NoInternetConnection value)? noInternetConnection,
-    TResult Function(_Validation value)? validation,
-    required TResult orElse(),
-  }) {
-    if (validation != null) {
-      return validation(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _Validation extends Failure {
-  const factory _Validation({required final Map<String, String> errors}) =
-      _$_Validation;
-  const _Validation._() : super._();
-
-  Map<String, String> get errors;
-  @JsonKey(ignore: true)
-  _$$_ValidationCopyWith<_$_Validation> get copyWith =>
       throw _privateConstructorUsedError;
 }

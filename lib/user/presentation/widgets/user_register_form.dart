@@ -2,26 +2,50 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:reactive_forms/reactive_forms.dart';
+import 'package:ryan_pujo_app/init.dart';
+import 'package:ryan_pujo_app/user/infrastructure/repository/user_repo_contract.dart';
 
 import '../../application/bloc/user_bloc_bloc.dart';
 import '../../application/bloc/user_bloc_event.dart';
 import '../../domain/user.dart';
-import '../models/user_form.dart';
 import 'custom_text_form_field.dart';
+import 'submit_button.dart';
 
 class UserRegisterForm extends StatelessWidget {
-  UserRegisterForm({
-    super.key,
-    required this.warningMessage,
+  UserRegisterForm({super.key});
+
+  static final userRepo = locator<UserRepositoryContract>();
+
+  final form = FormGroup({
+    "fname": FormControl<String>(validators: [Validators.required]),
+    "lname": FormControl<String>(validators: [Validators.required]),
+    "username": FormControl<String>(
+      validators: [Validators.required],
+      asyncValidators: [_uniqueUsername],
+    ),
+    "email": FormControl<String>(validators: [
+      Validators.email,
+      Validators.required,
+    ]),
+    "password": FormControl<String>(validators: [Validators.required])
   });
 
-  var form = const UserForm.form();
-  final _formKey = GlobalKey<FormState>();
-  final Widget warningMessage;
+  static Future<Map<String, dynamic>?> _uniqueUsername(
+      AbstractControl<dynamic> control) async {
+    final error = {"username already been used": false};
+    final isUnique = await userRepo.isUsernameAvailable(control.value);
+    if (!isUnique) {
+      control.markAllAsTouched();
+      return error;
+    }
+    return null;
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Form(
-      key: _formKey,
+    return ReactiveForm(
+      formGroup: form,
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 48),
         child: Column(
@@ -35,117 +59,80 @@ class UserRegisterForm extends StatelessWidget {
               Icons.person,
               size: 150.0,
             ),
-            Center(child: warningMessage),
             const SizedBox(
               height: 15,
             ),
             CustomTextFormField(
+              name: "fname",
               label: "First Name",
               icon: const Icon(Icons.person),
-              onSaved: (value) {
-                form = form.copyWith(fName: value);
-              },
-              validator: (value) {
-                if (value != null && value.length < 3) {
-                  return "first name should be at least 3 characters";
-                }
-                return null;
+              validationMessages: {
+                "required": (value) => "this field is required"
               },
             ),
             const SizedBox(
               height: 15,
             ),
             CustomTextFormField(
+              name: "lname",
               label: "Last Name",
               icon: const Icon(Icons.person_2),
-              onSaved: (value) {
-                form = form.copyWith(lName: value);
-              },
-              validator: (value) {
-                if (value != null && value.length < 3) {
-                  return "first name should be at least 3 characters";
-                }
-                return null;
+              validationMessages: {
+                "required": (value) => "this field is required"
               },
             ),
             const SizedBox(
               height: 15,
             ),
             CustomTextFormField(
+              name: "username",
               label: "Username",
               icon: const Icon(Icons.person_3),
-              onSaved: (value) {
-                form = form.copyWith(username: value);
-              },
-              validator: (value) {
-                if (value != null && value.length < 7) {
-                  return "username should be at least 7 characters";
-                }
-                return null;
+              validationMessages: {
+                "required": (value) => "this field is required"
               },
             ),
             const SizedBox(
               height: 15,
             ),
             CustomTextFormField(
+              name: "email",
               label: "Email",
               icon: const Icon(Icons.mail),
-              onSaved: (value) {
-                form = form.copyWith(email: value);
-              },
-              validator: (value) {
-                if (value != null && value.length < 10) {
-                  return "email should be at least 10 characters";
-                }
-                return null;
+              keyboardType: TextInputType.emailAddress,
+              validationMessages: {
+                "required": (value) => "this field is required",
+                "email": (value) => "this field needs a valid email address"
               },
             ),
             const SizedBox(
               height: 15,
             ),
             CustomTextFormField(
+              name: "password",
               label: "Password",
               obscureText: true,
               enableSuggestions: false,
               autoCorrect: false,
               icon: const Icon(Icons.password),
-              onSaved: (value) {
-                form = form.copyWith(password: value);
-              },
-              validator: (value) {
-                if (value != null && value.length < 12) {
-                  return "first name should be at least 12 characters";
-                }
-                return null;
+              validationMessages: {
+                "required": (value) => "this field is required"
               },
             ),
             const SizedBox(
               height: 15,
             ),
-            ElevatedButton(
-              style: ButtonStyle(
-                backgroundColor: MaterialStateProperty.resolveWith((states) {
-                  if (states.contains(MaterialState.pressed)) {
-                    return Colors.blue;
-                  }
-                  return Colors.green;
-                }),
-              ),
+            SubmitButton(
               onPressed: () {
-                if (!_formKey.currentState!.validate()) {
-                  return;
-                }
-                _formKey.currentState?.save();
                 final user = User(
-                  fName: form.fName!,
-                  lName: form.lName!,
-                  username: form.username!,
-                  email: form.email!,
-                  password: form.password!,
+                  fName: form.control("fname").value,
+                  lName: form.control("lname").value,
+                  username: form.control("username").value,
+                  email: form.control("email").value,
+                  password: form.control("password").value,
                 );
                 context.read<UserBlocBloc>().add(UserBlocEvent.register(user));
               },
-              child: const Text("Submit"),
             )
           ],
         ),

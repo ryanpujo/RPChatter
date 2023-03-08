@@ -10,8 +10,11 @@ class UserBlocState with _$UserBlocState {
       {User? user, required List<User> users}) = InitialState;
   const factory UserBlocState.loadingState(
       {User? user, required List<User> users}) = LoadingState;
-  const factory UserBlocState.loadedState(
-      {User? user, required List<User> users}) = LoadedState;
+  const factory UserBlocState.loadedState({
+    User? user,
+    required List<User> users,
+    bool? isUsernameAvailable,
+  }) = LoadedState;
   const factory UserBlocState.failureState(
       {User? user,
       required List<User> users,

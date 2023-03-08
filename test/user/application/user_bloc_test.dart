@@ -34,42 +34,12 @@ void main() {
       act: (bloc) {
         bloc.add(RegisterEvent(user));
         when(repository.registerUser(any)).thenAnswer((realInvocation) async =>
-            left(const Failure.serverFailure("message")));
+            left(const Failure.serverFailure("message", 400)));
       },
       expect: () => const <UserBlocState>[
         UserBlocState.loadingState(user: null, users: []),
         UserBlocState.failureState(
-            users: [], failure: Failure.serverFailure("message")),
-      ],
-    );
-
-    blocTest<UserBlocBloc, UserBlocState>(
-      'should emits [loadingState, userAlreadyExist].',
-      build: () => UserBlocBloc(repository),
-      act: (bloc) {
-        bloc.add(RegisterEvent(user));
-        when(repository.registerUser(any)).thenAnswer(
-            (realInvocation) async => left(const Failure.userAlreadyExist()));
-      },
-      expect: () => const <UserBlocState>[
-        UserBlocState.loadingState(user: null, users: []),
-        UserBlocState.failureState(
-            users: [], failure: Failure.userAlreadyExist()),
-      ],
-    );
-
-    blocTest<UserBlocBloc, UserBlocState>(
-      'should emits [loadingState, noInternetConnection].',
-      build: () => UserBlocBloc(repository),
-      act: (bloc) {
-        bloc.add(RegisterEvent(user));
-        when(repository.registerUser(any)).thenAnswer((realInvocation) async =>
-            left(const Failure.noInternetConnection()));
-      },
-      expect: () => const <UserBlocState>[
-        UserBlocState.loadingState(user: null, users: []),
-        UserBlocState.failureState(
-            users: [], failure: Failure.noInternetConnection()),
+            users: [], failure: Failure.serverFailure("message", 400)),
       ],
     );
 

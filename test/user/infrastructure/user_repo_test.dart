@@ -1,11 +1,7 @@
-import 'dart:io';
-
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
-import 'package:ryan_pujo_app/core/infrastructure/exceptions/failed_precondition_exception.dart';
 import 'package:ryan_pujo_app/core/infrastructure/exceptions/network_exception.dart';
-import 'package:ryan_pujo_app/core/infrastructure/exceptions/user_exist_exception.dart';
 import 'package:ryan_pujo_app/core/infrastructure/failure/failure.dart';
 import 'package:ryan_pujo_app/user/infrastructure/datasource/user_remote_datasource_contract.dart';
 import 'package:ryan_pujo_app/user/infrastructure/repository/user_repo.dart';
@@ -43,53 +39,15 @@ void main() {
       expect(actual, equals(right(user.toUser())));
     });
 
-    test("should return left with userAlradyExist union", () async {
-      when(remoteDatasourceContract.registerUser(any))
-          .thenThrow(const UserAlreadyExistException(500));
-
-      final actual = await repository.registerUser(user);
-
-      expect(actual, equals(left(const Failure.userAlreadyExist())));
-    });
-
-    test("should return left with noInternetConnection union", () async {
-      when(remoteDatasourceContract.registerUser(any))
-          .thenThrow(const SocketException("no connection"));
-
-      final actual = await repository.registerUser(user);
-
-      expect(actual, equals(left(const Failure.noInternetConnection())));
-    });
-
     group("should return server failure union", () {
       test("when RestApiException thrown", () async {
         when(remoteDatasourceContract.registerUser(any))
-            .thenThrow(const RestApiException(500));
-
-        final actual = await repository.registerUser(user);
-
-        expect(actual,
-            equals(left(const Failure.serverFailure("something went wrong"))));
-      });
-
-      test("when HttpException thrown", () async {
-        when(remoteDatasourceContract.registerUser(any))
-            .thenThrow(const HttpException("server down"));
+            .thenThrow(const RestApiException(400, "nyamuk"));
 
         final actual = await repository.registerUser(user);
 
         expect(
-            actual, equals(left(const Failure.serverFailure("server down"))));
-      });
-
-      test("when FailedPreconditionException thrown", () async {
-        when(remoteDatasourceContract.registerUser(any))
-            .thenThrow(const FailePreconditionException(500));
-
-        final actual = await repository.registerUser(user);
-
-        expect(actual,
-            equals(left(const Failure.serverFailure("something went wrong"))));
+            actual, equals(left(const Failure.serverFailure("nyamuk", 400))));
       });
     });
   });

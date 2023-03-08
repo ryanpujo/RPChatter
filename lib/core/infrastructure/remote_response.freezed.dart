@@ -20,49 +20,49 @@ mixin _$RemoteResponse<T> {
   TResult when<TResult extends Object?>({
     required TResult Function() noConnection,
     required TResult Function(T data) withData,
+    required TResult Function() noDataFound,
     required TResult Function() badRequest,
-    required TResult Function() userAlreadyExist,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? noConnection,
     TResult? Function(T data)? withData,
+    TResult? Function()? noDataFound,
     TResult? Function()? badRequest,
-    TResult? Function()? userAlreadyExist,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? noConnection,
     TResult Function(T data)? withData,
+    TResult Function()? noDataFound,
     TResult Function()? badRequest,
-    TResult Function()? userAlreadyExist,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_NoConnection<T> value) noConnection,
-    required TResult Function(_WithData<T> value) withData,
-    required TResult Function(_BadRequest<T> value) badRequest,
-    required TResult Function(_UserAlreadyExist<T> value) userAlreadyExist,
+    required TResult Function(NoConnection<T> value) noConnection,
+    required TResult Function(WithData<T> value) withData,
+    required TResult Function(NoDataFound<T> value) noDataFound,
+    required TResult Function(BadRequest<T> value) badRequest,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_NoConnection<T> value)? noConnection,
-    TResult? Function(_WithData<T> value)? withData,
-    TResult? Function(_BadRequest<T> value)? badRequest,
-    TResult? Function(_UserAlreadyExist<T> value)? userAlreadyExist,
+    TResult? Function(NoConnection<T> value)? noConnection,
+    TResult? Function(WithData<T> value)? withData,
+    TResult? Function(NoDataFound<T> value)? noDataFound,
+    TResult? Function(BadRequest<T> value)? badRequest,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_NoConnection<T> value)? noConnection,
-    TResult Function(_WithData<T> value)? withData,
-    TResult Function(_BadRequest<T> value)? badRequest,
-    TResult Function(_UserAlreadyExist<T> value)? userAlreadyExist,
+    TResult Function(NoConnection<T> value)? noConnection,
+    TResult Function(WithData<T> value)? withData,
+    TResult Function(NoDataFound<T> value)? noDataFound,
+    TResult Function(BadRequest<T> value)? badRequest,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -87,25 +87,25 @@ class _$RemoteResponseCopyWithImpl<T, $Res, $Val extends RemoteResponse<T>>
 }
 
 /// @nodoc
-abstract class _$$_NoConnectionCopyWith<T, $Res> {
-  factory _$$_NoConnectionCopyWith(
-          _$_NoConnection<T> value, $Res Function(_$_NoConnection<T>) then) =
-      __$$_NoConnectionCopyWithImpl<T, $Res>;
+abstract class _$$NoConnectionCopyWith<T, $Res> {
+  factory _$$NoConnectionCopyWith(
+          _$NoConnection<T> value, $Res Function(_$NoConnection<T>) then) =
+      __$$NoConnectionCopyWithImpl<T, $Res>;
 }
 
 /// @nodoc
-class __$$_NoConnectionCopyWithImpl<T, $Res>
-    extends _$RemoteResponseCopyWithImpl<T, $Res, _$_NoConnection<T>>
-    implements _$$_NoConnectionCopyWith<T, $Res> {
-  __$$_NoConnectionCopyWithImpl(
-      _$_NoConnection<T> _value, $Res Function(_$_NoConnection<T>) _then)
+class __$$NoConnectionCopyWithImpl<T, $Res>
+    extends _$RemoteResponseCopyWithImpl<T, $Res, _$NoConnection<T>>
+    implements _$$NoConnectionCopyWith<T, $Res> {
+  __$$NoConnectionCopyWithImpl(
+      _$NoConnection<T> _value, $Res Function(_$NoConnection<T>) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_NoConnection<T> extends _NoConnection<T> {
-  const _$_NoConnection() : super._();
+class _$NoConnection<T> extends NoConnection<T> {
+  const _$NoConnection() : super._();
 
   @override
   String toString() {
@@ -115,7 +115,7 @@ class _$_NoConnection<T> extends _NoConnection<T> {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_NoConnection<T>);
+        (other.runtimeType == runtimeType && other is _$NoConnection<T>);
   }
 
   @override
@@ -126,8 +126,8 @@ class _$_NoConnection<T> extends _NoConnection<T> {
   TResult when<TResult extends Object?>({
     required TResult Function() noConnection,
     required TResult Function(T data) withData,
+    required TResult Function() noDataFound,
     required TResult Function() badRequest,
-    required TResult Function() userAlreadyExist,
   }) {
     return noConnection();
   }
@@ -137,8 +137,8 @@ class _$_NoConnection<T> extends _NoConnection<T> {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? noConnection,
     TResult? Function(T data)? withData,
+    TResult? Function()? noDataFound,
     TResult? Function()? badRequest,
-    TResult? Function()? userAlreadyExist,
   }) {
     return noConnection?.call();
   }
@@ -148,8 +148,8 @@ class _$_NoConnection<T> extends _NoConnection<T> {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? noConnection,
     TResult Function(T data)? withData,
+    TResult Function()? noDataFound,
     TResult Function()? badRequest,
-    TResult Function()? userAlreadyExist,
     required TResult orElse(),
   }) {
     if (noConnection != null) {
@@ -161,10 +161,10 @@ class _$_NoConnection<T> extends _NoConnection<T> {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_NoConnection<T> value) noConnection,
-    required TResult Function(_WithData<T> value) withData,
-    required TResult Function(_BadRequest<T> value) badRequest,
-    required TResult Function(_UserAlreadyExist<T> value) userAlreadyExist,
+    required TResult Function(NoConnection<T> value) noConnection,
+    required TResult Function(WithData<T> value) withData,
+    required TResult Function(NoDataFound<T> value) noDataFound,
+    required TResult Function(BadRequest<T> value) badRequest,
   }) {
     return noConnection(this);
   }
@@ -172,10 +172,10 @@ class _$_NoConnection<T> extends _NoConnection<T> {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_NoConnection<T> value)? noConnection,
-    TResult? Function(_WithData<T> value)? withData,
-    TResult? Function(_BadRequest<T> value)? badRequest,
-    TResult? Function(_UserAlreadyExist<T> value)? userAlreadyExist,
+    TResult? Function(NoConnection<T> value)? noConnection,
+    TResult? Function(WithData<T> value)? withData,
+    TResult? Function(NoDataFound<T> value)? noDataFound,
+    TResult? Function(BadRequest<T> value)? badRequest,
   }) {
     return noConnection?.call(this);
   }
@@ -183,10 +183,10 @@ class _$_NoConnection<T> extends _NoConnection<T> {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_NoConnection<T> value)? noConnection,
-    TResult Function(_WithData<T> value)? withData,
-    TResult Function(_BadRequest<T> value)? badRequest,
-    TResult Function(_UserAlreadyExist<T> value)? userAlreadyExist,
+    TResult Function(NoConnection<T> value)? noConnection,
+    TResult Function(WithData<T> value)? withData,
+    TResult Function(NoDataFound<T> value)? noDataFound,
+    TResult Function(BadRequest<T> value)? badRequest,
     required TResult orElse(),
   }) {
     if (noConnection != null) {
@@ -196,26 +196,26 @@ class _$_NoConnection<T> extends _NoConnection<T> {
   }
 }
 
-abstract class _NoConnection<T> extends RemoteResponse<T> {
-  const factory _NoConnection() = _$_NoConnection<T>;
-  const _NoConnection._() : super._();
+abstract class NoConnection<T> extends RemoteResponse<T> {
+  const factory NoConnection() = _$NoConnection<T>;
+  const NoConnection._() : super._();
 }
 
 /// @nodoc
-abstract class _$$_WithDataCopyWith<T, $Res> {
-  factory _$$_WithDataCopyWith(
-          _$_WithData<T> value, $Res Function(_$_WithData<T>) then) =
-      __$$_WithDataCopyWithImpl<T, $Res>;
+abstract class _$$WithDataCopyWith<T, $Res> {
+  factory _$$WithDataCopyWith(
+          _$WithData<T> value, $Res Function(_$WithData<T>) then) =
+      __$$WithDataCopyWithImpl<T, $Res>;
   @useResult
   $Res call({T data});
 }
 
 /// @nodoc
-class __$$_WithDataCopyWithImpl<T, $Res>
-    extends _$RemoteResponseCopyWithImpl<T, $Res, _$_WithData<T>>
-    implements _$$_WithDataCopyWith<T, $Res> {
-  __$$_WithDataCopyWithImpl(
-      _$_WithData<T> _value, $Res Function(_$_WithData<T>) _then)
+class __$$WithDataCopyWithImpl<T, $Res>
+    extends _$RemoteResponseCopyWithImpl<T, $Res, _$WithData<T>>
+    implements _$$WithDataCopyWith<T, $Res> {
+  __$$WithDataCopyWithImpl(
+      _$WithData<T> _value, $Res Function(_$WithData<T>) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -223,7 +223,7 @@ class __$$_WithDataCopyWithImpl<T, $Res>
   $Res call({
     Object? data = freezed,
   }) {
-    return _then(_$_WithData<T>(
+    return _then(_$WithData<T>(
       freezed == data
           ? _value.data
           : data // ignore: cast_nullable_to_non_nullable
@@ -234,8 +234,8 @@ class __$$_WithDataCopyWithImpl<T, $Res>
 
 /// @nodoc
 
-class _$_WithData<T> extends _WithData<T> {
-  const _$_WithData(this.data) : super._();
+class _$WithData<T> extends WithData<T> {
+  const _$WithData(this.data) : super._();
 
   @override
   final T data;
@@ -249,7 +249,7 @@ class _$_WithData<T> extends _WithData<T> {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_WithData<T> &&
+            other is _$WithData<T> &&
             const DeepCollectionEquality().equals(other.data, data));
   }
 
@@ -260,16 +260,16 @@ class _$_WithData<T> extends _WithData<T> {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_WithDataCopyWith<T, _$_WithData<T>> get copyWith =>
-      __$$_WithDataCopyWithImpl<T, _$_WithData<T>>(this, _$identity);
+  _$$WithDataCopyWith<T, _$WithData<T>> get copyWith =>
+      __$$WithDataCopyWithImpl<T, _$WithData<T>>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() noConnection,
     required TResult Function(T data) withData,
+    required TResult Function() noDataFound,
     required TResult Function() badRequest,
-    required TResult Function() userAlreadyExist,
   }) {
     return withData(data);
   }
@@ -279,8 +279,8 @@ class _$_WithData<T> extends _WithData<T> {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? noConnection,
     TResult? Function(T data)? withData,
+    TResult? Function()? noDataFound,
     TResult? Function()? badRequest,
-    TResult? Function()? userAlreadyExist,
   }) {
     return withData?.call(data);
   }
@@ -290,8 +290,8 @@ class _$_WithData<T> extends _WithData<T> {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? noConnection,
     TResult Function(T data)? withData,
+    TResult Function()? noDataFound,
     TResult Function()? badRequest,
-    TResult Function()? userAlreadyExist,
     required TResult orElse(),
   }) {
     if (withData != null) {
@@ -303,10 +303,10 @@ class _$_WithData<T> extends _WithData<T> {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_NoConnection<T> value) noConnection,
-    required TResult Function(_WithData<T> value) withData,
-    required TResult Function(_BadRequest<T> value) badRequest,
-    required TResult Function(_UserAlreadyExist<T> value) userAlreadyExist,
+    required TResult Function(NoConnection<T> value) noConnection,
+    required TResult Function(WithData<T> value) withData,
+    required TResult Function(NoDataFound<T> value) noDataFound,
+    required TResult Function(BadRequest<T> value) badRequest,
   }) {
     return withData(this);
   }
@@ -314,10 +314,10 @@ class _$_WithData<T> extends _WithData<T> {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_NoConnection<T> value)? noConnection,
-    TResult? Function(_WithData<T> value)? withData,
-    TResult? Function(_BadRequest<T> value)? badRequest,
-    TResult? Function(_UserAlreadyExist<T> value)? userAlreadyExist,
+    TResult? Function(NoConnection<T> value)? noConnection,
+    TResult? Function(WithData<T> value)? withData,
+    TResult? Function(NoDataFound<T> value)? noDataFound,
+    TResult? Function(BadRequest<T> value)? badRequest,
   }) {
     return withData?.call(this);
   }
@@ -325,10 +325,10 @@ class _$_WithData<T> extends _WithData<T> {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_NoConnection<T> value)? noConnection,
-    TResult Function(_WithData<T> value)? withData,
-    TResult Function(_BadRequest<T> value)? badRequest,
-    TResult Function(_UserAlreadyExist<T> value)? userAlreadyExist,
+    TResult Function(NoConnection<T> value)? noConnection,
+    TResult Function(WithData<T> value)? withData,
+    TResult Function(NoDataFound<T> value)? noDataFound,
+    TResult Function(BadRequest<T> value)? badRequest,
     required TResult orElse(),
   }) {
     if (withData != null) {
@@ -338,46 +338,46 @@ class _$_WithData<T> extends _WithData<T> {
   }
 }
 
-abstract class _WithData<T> extends RemoteResponse<T> {
-  const factory _WithData(final T data) = _$_WithData<T>;
-  const _WithData._() : super._();
+abstract class WithData<T> extends RemoteResponse<T> {
+  const factory WithData(final T data) = _$WithData<T>;
+  const WithData._() : super._();
 
   T get data;
   @JsonKey(ignore: true)
-  _$$_WithDataCopyWith<T, _$_WithData<T>> get copyWith =>
+  _$$WithDataCopyWith<T, _$WithData<T>> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_BadRequestCopyWith<T, $Res> {
-  factory _$$_BadRequestCopyWith(
-          _$_BadRequest<T> value, $Res Function(_$_BadRequest<T>) then) =
-      __$$_BadRequestCopyWithImpl<T, $Res>;
+abstract class _$$NoDataFoundCopyWith<T, $Res> {
+  factory _$$NoDataFoundCopyWith(
+          _$NoDataFound<T> value, $Res Function(_$NoDataFound<T>) then) =
+      __$$NoDataFoundCopyWithImpl<T, $Res>;
 }
 
 /// @nodoc
-class __$$_BadRequestCopyWithImpl<T, $Res>
-    extends _$RemoteResponseCopyWithImpl<T, $Res, _$_BadRequest<T>>
-    implements _$$_BadRequestCopyWith<T, $Res> {
-  __$$_BadRequestCopyWithImpl(
-      _$_BadRequest<T> _value, $Res Function(_$_BadRequest<T>) _then)
+class __$$NoDataFoundCopyWithImpl<T, $Res>
+    extends _$RemoteResponseCopyWithImpl<T, $Res, _$NoDataFound<T>>
+    implements _$$NoDataFoundCopyWith<T, $Res> {
+  __$$NoDataFoundCopyWithImpl(
+      _$NoDataFound<T> _value, $Res Function(_$NoDataFound<T>) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_BadRequest<T> extends _BadRequest<T> {
-  const _$_BadRequest() : super._();
+class _$NoDataFound<T> extends NoDataFound<T> {
+  const _$NoDataFound() : super._();
 
   @override
   String toString() {
-    return 'RemoteResponse<$T>.badRequest()';
+    return 'RemoteResponse<$T>.noDataFound()';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_BadRequest<T>);
+        (other.runtimeType == runtimeType && other is _$NoDataFound<T>);
   }
 
   @override
@@ -388,8 +388,123 @@ class _$_BadRequest<T> extends _BadRequest<T> {
   TResult when<TResult extends Object?>({
     required TResult Function() noConnection,
     required TResult Function(T data) withData,
+    required TResult Function() noDataFound,
     required TResult Function() badRequest,
-    required TResult Function() userAlreadyExist,
+  }) {
+    return noDataFound();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? noConnection,
+    TResult? Function(T data)? withData,
+    TResult? Function()? noDataFound,
+    TResult? Function()? badRequest,
+  }) {
+    return noDataFound?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? noConnection,
+    TResult Function(T data)? withData,
+    TResult Function()? noDataFound,
+    TResult Function()? badRequest,
+    required TResult orElse(),
+  }) {
+    if (noDataFound != null) {
+      return noDataFound();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(NoConnection<T> value) noConnection,
+    required TResult Function(WithData<T> value) withData,
+    required TResult Function(NoDataFound<T> value) noDataFound,
+    required TResult Function(BadRequest<T> value) badRequest,
+  }) {
+    return noDataFound(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(NoConnection<T> value)? noConnection,
+    TResult? Function(WithData<T> value)? withData,
+    TResult? Function(NoDataFound<T> value)? noDataFound,
+    TResult? Function(BadRequest<T> value)? badRequest,
+  }) {
+    return noDataFound?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(NoConnection<T> value)? noConnection,
+    TResult Function(WithData<T> value)? withData,
+    TResult Function(NoDataFound<T> value)? noDataFound,
+    TResult Function(BadRequest<T> value)? badRequest,
+    required TResult orElse(),
+  }) {
+    if (noDataFound != null) {
+      return noDataFound(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class NoDataFound<T> extends RemoteResponse<T> {
+  const factory NoDataFound() = _$NoDataFound<T>;
+  const NoDataFound._() : super._();
+}
+
+/// @nodoc
+abstract class _$$BadRequestCopyWith<T, $Res> {
+  factory _$$BadRequestCopyWith(
+          _$BadRequest<T> value, $Res Function(_$BadRequest<T>) then) =
+      __$$BadRequestCopyWithImpl<T, $Res>;
+}
+
+/// @nodoc
+class __$$BadRequestCopyWithImpl<T, $Res>
+    extends _$RemoteResponseCopyWithImpl<T, $Res, _$BadRequest<T>>
+    implements _$$BadRequestCopyWith<T, $Res> {
+  __$$BadRequestCopyWithImpl(
+      _$BadRequest<T> _value, $Res Function(_$BadRequest<T>) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$BadRequest<T> extends BadRequest<T> {
+  const _$BadRequest() : super._();
+
+  @override
+  String toString() {
+    return 'RemoteResponse<$T>.badRequest()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$BadRequest<T>);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() noConnection,
+    required TResult Function(T data) withData,
+    required TResult Function() noDataFound,
+    required TResult Function() badRequest,
   }) {
     return badRequest();
   }
@@ -399,8 +514,8 @@ class _$_BadRequest<T> extends _BadRequest<T> {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? noConnection,
     TResult? Function(T data)? withData,
+    TResult? Function()? noDataFound,
     TResult? Function()? badRequest,
-    TResult? Function()? userAlreadyExist,
   }) {
     return badRequest?.call();
   }
@@ -410,8 +525,8 @@ class _$_BadRequest<T> extends _BadRequest<T> {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? noConnection,
     TResult Function(T data)? withData,
+    TResult Function()? noDataFound,
     TResult Function()? badRequest,
-    TResult Function()? userAlreadyExist,
     required TResult orElse(),
   }) {
     if (badRequest != null) {
@@ -423,10 +538,10 @@ class _$_BadRequest<T> extends _BadRequest<T> {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_NoConnection<T> value) noConnection,
-    required TResult Function(_WithData<T> value) withData,
-    required TResult Function(_BadRequest<T> value) badRequest,
-    required TResult Function(_UserAlreadyExist<T> value) userAlreadyExist,
+    required TResult Function(NoConnection<T> value) noConnection,
+    required TResult Function(WithData<T> value) withData,
+    required TResult Function(NoDataFound<T> value) noDataFound,
+    required TResult Function(BadRequest<T> value) badRequest,
   }) {
     return badRequest(this);
   }
@@ -434,10 +549,10 @@ class _$_BadRequest<T> extends _BadRequest<T> {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_NoConnection<T> value)? noConnection,
-    TResult? Function(_WithData<T> value)? withData,
-    TResult? Function(_BadRequest<T> value)? badRequest,
-    TResult? Function(_UserAlreadyExist<T> value)? userAlreadyExist,
+    TResult? Function(NoConnection<T> value)? noConnection,
+    TResult? Function(WithData<T> value)? withData,
+    TResult? Function(NoDataFound<T> value)? noDataFound,
+    TResult? Function(BadRequest<T> value)? badRequest,
   }) {
     return badRequest?.call(this);
   }
@@ -445,10 +560,10 @@ class _$_BadRequest<T> extends _BadRequest<T> {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_NoConnection<T> value)? noConnection,
-    TResult Function(_WithData<T> value)? withData,
-    TResult Function(_BadRequest<T> value)? badRequest,
-    TResult Function(_UserAlreadyExist<T> value)? userAlreadyExist,
+    TResult Function(NoConnection<T> value)? noConnection,
+    TResult Function(WithData<T> value)? withData,
+    TResult Function(NoDataFound<T> value)? noDataFound,
+    TResult Function(BadRequest<T> value)? badRequest,
     required TResult orElse(),
   }) {
     if (badRequest != null) {
@@ -458,122 +573,7 @@ class _$_BadRequest<T> extends _BadRequest<T> {
   }
 }
 
-abstract class _BadRequest<T> extends RemoteResponse<T> {
-  const factory _BadRequest() = _$_BadRequest<T>;
-  const _BadRequest._() : super._();
-}
-
-/// @nodoc
-abstract class _$$_UserAlreadyExistCopyWith<T, $Res> {
-  factory _$$_UserAlreadyExistCopyWith(_$_UserAlreadyExist<T> value,
-          $Res Function(_$_UserAlreadyExist<T>) then) =
-      __$$_UserAlreadyExistCopyWithImpl<T, $Res>;
-}
-
-/// @nodoc
-class __$$_UserAlreadyExistCopyWithImpl<T, $Res>
-    extends _$RemoteResponseCopyWithImpl<T, $Res, _$_UserAlreadyExist<T>>
-    implements _$$_UserAlreadyExistCopyWith<T, $Res> {
-  __$$_UserAlreadyExistCopyWithImpl(_$_UserAlreadyExist<T> _value,
-      $Res Function(_$_UserAlreadyExist<T>) _then)
-      : super(_value, _then);
-}
-
-/// @nodoc
-
-class _$_UserAlreadyExist<T> extends _UserAlreadyExist<T> {
-  const _$_UserAlreadyExist() : super._();
-
-  @override
-  String toString() {
-    return 'RemoteResponse<$T>.userAlreadyExist()';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_UserAlreadyExist<T>);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() noConnection,
-    required TResult Function(T data) withData,
-    required TResult Function() badRequest,
-    required TResult Function() userAlreadyExist,
-  }) {
-    return userAlreadyExist();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? noConnection,
-    TResult? Function(T data)? withData,
-    TResult? Function()? badRequest,
-    TResult? Function()? userAlreadyExist,
-  }) {
-    return userAlreadyExist?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? noConnection,
-    TResult Function(T data)? withData,
-    TResult Function()? badRequest,
-    TResult Function()? userAlreadyExist,
-    required TResult orElse(),
-  }) {
-    if (userAlreadyExist != null) {
-      return userAlreadyExist();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_NoConnection<T> value) noConnection,
-    required TResult Function(_WithData<T> value) withData,
-    required TResult Function(_BadRequest<T> value) badRequest,
-    required TResult Function(_UserAlreadyExist<T> value) userAlreadyExist,
-  }) {
-    return userAlreadyExist(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_NoConnection<T> value)? noConnection,
-    TResult? Function(_WithData<T> value)? withData,
-    TResult? Function(_BadRequest<T> value)? badRequest,
-    TResult? Function(_UserAlreadyExist<T> value)? userAlreadyExist,
-  }) {
-    return userAlreadyExist?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_NoConnection<T> value)? noConnection,
-    TResult Function(_WithData<T> value)? withData,
-    TResult Function(_BadRequest<T> value)? badRequest,
-    TResult Function(_UserAlreadyExist<T> value)? userAlreadyExist,
-    required TResult orElse(),
-  }) {
-    if (userAlreadyExist != null) {
-      return userAlreadyExist(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _UserAlreadyExist<T> extends RemoteResponse<T> {
-  const factory _UserAlreadyExist() = _$_UserAlreadyExist<T>;
-  const _UserAlreadyExist._() : super._();
+abstract class BadRequest<T> extends RemoteResponse<T> {
+  const factory BadRequest() = _$BadRequest<T>;
+  const BadRequest._() : super._();
 }
