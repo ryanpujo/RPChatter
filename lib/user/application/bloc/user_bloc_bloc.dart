@@ -11,8 +11,6 @@ class UserBlocBloc extends Bloc<UserBlocEvent, UserBlocState> {
     on<UserBlocEvent>((event, emit) async {
       await event.map(
         register: (event) async => await _registerUser(event, emit),
-        isUsernameAvailable: (event) async =>
-            await _isUsernameAvailable(event, emit),
       );
     });
   }
@@ -33,12 +31,5 @@ class UserBlocBloc extends Bloc<UserBlocEvent, UserBlocState> {
               users: state.users,
               user: r,
             )));
-  }
-
-  Future<void> _isUsernameAvailable(
-      IsUsernameAvailableEvent event, Emitter<UserBlocState> emit) async {
-    final isAvailable = await repository.isUsernameAvailable(event.username);
-    emit(UserBlocState.loadedState(
-        users: state.users, isUsernameAvailable: isAvailable));
   }
 }

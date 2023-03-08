@@ -22,9 +22,7 @@ mixin _$UserBlocState {
   TResult when<TResult extends Object?>({
     required TResult Function(User? user, List<User> users) initialState,
     required TResult Function(User? user, List<User> users) loadingState,
-    required TResult Function(
-            User? user, List<User> users, bool? isUsernameAvailable)
-        loadedState,
+    required TResult Function(User? user, List<User> users) loadedState,
     required TResult Function(User? user, List<User> users, Failure failure)
         failureState,
   }) =>
@@ -33,8 +31,7 @@ mixin _$UserBlocState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(User? user, List<User> users)? initialState,
     TResult? Function(User? user, List<User> users)? loadingState,
-    TResult? Function(User? user, List<User> users, bool? isUsernameAvailable)?
-        loadedState,
+    TResult? Function(User? user, List<User> users)? loadedState,
     TResult? Function(User? user, List<User> users, Failure failure)?
         failureState,
   }) =>
@@ -43,8 +40,7 @@ mixin _$UserBlocState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(User? user, List<User> users)? initialState,
     TResult Function(User? user, List<User> users)? loadingState,
-    TResult Function(User? user, List<User> users, bool? isUsernameAvailable)?
-        loadedState,
+    TResult Function(User? user, List<User> users)? loadedState,
     TResult Function(User? user, List<User> users, Failure failure)?
         failureState,
     required TResult orElse(),
@@ -219,9 +215,7 @@ class _$InitialState implements InitialState {
   TResult when<TResult extends Object?>({
     required TResult Function(User? user, List<User> users) initialState,
     required TResult Function(User? user, List<User> users) loadingState,
-    required TResult Function(
-            User? user, List<User> users, bool? isUsernameAvailable)
-        loadedState,
+    required TResult Function(User? user, List<User> users) loadedState,
     required TResult Function(User? user, List<User> users, Failure failure)
         failureState,
   }) {
@@ -233,8 +227,7 @@ class _$InitialState implements InitialState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(User? user, List<User> users)? initialState,
     TResult? Function(User? user, List<User> users)? loadingState,
-    TResult? Function(User? user, List<User> users, bool? isUsernameAvailable)?
-        loadedState,
+    TResult? Function(User? user, List<User> users)? loadedState,
     TResult? Function(User? user, List<User> users, Failure failure)?
         failureState,
   }) {
@@ -246,8 +239,7 @@ class _$InitialState implements InitialState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(User? user, List<User> users)? initialState,
     TResult Function(User? user, List<User> users)? loadingState,
-    TResult Function(User? user, List<User> users, bool? isUsernameAvailable)?
-        loadedState,
+    TResult Function(User? user, List<User> users)? loadedState,
     TResult Function(User? user, List<User> users, Failure failure)?
         failureState,
     required TResult orElse(),
@@ -396,9 +388,7 @@ class _$LoadingState implements LoadingState {
   TResult when<TResult extends Object?>({
     required TResult Function(User? user, List<User> users) initialState,
     required TResult Function(User? user, List<User> users) loadingState,
-    required TResult Function(
-            User? user, List<User> users, bool? isUsernameAvailable)
-        loadedState,
+    required TResult Function(User? user, List<User> users) loadedState,
     required TResult Function(User? user, List<User> users, Failure failure)
         failureState,
   }) {
@@ -410,8 +400,7 @@ class _$LoadingState implements LoadingState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(User? user, List<User> users)? initialState,
     TResult? Function(User? user, List<User> users)? loadingState,
-    TResult? Function(User? user, List<User> users, bool? isUsernameAvailable)?
-        loadedState,
+    TResult? Function(User? user, List<User> users)? loadedState,
     TResult? Function(User? user, List<User> users, Failure failure)?
         failureState,
   }) {
@@ -423,8 +412,7 @@ class _$LoadingState implements LoadingState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(User? user, List<User> users)? initialState,
     TResult Function(User? user, List<User> users)? loadingState,
-    TResult Function(User? user, List<User> users, bool? isUsernameAvailable)?
-        loadedState,
+    TResult Function(User? user, List<User> users)? loadedState,
     TResult Function(User? user, List<User> users, Failure failure)?
         failureState,
     required TResult orElse(),
@@ -495,7 +483,7 @@ abstract class _$$LoadedStateCopyWith<$Res>
       __$$LoadedStateCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({User? user, List<User> users, bool? isUsernameAvailable});
+  $Res call({User? user, List<User> users});
 
   @override
   $UserCopyWith<$Res>? get user;
@@ -514,7 +502,6 @@ class __$$LoadedStateCopyWithImpl<$Res>
   $Res call({
     Object? user = freezed,
     Object? users = null,
-    Object? isUsernameAvailable = freezed,
   }) {
     return _then(_$LoadedState(
       user: freezed == user
@@ -525,10 +512,6 @@ class __$$LoadedStateCopyWithImpl<$Res>
           ? _value._users
           : users // ignore: cast_nullable_to_non_nullable
               as List<User>,
-      isUsernameAvailable: freezed == isUsernameAvailable
-          ? _value.isUsernameAvailable
-          : isUsernameAvailable // ignore: cast_nullable_to_non_nullable
-              as bool?,
     ));
   }
 }
@@ -536,8 +519,7 @@ class __$$LoadedStateCopyWithImpl<$Res>
 /// @nodoc
 
 class _$LoadedState implements LoadedState {
-  const _$LoadedState(
-      {this.user, required final List<User> users, this.isUsernameAvailable})
+  const _$LoadedState({this.user, required final List<User> users})
       : _users = users;
 
   @override
@@ -551,11 +533,8 @@ class _$LoadedState implements LoadedState {
   }
 
   @override
-  final bool? isUsernameAvailable;
-
-  @override
   String toString() {
-    return 'UserBlocState.loadedState(user: $user, users: $users, isUsernameAvailable: $isUsernameAvailable)';
+    return 'UserBlocState.loadedState(user: $user, users: $users)';
   }
 
   @override
@@ -564,14 +543,12 @@ class _$LoadedState implements LoadedState {
         (other.runtimeType == runtimeType &&
             other is _$LoadedState &&
             (identical(other.user, user) || other.user == user) &&
-            const DeepCollectionEquality().equals(other._users, _users) &&
-            (identical(other.isUsernameAvailable, isUsernameAvailable) ||
-                other.isUsernameAvailable == isUsernameAvailable));
+            const DeepCollectionEquality().equals(other._users, _users));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, user,
-      const DeepCollectionEquality().hash(_users), isUsernameAvailable);
+  int get hashCode => Object.hash(
+      runtimeType, user, const DeepCollectionEquality().hash(_users));
 
   @JsonKey(ignore: true)
   @override
@@ -584,13 +561,11 @@ class _$LoadedState implements LoadedState {
   TResult when<TResult extends Object?>({
     required TResult Function(User? user, List<User> users) initialState,
     required TResult Function(User? user, List<User> users) loadingState,
-    required TResult Function(
-            User? user, List<User> users, bool? isUsernameAvailable)
-        loadedState,
+    required TResult Function(User? user, List<User> users) loadedState,
     required TResult Function(User? user, List<User> users, Failure failure)
         failureState,
   }) {
-    return loadedState(user, users, isUsernameAvailable);
+    return loadedState(user, users);
   }
 
   @override
@@ -598,12 +573,11 @@ class _$LoadedState implements LoadedState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(User? user, List<User> users)? initialState,
     TResult? Function(User? user, List<User> users)? loadingState,
-    TResult? Function(User? user, List<User> users, bool? isUsernameAvailable)?
-        loadedState,
+    TResult? Function(User? user, List<User> users)? loadedState,
     TResult? Function(User? user, List<User> users, Failure failure)?
         failureState,
   }) {
-    return loadedState?.call(user, users, isUsernameAvailable);
+    return loadedState?.call(user, users);
   }
 
   @override
@@ -611,14 +585,13 @@ class _$LoadedState implements LoadedState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(User? user, List<User> users)? initialState,
     TResult Function(User? user, List<User> users)? loadingState,
-    TResult Function(User? user, List<User> users, bool? isUsernameAvailable)?
-        loadedState,
+    TResult Function(User? user, List<User> users)? loadedState,
     TResult Function(User? user, List<User> users, Failure failure)?
         failureState,
     required TResult orElse(),
   }) {
     if (loadedState != null) {
-      return loadedState(user, users, isUsernameAvailable);
+      return loadedState(user, users);
     }
     return orElse();
   }
@@ -663,15 +636,12 @@ class _$LoadedState implements LoadedState {
 
 abstract class LoadedState implements UserBlocState {
   const factory LoadedState(
-      {final User? user,
-      required final List<User> users,
-      final bool? isUsernameAvailable}) = _$LoadedState;
+      {final User? user, required final List<User> users}) = _$LoadedState;
 
   @override
   User? get user;
   @override
   List<User> get users;
-  bool? get isUsernameAvailable;
   @override
   @JsonKey(ignore: true)
   _$$LoadedStateCopyWith<_$LoadedState> get copyWith =>
@@ -783,9 +753,7 @@ class _$FailureState implements FailureState {
   TResult when<TResult extends Object?>({
     required TResult Function(User? user, List<User> users) initialState,
     required TResult Function(User? user, List<User> users) loadingState,
-    required TResult Function(
-            User? user, List<User> users, bool? isUsernameAvailable)
-        loadedState,
+    required TResult Function(User? user, List<User> users) loadedState,
     required TResult Function(User? user, List<User> users, Failure failure)
         failureState,
   }) {
@@ -797,8 +765,7 @@ class _$FailureState implements FailureState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(User? user, List<User> users)? initialState,
     TResult? Function(User? user, List<User> users)? loadingState,
-    TResult? Function(User? user, List<User> users, bool? isUsernameAvailable)?
-        loadedState,
+    TResult? Function(User? user, List<User> users)? loadedState,
     TResult? Function(User? user, List<User> users, Failure failure)?
         failureState,
   }) {
@@ -810,8 +777,7 @@ class _$FailureState implements FailureState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(User? user, List<User> users)? initialState,
     TResult Function(User? user, List<User> users)? loadingState,
-    TResult Function(User? user, List<User> users, bool? isUsernameAvailable)?
-        loadedState,
+    TResult Function(User? user, List<User> users)? loadedState,
     TResult Function(User? user, List<User> users, Failure failure)?
         failureState,
     required TResult orElse(),

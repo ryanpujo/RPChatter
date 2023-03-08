@@ -65,4 +65,13 @@ class MockUserRepositoryContract extends _i1.Mock
           ),
         )),
       ) as _i4.Future<_i2.Either<_i5.Failure, _i6.User>>);
+  @override
+  _i4.Future<bool> isUsernameAvailable(String? username) => (super.noSuchMethod(
+        Invocation.method(
+          #isUsernameAvailable,
+          [username],
+        ),
+        returnValue: _i4.Future<bool>.value(false),
+        returnValueForMissingStub: _i4.Future<bool>.value(false),
+      ) as _i4.Future<bool>);
 }

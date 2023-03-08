@@ -16,44 +16,42 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$UserBlocEvent {
+  User get user => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(User user) register,
-    required TResult Function(String username) isUsernameAvailable,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(User user)? register,
-    TResult? Function(String username)? isUsernameAvailable,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(User user)? register,
-    TResult Function(String username)? isUsernameAvailable,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(RegisterEvent value) register,
-    required TResult Function(IsUsernameAvailableEvent value)
-        isUsernameAvailable,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(RegisterEvent value)? register,
-    TResult? Function(IsUsernameAvailableEvent value)? isUsernameAvailable,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(RegisterEvent value)? register,
-    TResult Function(IsUsernameAvailableEvent value)? isUsernameAvailable,
     required TResult orElse(),
   }) =>
+      throw _privateConstructorUsedError;
+
+  @JsonKey(ignore: true)
+  $UserBlocEventCopyWith<UserBlocEvent> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -62,6 +60,10 @@ abstract class $UserBlocEventCopyWith<$Res> {
   factory $UserBlocEventCopyWith(
           UserBlocEvent value, $Res Function(UserBlocEvent) then) =
       _$UserBlocEventCopyWithImpl<$Res, UserBlocEvent>;
+  @useResult
+  $Res call({User user});
+
+  $UserCopyWith<$Res> get user;
 }
 
 /// @nodoc
@@ -73,16 +75,40 @@ class _$UserBlocEventCopyWithImpl<$Res, $Val extends UserBlocEvent>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? user = null,
+  }) {
+    return _then(_value.copyWith(
+      user: null == user
+          ? _value.user
+          : user // ignore: cast_nullable_to_non_nullable
+              as User,
+    ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $UserCopyWith<$Res> get user {
+    return $UserCopyWith<$Res>(_value.user, (value) {
+      return _then(_value.copyWith(user: value) as $Val);
+    });
+  }
 }
 
 /// @nodoc
-abstract class _$$RegisterEventCopyWith<$Res> {
+abstract class _$$RegisterEventCopyWith<$Res>
+    implements $UserBlocEventCopyWith<$Res> {
   factory _$$RegisterEventCopyWith(
           _$RegisterEvent value, $Res Function(_$RegisterEvent) then) =
       __$$RegisterEventCopyWithImpl<$Res>;
+  @override
   @useResult
   $Res call({User user});
 
+  @override
   $UserCopyWith<$Res> get user;
 }
 
@@ -105,14 +131,6 @@ class __$$RegisterEventCopyWithImpl<$Res>
           : user // ignore: cast_nullable_to_non_nullable
               as User,
     ));
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $UserCopyWith<$Res> get user {
-    return $UserCopyWith<$Res>(_value.user, (value) {
-      return _then(_value.copyWith(user: value));
-    });
   }
 }
 
@@ -150,7 +168,6 @@ class _$RegisterEvent implements RegisterEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(User user) register,
-    required TResult Function(String username) isUsernameAvailable,
   }) {
     return register(user);
   }
@@ -159,7 +176,6 @@ class _$RegisterEvent implements RegisterEvent {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(User user)? register,
-    TResult? Function(String username)? isUsernameAvailable,
   }) {
     return register?.call(user);
   }
@@ -168,7 +184,6 @@ class _$RegisterEvent implements RegisterEvent {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(User user)? register,
-    TResult Function(String username)? isUsernameAvailable,
     required TResult orElse(),
   }) {
     if (register != null) {
@@ -181,8 +196,6 @@ class _$RegisterEvent implements RegisterEvent {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(RegisterEvent value) register,
-    required TResult Function(IsUsernameAvailableEvent value)
-        isUsernameAvailable,
   }) {
     return register(this);
   }
@@ -191,7 +204,6 @@ class _$RegisterEvent implements RegisterEvent {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(RegisterEvent value)? register,
-    TResult? Function(IsUsernameAvailableEvent value)? isUsernameAvailable,
   }) {
     return register?.call(this);
   }
@@ -200,7 +212,6 @@ class _$RegisterEvent implements RegisterEvent {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(RegisterEvent value)? register,
-    TResult Function(IsUsernameAvailableEvent value)? isUsernameAvailable,
     required TResult orElse(),
   }) {
     if (register != null) {
@@ -213,146 +224,10 @@ class _$RegisterEvent implements RegisterEvent {
 abstract class RegisterEvent implements UserBlocEvent {
   const factory RegisterEvent(final User user) = _$RegisterEvent;
 
+  @override
   User get user;
+  @override
   @JsonKey(ignore: true)
   _$$RegisterEventCopyWith<_$RegisterEvent> get copyWith =>
       throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class _$$IsUsernameAvailableEventCopyWith<$Res> {
-  factory _$$IsUsernameAvailableEventCopyWith(_$IsUsernameAvailableEvent value,
-          $Res Function(_$IsUsernameAvailableEvent) then) =
-      __$$IsUsernameAvailableEventCopyWithImpl<$Res>;
-  @useResult
-  $Res call({String username});
-}
-
-/// @nodoc
-class __$$IsUsernameAvailableEventCopyWithImpl<$Res>
-    extends _$UserBlocEventCopyWithImpl<$Res, _$IsUsernameAvailableEvent>
-    implements _$$IsUsernameAvailableEventCopyWith<$Res> {
-  __$$IsUsernameAvailableEventCopyWithImpl(_$IsUsernameAvailableEvent _value,
-      $Res Function(_$IsUsernameAvailableEvent) _then)
-      : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? username = null,
-  }) {
-    return _then(_$IsUsernameAvailableEvent(
-      null == username
-          ? _value.username
-          : username // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$IsUsernameAvailableEvent implements IsUsernameAvailableEvent {
-  const _$IsUsernameAvailableEvent(this.username);
-
-  @override
-  final String username;
-
-  @override
-  String toString() {
-    return 'UserBlocEvent.isUsernameAvailable(username: $username)';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$IsUsernameAvailableEvent &&
-            (identical(other.username, username) ||
-                other.username == username));
-  }
-
-  @override
-  int get hashCode => Object.hash(runtimeType, username);
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$IsUsernameAvailableEventCopyWith<_$IsUsernameAvailableEvent>
-      get copyWith =>
-          __$$IsUsernameAvailableEventCopyWithImpl<_$IsUsernameAvailableEvent>(
-              this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(User user) register,
-    required TResult Function(String username) isUsernameAvailable,
-  }) {
-    return isUsernameAvailable(username);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(User user)? register,
-    TResult? Function(String username)? isUsernameAvailable,
-  }) {
-    return isUsernameAvailable?.call(username);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(User user)? register,
-    TResult Function(String username)? isUsernameAvailable,
-    required TResult orElse(),
-  }) {
-    if (isUsernameAvailable != null) {
-      return isUsernameAvailable(username);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(RegisterEvent value) register,
-    required TResult Function(IsUsernameAvailableEvent value)
-        isUsernameAvailable,
-  }) {
-    return isUsernameAvailable(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(RegisterEvent value)? register,
-    TResult? Function(IsUsernameAvailableEvent value)? isUsernameAvailable,
-  }) {
-    return isUsernameAvailable?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(RegisterEvent value)? register,
-    TResult Function(IsUsernameAvailableEvent value)? isUsernameAvailable,
-    required TResult orElse(),
-  }) {
-    if (isUsernameAvailable != null) {
-      return isUsernameAvailable(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class IsUsernameAvailableEvent implements UserBlocEvent {
-  const factory IsUsernameAvailableEvent(final String username) =
-      _$IsUsernameAvailableEvent;
-
-  String get username;
-  @JsonKey(ignore: true)
-  _$$IsUsernameAvailableEventCopyWith<_$IsUsernameAvailableEvent>
-      get copyWith => throw _privateConstructorUsedError;
 }
