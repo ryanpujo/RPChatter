@@ -6,20 +6,20 @@ import 'package:ryan_pujo_app/firebase_options.dart';
 import 'package:ryan_pujo_app/init.dart';
 import 'package:ryan_pujo_app/user/application/bloc/user_bloc_bloc.dart';
 import 'package:ryan_pujo_app/user/infrastructure/repository/user_repo_contract.dart';
-
-import 'user/presentation/pages/splash_page.dart';
+import 'package:ryan_pujo_app/user/presentation/pages/sign_in_page.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   init();
+
   runApp(const MyApp());
 }
 
 final _route = GoRouter(routes: [
   GoRoute(
     path: "/",
-    builder: (context, state) => const SplashPage(),
+    builder: (context, state) => const SignInPage(),
   )
 ]);
 
