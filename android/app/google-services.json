@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "175002313861",
+    "project_id": "orbit-app-145b9",
+    "storage_bucket": "orbit-app-145b9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:175002313861:android:51b00d526adaaaed2db5ec",
+        "android_client_info": {
+          "package_name": "com.example.ryan_pujo_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "175002313861-j5ohipkldjtvusgcqccq62t6qer22lif.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAF_P511OviVWa8fCZ5SpMA5qwMkDKTd4I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "175002313861-j5ohipkldjtvusgcqccq62t6qer22lif.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

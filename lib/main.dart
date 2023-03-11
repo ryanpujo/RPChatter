@@ -1,14 +1,17 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:ryan_pujo_app/firebase_options.dart';
 import 'package:ryan_pujo_app/init.dart';
 import 'package:ryan_pujo_app/user/application/bloc/user_bloc_bloc.dart';
 import 'package:ryan_pujo_app/user/infrastructure/repository/user_repo_contract.dart';
 
 import 'user/presentation/pages/splash_page.dart';
 
-void main() {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   init();
   runApp(const MyApp());
 }
