@@ -5,9 +5,11 @@ class SubmitButton extends StatelessWidget {
   const SubmitButton({
     super.key,
     this.onPressed,
+    required this.label,
   });
 
   final void Function()? onPressed;
+  final String label;
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +24,7 @@ class SubmitButton extends StatelessWidget {
         }),
       ),
       onPressed: form != null && form.valid ? onPressed : null,
-      child: const Text("Submit"),
+      child: Text(label),
     );
   }
 }

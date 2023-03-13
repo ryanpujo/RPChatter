@@ -1,11 +1,10 @@
 // ignore_for_file: must_be_immutable
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:ryan_pujo_app/user/application/bloc/user_bloc_bloc.dart';
-import 'package:ryan_pujo_app/user/application/bloc/user_bloc_state.dart';
-
-import '../widgets/user_register_form.dart';
+import 'package:ryan_pujo_app/auth/application/bloc/auth_bloc.dart';
+import 'package:ryan_pujo_app/auth/application/bloc/auth_event.dart';
 
 class Homepage extends StatelessWidget {
   Homepage({super.key});
@@ -14,20 +13,18 @@ class Homepage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(),
       body: SingleChildScrollView(
         child: SafeArea(
-          child: BlocBuilder<UserBlocBloc, UserBlocState>(
-            builder: (context, state) {
-              return state.map(
-                initialState: (value) => UserRegisterForm(),
-                loadingState: (value) => const Center(
-                  child: CircularProgressIndicator(),
-                ),
-                loadedState: (value) => const Text("successfuly registered"),
-                failureState: (value) =>
-                    Text("${value.failure.errorCode} ${value.failure.message}"),
-              );
-            },
+          child: Column(
+            children: [
+              Text(FirebaseAuth.instance.currentUser!.email!),
+              ElevatedButton(
+                  onPressed: () {
+                    context.read<AuthBloc>().add(const AuthEvent.signOut());
+                  },
+                  child: const Text("Sign out")),
+            ],
           ),
         ),
       ),
