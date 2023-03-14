@@ -22,11 +22,11 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       AuthEvent event, Emitter<AuthState> emit) async {
     final user = _authenticator.currentUser;
     if (user != null) {
-      if (user.emailVerified) {
-        emit(const AuthState.authenticated());
+      if (!user.emailVerified) {
+        emit(const AuthState.unVerified());
         return;
       }
-      emit(const AuthState.unVerified());
+      emit(const AuthState.authenticated());
       return;
     }
     emit(const AuthState.unAuthenticated());
@@ -52,7 +52,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
           }
           emit(const AuthState.unVerified());
         } on FirebaseAuthException catch (e) {
-          emit(AuthState.failure(e.message!));
+          emit(AuthState.failure(e.code));
         }
       },
     );

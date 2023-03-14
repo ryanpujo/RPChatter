@@ -1,14 +1,14 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
 import '../../core/presentation/submit_button.dart';
-import '../../user/presentation/widgets/custom_text_form_field.dart';
+import '../../core/presentation/custom_text_form_field.dart';
 import '../application/bloc/auth_bloc.dart';
 import '../application/bloc/auth_event.dart';
+import 'error_text.dart';
+import 'register_clickable_text.dart';
 
 class SignInForm extends StatefulWidget {
   const SignInForm({
@@ -50,33 +50,14 @@ class _SignInFormState extends State<SignInForm> {
           const SizedBox(
             height: 10,
           ),
-          Text.rich(
-            TextSpan(
-              children: [
-                const TextSpan(text: "Don't have an account? "),
-                TextSpan(
-                  text: "Register",
-                  style: const TextStyle(
-                    color: Colors.blue,
-                  ),
-                  recognizer: TapGestureRecognizer()
-                    ..onTap = () {
-                      context.go("/sign-in/register-page");
-                    },
-                )
-              ],
-            ),
-            style: Theme.of(context).textTheme.labelMedium,
-          ),
-          Text(
-            widget.errorMessage,
-            style: const TextStyle(
-              color: Colors.red,
-            ),
-          ),
+          const RegisterClickableText(),
           const SizedBox(
             height: 10,
           ),
+          if (widget.errorMessage != "")
+            ErrorText(
+              errorText: widget.errorMessage,
+            ),
           const CustomTextFormField(
             label: "Username",
             icon: Icon(MdiIcons.account),
@@ -89,6 +70,7 @@ class _SignInFormState extends State<SignInForm> {
             label: "Password",
             icon: Icon(MdiIcons.formTextboxPassword),
             name: "password",
+            obscureText: true,
           ),
           const SizedBox(
             height: 15,

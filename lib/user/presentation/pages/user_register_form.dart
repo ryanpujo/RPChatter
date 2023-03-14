@@ -9,7 +9,7 @@ import 'package:ryan_pujo_app/user/infrastructure/repository/user_repo_contract.
 import '../../application/bloc/user_bloc_bloc.dart';
 import '../../application/bloc/user_bloc_event.dart';
 import '../../domain/user.dart';
-import '../widgets/custom_text_form_field.dart';
+import '../../../core/presentation/custom_text_form_field.dart';
 import '../../../core/presentation/submit_button.dart';
 
 class UserRegisterForm extends StatefulWidget {
