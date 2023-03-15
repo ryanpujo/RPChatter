@@ -5,15 +5,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ryan_pujo_app/auth/application/bloc/auth_bloc.dart';
+import 'package:ryan_pujo_app/auth/application/bloc/auth_event.dart';
 import 'package:ryan_pujo_app/auth/presentation/sign_in_page.dart';
-import 'package:ryan_pujo_app/core/presentation/splash_page.dart';
 import 'package:ryan_pujo_app/firebase_options.dart';
 import 'package:ryan_pujo_app/init.dart';
 import 'package:ryan_pujo_app/user/application/bloc/user_bloc_bloc.dart';
 import 'package:ryan_pujo_app/user/infrastructure/repository/user_repo_contract.dart';
 import 'package:ryan_pujo_app/user/presentation/pages/user_register_form.dart';
 
-import 'auth/application/bloc/auth_event.dart';
 import 'auth/application/bloc/auth_state.dart' as auth;
 import 'user/presentation/pages/homepage.dart';
 
@@ -27,10 +26,6 @@ Future<void> main() async {
 
 final _route = GoRouter(
   routes: [
-    GoRoute(
-      path: "/",
-      builder: (context, state) => const SplashPage(),
-    ),
     GoRoute(
       name: "homepage",
       path: "/homepage",
@@ -55,7 +50,7 @@ final _route = GoRouter(
       ),
     ),
     GoRoute(
-      path: "/sign-in",
+      path: "/",
       builder: (context, state) => const SignInPage(),
       routes: [
         GoRoute(
@@ -88,10 +83,9 @@ class MyApp extends StatelessWidget {
         listener: (context, state) {
           state.maybeMap(
             orElse: () {},
-            authenticated: (value) => _route.pushReplacement("/homepage"),
-            unAuthenticated: (value) => _route.pushReplacement("/sign-in"),
-            unVerified: (value) =>
-                _route.pushReplacement("/email-verification"),
+            authenticated: (value) => _route.go("/homepage"),
+            unAuthenticated: (value) => _route.go("/"),
+            unVerified: (value) => _route.go("/email-verification"),
           );
         },
         child: MaterialApp.router(

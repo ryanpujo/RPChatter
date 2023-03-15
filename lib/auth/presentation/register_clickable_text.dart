@@ -20,7 +20,7 @@ class RegisterClickableText extends StatelessWidget {
             ),
             recognizer: TapGestureRecognizer()
               ..onTap = () {
-                context.go("/sign-in/register-page");
+                context.go("/register-page");
               },
           )
         ],
