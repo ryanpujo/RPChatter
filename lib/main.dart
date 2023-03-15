@@ -79,7 +79,8 @@ class MyApp extends StatelessWidget {
             create: (context) =>
                 UserBlocBloc(locator<UserRepositoryContract>())),
         BlocProvider(
-          create: (context) => AuthBloc(locator<FirebaseAuth>())
+          create: (context) => AuthBloc(
+              locator<FirebaseAuth>(), locator<UserRepositoryContract>())
             ..add(const AuthEvent.isAuthenticated()),
         )
       ],

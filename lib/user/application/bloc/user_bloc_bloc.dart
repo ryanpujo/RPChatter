@@ -22,14 +22,20 @@ class UserBlocBloc extends Bloc<UserBlocEvent, UserBlocState> {
     final failureOrSuccess =
         await repository.registerUser(UserDto.fromDomain(event.user));
 
-    failureOrSuccess.fold((l) {
-      l.map(
+    failureOrSuccess.fold(
+      (l) {
+        l.maybeMap(
           serverFailure: (value) => emit(
-              UserBlocState.failureState(users: state.users, failure: value)));
-    },
-        (r) => emit(UserBlocState.loadedState(
-              users: state.users,
-              user: r,
-            )));
+              UserBlocState.failureState(users: state.users, failure: value)),
+          orElse: () {},
+        );
+      },
+      (r) => emit(
+        UserBlocState.loadedState(
+          users: state.users,
+          user: r,
+        ),
+      ),
+    );
   }
 }

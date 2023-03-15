@@ -74,4 +74,30 @@ class MockUserRepositoryContract extends _i1.Mock
         returnValue: _i4.Future<bool>.value(false),
         returnValueForMissingStub: _i4.Future<bool>.value(false),
       ) as _i4.Future<bool>);
+  @override
+  _i4.Future<_i2.Either<_i5.Failure, _i6.User>> getByUsername(
+          String? username) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #getByUsername,
+          [username],
+        ),
+        returnValue: _i4.Future<_i2.Either<_i5.Failure, _i6.User>>.value(
+            _FakeEither_0<_i5.Failure, _i6.User>(
+          this,
+          Invocation.method(
+            #getByUsername,
+            [username],
+          ),
+        )),
+        returnValueForMissingStub:
+            _i4.Future<_i2.Either<_i5.Failure, _i6.User>>.value(
+                _FakeEither_0<_i5.Failure, _i6.User>(
+          this,
+          Invocation.method(
+            #getByUsername,
+            [username],
+          ),
+        )),
+      ) as _i4.Future<_i2.Either<_i5.Failure, _i6.User>>);
 }

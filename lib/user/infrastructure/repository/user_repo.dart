@@ -32,4 +32,17 @@ class UserRepo implements UserRepositoryContract {
       badRequest: (value) => false,
     );
   }
+
+  @override
+  Future<Either<Failure, User>> getByUsername(String username) async {
+    final user = await _remmoteDatasource.getByUsername(username);
+    return user.maybeMap(
+      noConnection: (value) =>
+          left(const Failure.clientFailure("no internet connection")),
+      withData: (value) => right(value.data.toUser()),
+      noDataFound: (value) =>
+          left(const Failure.clientFailure("username is not registered yet")),
+      orElse: () => left(const Failure.clientFailure("bad request")),
+    );
+  }
 }

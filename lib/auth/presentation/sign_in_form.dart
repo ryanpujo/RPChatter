@@ -59,7 +59,7 @@ class _SignInFormState extends State<SignInForm> {
               errorText: widget.errorMessage,
             ),
           const CustomTextFormField(
-            label: "Username",
+            label: "Username/Email",
             icon: Icon(MdiIcons.account),
             name: "username",
           ),

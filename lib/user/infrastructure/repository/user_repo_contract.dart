@@ -6,4 +6,5 @@ import 'package:ryan_pujo_app/user/infrastructure/user_dto.dart';
 abstract class UserRepositoryContract {
   Future<Either<Failure, User>> registerUser(UserDto dto);
   Future<bool> isUsernameAvailable(String username);
+  Future<Either<Failure, User>> getByUsername(String username);
 }

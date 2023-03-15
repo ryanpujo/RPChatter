@@ -10,4 +10,5 @@ class AuthState with _$AuthState {
   const factory AuthState.unAuthenticated() = _UnAuthenticated;
   const factory AuthState.unVerified() = _UnVerified;
   const factory AuthState.failure(String message) = _Failure;
+  const factory AuthState.loading() = _Loading;
 }

@@ -23,6 +23,7 @@ mixin _$AuthState {
     required TResult Function() unAuthenticated,
     required TResult Function() unVerified,
     required TResult Function(String message) failure,
+    required TResult Function() loading,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -32,6 +33,7 @@ mixin _$AuthState {
     TResult? Function()? unAuthenticated,
     TResult? Function()? unVerified,
     TResult? Function(String message)? failure,
+    TResult? Function()? loading,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -41,6 +43,7 @@ mixin _$AuthState {
     TResult Function()? unAuthenticated,
     TResult Function()? unVerified,
     TResult Function(String message)? failure,
+    TResult Function()? loading,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -51,6 +54,7 @@ mixin _$AuthState {
     required TResult Function(_UnAuthenticated value) unAuthenticated,
     required TResult Function(_UnVerified value) unVerified,
     required TResult Function(_Failure value) failure,
+    required TResult Function(_Loading value) loading,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -60,6 +64,7 @@ mixin _$AuthState {
     TResult? Function(_UnAuthenticated value)? unAuthenticated,
     TResult? Function(_UnVerified value)? unVerified,
     TResult? Function(_Failure value)? failure,
+    TResult? Function(_Loading value)? loading,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -69,6 +74,7 @@ mixin _$AuthState {
     TResult Function(_UnAuthenticated value)? unAuthenticated,
     TResult Function(_UnVerified value)? unVerified,
     TResult Function(_Failure value)? failure,
+    TResult Function(_Loading value)? loading,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -134,6 +140,7 @@ class _$_Inittial extends _Inittial {
     required TResult Function() unAuthenticated,
     required TResult Function() unVerified,
     required TResult Function(String message) failure,
+    required TResult Function() loading,
   }) {
     return initial();
   }
@@ -146,6 +153,7 @@ class _$_Inittial extends _Inittial {
     TResult? Function()? unAuthenticated,
     TResult? Function()? unVerified,
     TResult? Function(String message)? failure,
+    TResult? Function()? loading,
   }) {
     return initial?.call();
   }
@@ -158,6 +166,7 @@ class _$_Inittial extends _Inittial {
     TResult Function()? unAuthenticated,
     TResult Function()? unVerified,
     TResult Function(String message)? failure,
+    TResult Function()? loading,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -174,6 +183,7 @@ class _$_Inittial extends _Inittial {
     required TResult Function(_UnAuthenticated value) unAuthenticated,
     required TResult Function(_UnVerified value) unVerified,
     required TResult Function(_Failure value) failure,
+    required TResult Function(_Loading value) loading,
   }) {
     return initial(this);
   }
@@ -186,6 +196,7 @@ class _$_Inittial extends _Inittial {
     TResult? Function(_UnAuthenticated value)? unAuthenticated,
     TResult? Function(_UnVerified value)? unVerified,
     TResult? Function(_Failure value)? failure,
+    TResult? Function(_Loading value)? loading,
   }) {
     return initial?.call(this);
   }
@@ -198,6 +209,7 @@ class _$_Inittial extends _Inittial {
     TResult Function(_UnAuthenticated value)? unAuthenticated,
     TResult Function(_UnVerified value)? unVerified,
     TResult Function(_Failure value)? failure,
+    TResult Function(_Loading value)? loading,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -255,6 +267,7 @@ class _$_Authenticated extends _Authenticated {
     required TResult Function() unAuthenticated,
     required TResult Function() unVerified,
     required TResult Function(String message) failure,
+    required TResult Function() loading,
   }) {
     return authenticated();
   }
@@ -267,6 +280,7 @@ class _$_Authenticated extends _Authenticated {
     TResult? Function()? unAuthenticated,
     TResult? Function()? unVerified,
     TResult? Function(String message)? failure,
+    TResult? Function()? loading,
   }) {
     return authenticated?.call();
   }
@@ -279,6 +293,7 @@ class _$_Authenticated extends _Authenticated {
     TResult Function()? unAuthenticated,
     TResult Function()? unVerified,
     TResult Function(String message)? failure,
+    TResult Function()? loading,
     required TResult orElse(),
   }) {
     if (authenticated != null) {
@@ -295,6 +310,7 @@ class _$_Authenticated extends _Authenticated {
     required TResult Function(_UnAuthenticated value) unAuthenticated,
     required TResult Function(_UnVerified value) unVerified,
     required TResult Function(_Failure value) failure,
+    required TResult Function(_Loading value) loading,
   }) {
     return authenticated(this);
   }
@@ -307,6 +323,7 @@ class _$_Authenticated extends _Authenticated {
     TResult? Function(_UnAuthenticated value)? unAuthenticated,
     TResult? Function(_UnVerified value)? unVerified,
     TResult? Function(_Failure value)? failure,
+    TResult? Function(_Loading value)? loading,
   }) {
     return authenticated?.call(this);
   }
@@ -319,6 +336,7 @@ class _$_Authenticated extends _Authenticated {
     TResult Function(_UnAuthenticated value)? unAuthenticated,
     TResult Function(_UnVerified value)? unVerified,
     TResult Function(_Failure value)? failure,
+    TResult Function(_Loading value)? loading,
     required TResult orElse(),
   }) {
     if (authenticated != null) {
@@ -376,6 +394,7 @@ class _$_UnAuthenticated extends _UnAuthenticated {
     required TResult Function() unAuthenticated,
     required TResult Function() unVerified,
     required TResult Function(String message) failure,
+    required TResult Function() loading,
   }) {
     return unAuthenticated();
   }
@@ -388,6 +407,7 @@ class _$_UnAuthenticated extends _UnAuthenticated {
     TResult? Function()? unAuthenticated,
     TResult? Function()? unVerified,
     TResult? Function(String message)? failure,
+    TResult? Function()? loading,
   }) {
     return unAuthenticated?.call();
   }
@@ -400,6 +420,7 @@ class _$_UnAuthenticated extends _UnAuthenticated {
     TResult Function()? unAuthenticated,
     TResult Function()? unVerified,
     TResult Function(String message)? failure,
+    TResult Function()? loading,
     required TResult orElse(),
   }) {
     if (unAuthenticated != null) {
@@ -416,6 +437,7 @@ class _$_UnAuthenticated extends _UnAuthenticated {
     required TResult Function(_UnAuthenticated value) unAuthenticated,
     required TResult Function(_UnVerified value) unVerified,
     required TResult Function(_Failure value) failure,
+    required TResult Function(_Loading value) loading,
   }) {
     return unAuthenticated(this);
   }
@@ -428,6 +450,7 @@ class _$_UnAuthenticated extends _UnAuthenticated {
     TResult? Function(_UnAuthenticated value)? unAuthenticated,
     TResult? Function(_UnVerified value)? unVerified,
     TResult? Function(_Failure value)? failure,
+    TResult? Function(_Loading value)? loading,
   }) {
     return unAuthenticated?.call(this);
   }
@@ -440,6 +463,7 @@ class _$_UnAuthenticated extends _UnAuthenticated {
     TResult Function(_UnAuthenticated value)? unAuthenticated,
     TResult Function(_UnVerified value)? unVerified,
     TResult Function(_Failure value)? failure,
+    TResult Function(_Loading value)? loading,
     required TResult orElse(),
   }) {
     if (unAuthenticated != null) {
@@ -497,6 +521,7 @@ class _$_UnVerified extends _UnVerified {
     required TResult Function() unAuthenticated,
     required TResult Function() unVerified,
     required TResult Function(String message) failure,
+    required TResult Function() loading,
   }) {
     return unVerified();
   }
@@ -509,6 +534,7 @@ class _$_UnVerified extends _UnVerified {
     TResult? Function()? unAuthenticated,
     TResult? Function()? unVerified,
     TResult? Function(String message)? failure,
+    TResult? Function()? loading,
   }) {
     return unVerified?.call();
   }
@@ -521,6 +547,7 @@ class _$_UnVerified extends _UnVerified {
     TResult Function()? unAuthenticated,
     TResult Function()? unVerified,
     TResult Function(String message)? failure,
+    TResult Function()? loading,
     required TResult orElse(),
   }) {
     if (unVerified != null) {
@@ -537,6 +564,7 @@ class _$_UnVerified extends _UnVerified {
     required TResult Function(_UnAuthenticated value) unAuthenticated,
     required TResult Function(_UnVerified value) unVerified,
     required TResult Function(_Failure value) failure,
+    required TResult Function(_Loading value) loading,
   }) {
     return unVerified(this);
   }
@@ -549,6 +577,7 @@ class _$_UnVerified extends _UnVerified {
     TResult? Function(_UnAuthenticated value)? unAuthenticated,
     TResult? Function(_UnVerified value)? unVerified,
     TResult? Function(_Failure value)? failure,
+    TResult? Function(_Loading value)? loading,
   }) {
     return unVerified?.call(this);
   }
@@ -561,6 +590,7 @@ class _$_UnVerified extends _UnVerified {
     TResult Function(_UnAuthenticated value)? unAuthenticated,
     TResult Function(_UnVerified value)? unVerified,
     TResult Function(_Failure value)? failure,
+    TResult Function(_Loading value)? loading,
     required TResult orElse(),
   }) {
     if (unVerified != null) {
@@ -643,6 +673,7 @@ class _$_Failure extends _Failure {
     required TResult Function() unAuthenticated,
     required TResult Function() unVerified,
     required TResult Function(String message) failure,
+    required TResult Function() loading,
   }) {
     return failure(message);
   }
@@ -655,6 +686,7 @@ class _$_Failure extends _Failure {
     TResult? Function()? unAuthenticated,
     TResult? Function()? unVerified,
     TResult? Function(String message)? failure,
+    TResult? Function()? loading,
   }) {
     return failure?.call(message);
   }
@@ -667,6 +699,7 @@ class _$_Failure extends _Failure {
     TResult Function()? unAuthenticated,
     TResult Function()? unVerified,
     TResult Function(String message)? failure,
+    TResult Function()? loading,
     required TResult orElse(),
   }) {
     if (failure != null) {
@@ -683,6 +716,7 @@ class _$_Failure extends _Failure {
     required TResult Function(_UnAuthenticated value) unAuthenticated,
     required TResult Function(_UnVerified value) unVerified,
     required TResult Function(_Failure value) failure,
+    required TResult Function(_Loading value) loading,
   }) {
     return failure(this);
   }
@@ -695,6 +729,7 @@ class _$_Failure extends _Failure {
     TResult? Function(_UnAuthenticated value)? unAuthenticated,
     TResult? Function(_UnVerified value)? unVerified,
     TResult? Function(_Failure value)? failure,
+    TResult? Function(_Loading value)? loading,
   }) {
     return failure?.call(this);
   }
@@ -707,6 +742,7 @@ class _$_Failure extends _Failure {
     TResult Function(_UnAuthenticated value)? unAuthenticated,
     TResult Function(_UnVerified value)? unVerified,
     TResult Function(_Failure value)? failure,
+    TResult Function(_Loading value)? loading,
     required TResult orElse(),
   }) {
     if (failure != null) {
@@ -724,4 +760,130 @@ abstract class _Failure extends AuthState {
   @JsonKey(ignore: true)
   _$$_FailureCopyWith<_$_Failure> get copyWith =>
       throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_LoadingCopyWith<$Res> {
+  factory _$$_LoadingCopyWith(
+          _$_Loading value, $Res Function(_$_Loading) then) =
+      __$$_LoadingCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$_LoadingCopyWithImpl<$Res>
+    extends _$AuthStateCopyWithImpl<$Res, _$_Loading>
+    implements _$$_LoadingCopyWith<$Res> {
+  __$$_LoadingCopyWithImpl(_$_Loading _value, $Res Function(_$_Loading) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$_Loading extends _Loading {
+  const _$_Loading() : super._();
+
+  @override
+  String toString() {
+    return 'AuthState.loading()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$_Loading);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() authenticated,
+    required TResult Function() unAuthenticated,
+    required TResult Function() unVerified,
+    required TResult Function(String message) failure,
+    required TResult Function() loading,
+  }) {
+    return loading();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? authenticated,
+    TResult? Function()? unAuthenticated,
+    TResult? Function()? unVerified,
+    TResult? Function(String message)? failure,
+    TResult? Function()? loading,
+  }) {
+    return loading?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? authenticated,
+    TResult Function()? unAuthenticated,
+    TResult Function()? unVerified,
+    TResult Function(String message)? failure,
+    TResult Function()? loading,
+    required TResult orElse(),
+  }) {
+    if (loading != null) {
+      return loading();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Inittial value) initial,
+    required TResult Function(_Authenticated value) authenticated,
+    required TResult Function(_UnAuthenticated value) unAuthenticated,
+    required TResult Function(_UnVerified value) unVerified,
+    required TResult Function(_Failure value) failure,
+    required TResult Function(_Loading value) loading,
+  }) {
+    return loading(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Inittial value)? initial,
+    TResult? Function(_Authenticated value)? authenticated,
+    TResult? Function(_UnAuthenticated value)? unAuthenticated,
+    TResult? Function(_UnVerified value)? unVerified,
+    TResult? Function(_Failure value)? failure,
+    TResult? Function(_Loading value)? loading,
+  }) {
+    return loading?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Inittial value)? initial,
+    TResult Function(_Authenticated value)? authenticated,
+    TResult Function(_UnAuthenticated value)? unAuthenticated,
+    TResult Function(_UnVerified value)? unVerified,
+    TResult Function(_Failure value)? failure,
+    TResult Function(_Loading value)? loading,
+    required TResult orElse(),
+  }) {
+    if (loading != null) {
+      return loading(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _Loading extends AuthState {
+  const factory _Loading() = _$_Loading;
+  const _Loading._() : super._();
 }
