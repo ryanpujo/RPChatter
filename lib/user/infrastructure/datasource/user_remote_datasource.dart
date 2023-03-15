@@ -44,7 +44,7 @@ class UserRemoteDatasource implements UserRemoteDatasourceContract {
   @override
   Future<RemoteResponse<UserDto>> getByUsername(String username) async {
     try {
-      final res = await _dio.get("http://192.168.117.61:4001/user/$username");
+      final res = await _dio.get("http://10.0.2.2:4001/user/$username");
       Map<String, dynamic>? result;
       if (res.statusCode == 200) {
         result = res.data as Map<String, dynamic>;
