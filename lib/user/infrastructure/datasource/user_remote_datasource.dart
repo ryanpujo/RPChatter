@@ -10,10 +10,11 @@ import 'package:ryan_pujo_app/user/infrastructure/user_dto.dart';
 class UserRemoteDatasource implements UserRemoteDatasourceContract {
   final Dio _dio;
   const UserRemoteDatasource(this._dio);
+  final url = "http://10.0.2.2:4001/";
 
   @override
   Future<UserDto> registerUser(UserDto user) async {
-    String uri = "http://10.0.2.2:4001/user";
+    String uri = "${url}user";
     try {
       final res = await _dio.post(
         uri,
@@ -44,7 +45,7 @@ class UserRemoteDatasource implements UserRemoteDatasourceContract {
   @override
   Future<RemoteResponse<UserDto>> getByUsername(String username) async {
     try {
-      final res = await _dio.get("http://10.0.2.2:4001/user/$username");
+      final res = await _dio.get("${url}user/$username");
       Map<String, dynamic>? result;
       if (res.statusCode == 200) {
         result = res.data as Map<String, dynamic>;
@@ -67,6 +68,49 @@ class UserRemoteDatasource implements UserRemoteDatasourceContract {
       } else {
         rethrow;
       }
+    }
+  }
+
+  @override
+  Future<RemoteResponse<List<UserDto>>> getUsers() async {
+    try {
+      final response = await _dio.get("${url}user");
+      Map<String, List<UserDto>>? json;
+      if (response.statusCode == 200) {
+        json = response.data as Map<String, List<UserDto>>;
+      }
+      return RemoteResponse.withData(json!["data"]!);
+    } on DioError catch (e) {
+      if (e.isConnectionError) {
+        return const RemoteResponse.noConnection();
+      }
+      return const RemoteResponse.badRequest();
+    }
+  }
+
+  @override
+  Future<RemoteResponse<String>> update(UserDto dto) async {
+    try {
+      final response = await _dio.patch("${url}user");
+      return RemoteResponse.withData(response.data["data"]);
+    } on DioError catch (e) {
+      if (e.isConnectionError) {
+        return const RemoteResponse.noConnection();
+      }
+      return const RemoteResponse.badRequest();
+    }
+  }
+
+  @override
+  Future<RemoteResponse<String>> delete(String username) async {
+    try {
+      final response = await _dio.delete("${url}user");
+      return RemoteResponse.withData(response.data["data"]);
+    } on DioError catch (e) {
+      if (e.isConnectionError) {
+        return const RemoteResponse.noConnection();
+      }
+      return const RemoteResponse.badRequest();
     }
   }
 }
