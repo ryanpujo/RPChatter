@@ -1,10 +1,10 @@
 import 'dart:io';
 
+import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
-import 'package:ryan_pujo_app/core/infrastructure/exceptions/network_exception.dart';
 import 'package:ryan_pujo_app/core/infrastructure/remote_response.dart';
 import 'package:ryan_pujo_app/user/infrastructure/datasource/user_remote_datasource.dart';
 import 'package:ryan_pujo_app/user/infrastructure/datasource/user_remote_datasource_contract.dart';
@@ -30,7 +30,7 @@ void main() {
       email: "sdfs",
       password: "Sdfsffsf",
     );
-    test("should return an id for succesful call", () async {
+    test("should return a registered user", () async {
       when(dio.post(any, data: anyNamed("data"))).thenAnswer(
           (realInvocation) async => Response(
               requestOptions: RequestOptions(),
@@ -39,21 +39,41 @@ void main() {
 
       final actual = await dataSource.registerUser(user);
 
-      expect(actual, equals(user));
+      expect(actual, equals(RemoteResponse.withData(user)));
     });
 
-    test("should throw socket exception", () async {
+    test("should return noConnection response", () async {
       when(dio.post(any, data: anyNamed("data"))).thenThrow(DioError(
           requestOptions: RequestOptions(),
           type: DioErrorType.connectionError,
           error: const SocketException("no connection")));
 
-      final result = dataSource.registerUser;
+      final result = await dataSource.registerUser(user);
 
-      expect(() => result(user), throwsA(const TypeMatcher<SocketException>()));
+      expect(result, equals(const RemoteResponse<UserDto>.noConnection()));
     });
 
-    test("should throw RestApiException", () {
+    test("should return a userAlreadyExust response", () async {
+      when(dio.post(any, data: anyNamed("data"))).thenThrow(
+        DioError(
+          requestOptions: RequestOptions(),
+          response: Response(
+            requestOptions: RequestOptions(),
+            data: {
+              "error": "got an error",
+              "code": 6,
+            },
+            statusCode: 400,
+          ),
+        ),
+      );
+
+      final result = await dataSource.registerUser(user);
+
+      expect(result, equals(const RemoteResponse<UserDto>.userAlreadyExist()));
+    });
+
+    test("should return a badRequest response", () async {
       when(dio.post(any, data: anyNamed("data"))).thenThrow(
         DioError(
           requestOptions: RequestOptions(),
@@ -65,10 +85,26 @@ void main() {
         ),
       );
 
-      final result = dataSource.registerUser;
+      final result = await dataSource.registerUser(user);
 
-      expect(
-          () => result(user), throwsA(const TypeMatcher<RestApiException>()));
+      expect(result, equals(const RemoteResponse<UserDto>.badRequest()));
+    });
+
+    test("should return an internalError response", () async {
+      when(dio.post(any, data: anyNamed("data"))).thenThrow(
+        DioError(
+          requestOptions: RequestOptions(),
+          response: Response(
+            requestOptions: RequestOptions(),
+            data: {"error": "got an error"},
+            statusCode: 500,
+          ),
+        ),
+      );
+
+      final result = await dataSource.registerUser(user);
+
+      expect(result, equals(const RemoteResponse<UserDto>.internalError(500)));
     });
   });
 
@@ -89,15 +125,7 @@ void main() {
 
       final actual = await dataSource.getByUsername("");
 
-      actual.map(
-        noConnection: (value) {},
-        withData: (value) {
-          expect(value, isNotNull);
-          expect(value.data, equals(user));
-        },
-        noDataFound: (value) {},
-        badRequest: (value) {},
-      );
+      expect(actual, RemoteResponse.withData(user));
     });
 
     test("should return NoConnection response", () async {
@@ -109,14 +137,7 @@ void main() {
 
       final actual = await dataSource.getByUsername("");
 
-      actual.map(
-        noConnection: (value) {
-          expect(value, isNotNull);
-        },
-        withData: (value) {},
-        noDataFound: (value) {},
-        badRequest: (value) {},
-      );
+      expect(actual, equals(const RemoteResponse<UserDto>.noConnection()));
     });
 
     test("should return NoDataFound response", () async {
@@ -124,20 +145,14 @@ void main() {
         requestOptions: RequestOptions(),
         response: Response(
           requestOptions: RequestOptions(),
+          statusCode: 400,
           data: {"code": 5},
         ),
       ));
 
       final actual = await dataSource.getByUsername("");
 
-      actual.map(
-        noConnection: (value) {},
-        withData: (value) {},
-        noDataFound: (value) {
-          expect(value, isNotNull);
-        },
-        badRequest: (value) {},
-      );
+      expect(actual, equals(const RemoteResponse<UserDto>.noDataFound()));
     });
 
     test("should return BadRequest response", () async {
@@ -145,24 +160,33 @@ void main() {
         requestOptions: RequestOptions(),
         response: Response(
           requestOptions: RequestOptions(),
+          statusCode: 400,
           data: {"error": "got an error"},
         ),
       ));
 
       final actual = await dataSource.getByUsername("");
 
-      actual.map(
-        noConnection: (value) {},
-        withData: (value) {},
-        noDataFound: (value) {},
-        badRequest: (value) {
-          expect(value, isNotNull);
-        },
-      );
+      expect(actual, equals(const RemoteResponse<UserDto>.badRequest()));
+    });
+
+    test("should return internalError response", () async {
+      when(dio.get(any)).thenThrow(DioError(
+        requestOptions: RequestOptions(),
+        response: Response(
+          requestOptions: RequestOptions(),
+          statusCode: 500,
+          data: {"error": "got an error"},
+        ),
+      ));
+
+      final actual = await dataSource.getByUsername("");
+
+      expect(actual, equals(const RemoteResponse<UserDto>.internalError(500)));
     });
   });
 
-  group("getUser", () {
+  group("getUsers", () {
     UserDto user = const UserDto(
       fName: "sdsds",
       lName: "Dfsdfsd",
@@ -179,12 +203,18 @@ void main() {
 
       final actual = await dataSource.getUsers();
 
-      actual.maybeMap(
-        orElse: () {},
-        withData: (value) {
-          expect(value.data, equals(users));
-        },
-      );
+      expect(actual, equals(RemoteResponse.withData(users)));
+    });
+
+    test("should return noDataFound", () async {
+      when(dio.get(any)).thenAnswer((realInvocation) async => Response(
+          requestOptions: RequestOptions(),
+          statusCode: 200,
+          data: {"data": []}));
+
+      final actual = await dataSource.getUsers();
+
+      expect(actual, equals(const RemoteResponse<List<UserDto>>.noDataFound()));
     });
 
     test("should return no connection error", () async {
@@ -193,30 +223,37 @@ void main() {
         error: const SocketException("no connection"),
       ));
 
-      final response = await dataSource.getUsers();
+      final actual = await dataSource.getUsers();
 
-      response.maybeMap(
-        orElse: () {},
-        noConnection: (value) {
-          expect(value, isA<NoConnection>());
-        },
-      );
+      expect(
+          actual, equals(const RemoteResponse<List<UserDto>>.noConnection()));
     });
 
     test("should return bad request error", () async {
       when(dio.get(any)).thenThrow(DioError(
-        requestOptions: RequestOptions(),
-      ));
+          requestOptions: RequestOptions(),
+          response: Response(
+            requestOptions: RequestOptions(),
+            statusCode: 400,
+          )));
 
-      final response = await dataSource.getUsers();
+      final actual = await dataSource.getUsers();
 
-      response.maybeMap(
-        orElse: () {},
-        badRequest: (value) {
-          expect(value, isNotNull);
-          expect(value, isA<BadRequest>());
-        },
-      );
+      expect(actual, equals(const RemoteResponse<List<UserDto>>.badRequest()));
+    });
+
+    test("should return  internalError", () async {
+      when(dio.get(any)).thenThrow(DioError(
+          requestOptions: RequestOptions(),
+          response: Response(
+            requestOptions: RequestOptions(),
+            statusCode: 500,
+          )));
+
+      final actual = await dataSource.getUsers();
+
+      expect(actual,
+          equals(const RemoteResponse<List<UserDto>>.internalError(500)));
     });
   });
 
@@ -228,20 +265,15 @@ void main() {
       email: "sdfs",
       password: "Sdfsffsf",
     );
-    test("should retutn a string", () async {
+    test("should retutn a withoutData response", () async {
       when(dio.patch(any)).thenAnswer((realInvocation) async => Response(
           requestOptions: RequestOptions(),
           statusCode: 200,
           data: {"data": "updated"}));
 
-      final response = await dataSource.update(user);
+      final actual = await dataSource.update(user);
 
-      response.maybeMap(
-        orElse: () {},
-        withData: (value) {
-          expect(value.data, equals("updated"));
-        },
-      );
+      expect(actual, equals(const RemoteResponse<Unit>.withoutData()));
     });
 
     test("should return a noConnection error", () async {
@@ -250,49 +282,48 @@ void main() {
         error: const SocketException("connection error"),
       ));
 
-      final response = await dataSource.update(user);
+      final actual = await dataSource.update(user);
 
-      response.maybeMap(
-        orElse: () {},
-        noConnection: (value) {
-          expect(value, isNotNull);
-          expect(value, isA<NoConnection>());
-        },
-      );
+      expect(actual, const RemoteResponse<Unit>.noConnection());
     });
 
     test("should return a badRequst error", () async {
       when(dio.patch(any)).thenThrow(DioError(
-        requestOptions: RequestOptions(),
-      ));
+          requestOptions: RequestOptions(),
+          response: Response(
+            requestOptions: RequestOptions(),
+            statusCode: 400,
+          )));
 
-      final response = await dataSource.update(user);
+      final actual = await dataSource.update(user);
 
-      response.maybeMap(
-        orElse: () {},
-        badRequest: (value) {
-          expect(value, isNotNull);
-          expect(value, isA<BadRequest>());
-        },
-      );
+      expect(actual, const RemoteResponse<Unit>.badRequest());
+    });
+
+    test("should return a internalError", () async {
+      when(dio.patch(any)).thenThrow(DioError(
+          requestOptions: RequestOptions(),
+          response: Response(
+            requestOptions: RequestOptions(),
+            statusCode: 500,
+          )));
+
+      final actual = await dataSource.update(user);
+
+      expect(actual, const RemoteResponse<Unit>.internalError(500));
     });
   });
 
-  group("deleter", () {
-    test("should retutn a string", () async {
+  group("delete user", () {
+    test("should retutn a withoutData response", () async {
       when(dio.delete(any)).thenAnswer((realInvocation) async => Response(
           requestOptions: RequestOptions(),
           statusCode: 200,
           data: {"data": "deleted"}));
 
-      final response = await dataSource.delete("ddsdsd");
+      final actual = await dataSource.delete("ddsdsd");
 
-      response.maybeMap(
-        orElse: () {},
-        withData: (value) {
-          expect(value.data, equals("deleted"));
-        },
-      );
+      expect(actual, equals(const RemoteResponse<Unit>.withoutData()));
     });
 
     test("should return a noConnection error", () async {
@@ -301,31 +332,35 @@ void main() {
         error: const SocketException("connection error"),
       ));
 
-      final response = await dataSource.delete("user");
+      final actual = await dataSource.delete("user");
 
-      response.maybeMap(
-        orElse: () {},
-        noConnection: (value) {
-          expect(value, isNotNull);
-          expect(value, isA<NoConnection>());
-        },
-      );
+      expect(actual, equals(const RemoteResponse<Unit>.noConnection()));
     });
 
     test("should return a badRequst error", () async {
       when(dio.delete(any)).thenThrow(DioError(
-        requestOptions: RequestOptions(),
-      ));
+          requestOptions: RequestOptions(),
+          response: Response(
+            requestOptions: RequestOptions(),
+            statusCode: 400,
+          )));
 
-      final response = await dataSource.delete("user");
+      final actual = await dataSource.delete("user");
 
-      response.maybeMap(
-        orElse: () {},
-        badRequest: (value) {
-          expect(value, isNotNull);
-          expect(value, isA<BadRequest>());
-        },
-      );
+      expect(actual, equals(const RemoteResponse<Unit>.badRequest()));
+    });
+
+    test("should return a internalError", () async {
+      when(dio.delete(any)).thenThrow(DioError(
+          requestOptions: RequestOptions(),
+          response: Response(
+            requestOptions: RequestOptions(),
+            statusCode: 500,
+          )));
+
+      final actual = await dataSource.delete("user");
+
+      expect(actual, equals(const RemoteResponse<Unit>.internalError(500)));
     });
   });
 }

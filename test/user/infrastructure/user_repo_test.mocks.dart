@@ -3,13 +3,14 @@
 // Do not manually edit this file.
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'dart:async' as _i5;
+import 'dart:async' as _i4;
 
+import 'package:dartz/dartz.dart' as _i6;
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:ryan_pujo_app/core/infrastructure/remote_response.dart' as _i3;
+import 'package:ryan_pujo_app/core/infrastructure/remote_response.dart' as _i2;
 import 'package:ryan_pujo_app/user/infrastructure/datasource/user_remote_datasource_contract.dart'
-    as _i4;
-import 'package:ryan_pujo_app/user/infrastructure/user_dto.dart' as _i2;
+    as _i3;
+import 'package:ryan_pujo_app/user/infrastructure/user_dto.dart' as _i5;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -22,19 +23,9 @@ import 'package:ryan_pujo_app/user/infrastructure/user_dto.dart' as _i2;
 // ignore_for_file: camel_case_types
 // ignore_for_file: subtype_of_sealed_class
 
-class _FakeUserDto_0 extends _i1.SmartFake implements _i2.UserDto {
-  _FakeUserDto_0(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
-}
-
-class _FakeRemoteResponse_1<T> extends _i1.SmartFake
-    implements _i3.RemoteResponse<T> {
-  _FakeRemoteResponse_1(
+class _FakeRemoteResponse_0<T> extends _i1.SmartFake
+    implements _i2.RemoteResponse<T> {
+  _FakeRemoteResponse_0(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -47,37 +38,41 @@ class _FakeRemoteResponse_1<T> extends _i1.SmartFake
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockUserRemoteDatasourceContract extends _i1.Mock
-    implements _i4.UserRemoteDatasourceContract {
+    implements _i3.UserRemoteDatasourceContract {
   @override
-  _i5.Future<_i2.UserDto> registerUser(_i2.UserDto? dto) => (super.noSuchMethod(
+  _i4.Future<_i2.RemoteResponse<_i5.UserDto>> registerUser(_i5.UserDto? dto) =>
+      (super.noSuchMethod(
         Invocation.method(
           #registerUser,
           [dto],
         ),
-        returnValue: _i5.Future<_i2.UserDto>.value(_FakeUserDto_0(
+        returnValue: _i4.Future<_i2.RemoteResponse<_i5.UserDto>>.value(
+            _FakeRemoteResponse_0<_i5.UserDto>(
           this,
           Invocation.method(
             #registerUser,
             [dto],
           ),
         )),
-        returnValueForMissingStub: _i5.Future<_i2.UserDto>.value(_FakeUserDto_0(
+        returnValueForMissingStub:
+            _i4.Future<_i2.RemoteResponse<_i5.UserDto>>.value(
+                _FakeRemoteResponse_0<_i5.UserDto>(
           this,
           Invocation.method(
             #registerUser,
             [dto],
           ),
         )),
-      ) as _i5.Future<_i2.UserDto>);
+      ) as _i4.Future<_i2.RemoteResponse<_i5.UserDto>>);
   @override
-  _i5.Future<_i3.RemoteResponse<_i2.UserDto>> getByUsername(String? username) =>
+  _i4.Future<_i2.RemoteResponse<_i5.UserDto>> getByUsername(String? username) =>
       (super.noSuchMethod(
         Invocation.method(
           #getByUsername,
           [username],
         ),
-        returnValue: _i5.Future<_i3.RemoteResponse<_i2.UserDto>>.value(
-            _FakeRemoteResponse_1<_i2.UserDto>(
+        returnValue: _i4.Future<_i2.RemoteResponse<_i5.UserDto>>.value(
+            _FakeRemoteResponse_0<_i5.UserDto>(
           this,
           Invocation.method(
             #getByUsername,
@@ -85,13 +80,88 @@ class MockUserRemoteDatasourceContract extends _i1.Mock
           ),
         )),
         returnValueForMissingStub:
-            _i5.Future<_i3.RemoteResponse<_i2.UserDto>>.value(
-                _FakeRemoteResponse_1<_i2.UserDto>(
+            _i4.Future<_i2.RemoteResponse<_i5.UserDto>>.value(
+                _FakeRemoteResponse_0<_i5.UserDto>(
           this,
           Invocation.method(
             #getByUsername,
             [username],
           ),
         )),
-      ) as _i5.Future<_i3.RemoteResponse<_i2.UserDto>>);
+      ) as _i4.Future<_i2.RemoteResponse<_i5.UserDto>>);
+  @override
+  _i4.Future<_i2.RemoteResponse<List<_i5.UserDto>>> getUsers() =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #getUsers,
+          [],
+        ),
+        returnValue: _i4.Future<_i2.RemoteResponse<List<_i5.UserDto>>>.value(
+            _FakeRemoteResponse_0<List<_i5.UserDto>>(
+          this,
+          Invocation.method(
+            #getUsers,
+            [],
+          ),
+        )),
+        returnValueForMissingStub:
+            _i4.Future<_i2.RemoteResponse<List<_i5.UserDto>>>.value(
+                _FakeRemoteResponse_0<List<_i5.UserDto>>(
+          this,
+          Invocation.method(
+            #getUsers,
+            [],
+          ),
+        )),
+      ) as _i4.Future<_i2.RemoteResponse<List<_i5.UserDto>>>);
+  @override
+  _i4.Future<_i2.RemoteResponse<_i6.Unit>> update(_i5.UserDto? dto) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #update,
+          [dto],
+        ),
+        returnValue: _i4.Future<_i2.RemoteResponse<_i6.Unit>>.value(
+            _FakeRemoteResponse_0<_i6.Unit>(
+          this,
+          Invocation.method(
+            #update,
+            [dto],
+          ),
+        )),
+        returnValueForMissingStub:
+            _i4.Future<_i2.RemoteResponse<_i6.Unit>>.value(
+                _FakeRemoteResponse_0<_i6.Unit>(
+          this,
+          Invocation.method(
+            #update,
+            [dto],
+          ),
+        )),
+      ) as _i4.Future<_i2.RemoteResponse<_i6.Unit>>);
+  @override
+  _i4.Future<_i2.RemoteResponse<_i6.Unit>> delete(String? username) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #delete,
+          [username],
+        ),
+        returnValue: _i4.Future<_i2.RemoteResponse<_i6.Unit>>.value(
+            _FakeRemoteResponse_0<_i6.Unit>(
+          this,
+          Invocation.method(
+            #delete,
+            [username],
+          ),
+        )),
+        returnValueForMissingStub:
+            _i4.Future<_i2.RemoteResponse<_i6.Unit>>.value(
+                _FakeRemoteResponse_0<_i6.Unit>(
+          this,
+          Invocation.method(
+            #delete,
+            [username],
+          ),
+        )),
+      ) as _i4.Future<_i2.RemoteResponse<_i6.Unit>>);
 }

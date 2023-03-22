@@ -1220,4 +1220,79 @@ class MockUserRepositoryContract extends _i1.Mock
           ),
         )),
       ) as _i6.Future<_i5.Either<_i8.Failure, _i9.User>>);
+  @override
+  _i6.Future<_i5.Either<_i8.Failure, List<_i9.User>>> getUsers() =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #getUsers,
+          [],
+        ),
+        returnValue: _i6.Future<_i5.Either<_i8.Failure, List<_i9.User>>>.value(
+            _FakeEither_8<_i8.Failure, List<_i9.User>>(
+          this,
+          Invocation.method(
+            #getUsers,
+            [],
+          ),
+        )),
+        returnValueForMissingStub:
+            _i6.Future<_i5.Either<_i8.Failure, List<_i9.User>>>.value(
+                _FakeEither_8<_i8.Failure, List<_i9.User>>(
+          this,
+          Invocation.method(
+            #getUsers,
+            [],
+          ),
+        )),
+      ) as _i6.Future<_i5.Either<_i8.Failure, List<_i9.User>>>);
+  @override
+  _i6.Future<_i5.Either<_i8.Failure, _i5.Unit>> update(_i10.UserDto? dto) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #update,
+          [dto],
+        ),
+        returnValue: _i6.Future<_i5.Either<_i8.Failure, _i5.Unit>>.value(
+            _FakeEither_8<_i8.Failure, _i5.Unit>(
+          this,
+          Invocation.method(
+            #update,
+            [dto],
+          ),
+        )),
+        returnValueForMissingStub:
+            _i6.Future<_i5.Either<_i8.Failure, _i5.Unit>>.value(
+                _FakeEither_8<_i8.Failure, _i5.Unit>(
+          this,
+          Invocation.method(
+            #update,
+            [dto],
+          ),
+        )),
+      ) as _i6.Future<_i5.Either<_i8.Failure, _i5.Unit>>);
+  @override
+  _i6.Future<_i5.Either<_i8.Failure, _i5.Unit>> delete(String? username) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #delete,
+          [username],
+        ),
+        returnValue: _i6.Future<_i5.Either<_i8.Failure, _i5.Unit>>.value(
+            _FakeEither_8<_i8.Failure, _i5.Unit>(
+          this,
+          Invocation.method(
+            #delete,
+            [username],
+          ),
+        )),
+        returnValueForMissingStub:
+            _i6.Future<_i5.Either<_i8.Failure, _i5.Unit>>.value(
+                _FakeEither_8<_i8.Failure, _i5.Unit>(
+          this,
+          Invocation.method(
+            #delete,
+            [username],
+          ),
+        )),
+      ) as _i6.Future<_i5.Either<_i8.Failure, _i5.Unit>>);
 }

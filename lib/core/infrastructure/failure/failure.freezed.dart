@@ -16,22 +16,21 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$Failure {
-  String get message => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String message, int errorCode) serverFailure,
+    required TResult Function(int errorCode) serverFailure,
     required TResult Function(String message) clientFailure,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String message, int errorCode)? serverFailure,
+    TResult? Function(int errorCode)? serverFailure,
     TResult? Function(String message)? clientFailure,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String message, int errorCode)? serverFailure,
+    TResult Function(int errorCode)? serverFailure,
     TResult Function(String message)? clientFailure,
     required TResult orElse(),
   }) =>
@@ -55,17 +54,12 @@ mixin _$Failure {
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
-
-  @JsonKey(ignore: true)
-  $FailureCopyWith<Failure> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $FailureCopyWith<$Res> {
   factory $FailureCopyWith(Failure value, $Res Function(Failure) then) =
       _$FailureCopyWithImpl<$Res, Failure>;
-  @useResult
-  $Res call({String message});
 }
 
 /// @nodoc
@@ -77,30 +71,15 @@ class _$FailureCopyWithImpl<$Res, $Val extends Failure>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? message = null,
-  }) {
-    return _then(_value.copyWith(
-      message: null == message
-          ? _value.message
-          : message // ignore: cast_nullable_to_non_nullable
-              as String,
-    ) as $Val);
-  }
 }
 
 /// @nodoc
-abstract class _$$_ServerFailureCopyWith<$Res>
-    implements $FailureCopyWith<$Res> {
+abstract class _$$_ServerFailureCopyWith<$Res> {
   factory _$$_ServerFailureCopyWith(
           _$_ServerFailure value, $Res Function(_$_ServerFailure) then) =
       __$$_ServerFailureCopyWithImpl<$Res>;
-  @override
   @useResult
-  $Res call({String message, int errorCode});
+  $Res call({int errorCode});
 }
 
 /// @nodoc
@@ -114,14 +93,9 @@ class __$$_ServerFailureCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? message = null,
     Object? errorCode = null,
   }) {
     return _then(_$_ServerFailure(
-      null == message
-          ? _value.message
-          : message // ignore: cast_nullable_to_non_nullable
-              as String,
       null == errorCode
           ? _value.errorCode
           : errorCode // ignore: cast_nullable_to_non_nullable
@@ -133,16 +107,14 @@ class __$$_ServerFailureCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_ServerFailure extends _ServerFailure {
-  const _$_ServerFailure(this.message, this.errorCode) : super._();
+  const _$_ServerFailure(this.errorCode) : super._();
 
-  @override
-  final String message;
   @override
   final int errorCode;
 
   @override
   String toString() {
-    return 'Failure.serverFailure(message: $message, errorCode: $errorCode)';
+    return 'Failure.serverFailure(errorCode: $errorCode)';
   }
 
   @override
@@ -150,13 +122,12 @@ class _$_ServerFailure extends _ServerFailure {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_ServerFailure &&
-            (identical(other.message, message) || other.message == message) &&
             (identical(other.errorCode, errorCode) ||
                 other.errorCode == errorCode));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, message, errorCode);
+  int get hashCode => Object.hash(runtimeType, errorCode);
 
   @JsonKey(ignore: true)
   @override
@@ -167,30 +138,30 @@ class _$_ServerFailure extends _ServerFailure {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String message, int errorCode) serverFailure,
+    required TResult Function(int errorCode) serverFailure,
     required TResult Function(String message) clientFailure,
   }) {
-    return serverFailure(message, errorCode);
+    return serverFailure(errorCode);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String message, int errorCode)? serverFailure,
+    TResult? Function(int errorCode)? serverFailure,
     TResult? Function(String message)? clientFailure,
   }) {
-    return serverFailure?.call(message, errorCode);
+    return serverFailure?.call(errorCode);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String message, int errorCode)? serverFailure,
+    TResult Function(int errorCode)? serverFailure,
     TResult Function(String message)? clientFailure,
     required TResult orElse(),
   }) {
     if (serverFailure != null) {
-      return serverFailure(message, errorCode);
+      return serverFailure(errorCode);
     }
     return orElse();
   }
@@ -228,26 +199,20 @@ class _$_ServerFailure extends _ServerFailure {
 }
 
 abstract class _ServerFailure extends Failure {
-  const factory _ServerFailure(final String message, final int errorCode) =
-      _$_ServerFailure;
+  const factory _ServerFailure(final int errorCode) = _$_ServerFailure;
   const _ServerFailure._() : super._();
 
-  @override
-  String get message;
   int get errorCode;
-  @override
   @JsonKey(ignore: true)
   _$$_ServerFailureCopyWith<_$_ServerFailure> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_ClientFailureCopyWith<$Res>
-    implements $FailureCopyWith<$Res> {
+abstract class _$$_ClientFailureCopyWith<$Res> {
   factory _$$_ClientFailureCopyWith(
           _$_ClientFailure value, $Res Function(_$_ClientFailure) then) =
       __$$_ClientFailureCopyWithImpl<$Res>;
-  @override
   @useResult
   $Res call({String message});
 }
@@ -307,7 +272,7 @@ class _$_ClientFailure extends _ClientFailure {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String message, int errorCode) serverFailure,
+    required TResult Function(int errorCode) serverFailure,
     required TResult Function(String message) clientFailure,
   }) {
     return clientFailure(message);
@@ -316,7 +281,7 @@ class _$_ClientFailure extends _ClientFailure {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String message, int errorCode)? serverFailure,
+    TResult? Function(int errorCode)? serverFailure,
     TResult? Function(String message)? clientFailure,
   }) {
     return clientFailure?.call(message);
@@ -325,7 +290,7 @@ class _$_ClientFailure extends _ClientFailure {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String message, int errorCode)? serverFailure,
+    TResult Function(int errorCode)? serverFailure,
     TResult Function(String message)? clientFailure,
     required TResult orElse(),
   }) {
@@ -371,9 +336,7 @@ abstract class _ClientFailure extends Failure {
   const factory _ClientFailure(final String message) = _$_ClientFailure;
   const _ClientFailure._() : super._();
 
-  @override
   String get message;
-  @override
   @JsonKey(ignore: true)
   _$$_ClientFailureCopyWith<_$_ClientFailure> get copyWith =>
       throw _privateConstructorUsedError;

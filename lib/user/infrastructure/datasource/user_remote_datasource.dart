@@ -1,8 +1,6 @@
-import 'dart:io';
-
+import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:ryan_pujo_app/core/infrastructure/dio_extensions.dart';
-import 'package:ryan_pujo_app/core/infrastructure/exceptions/network_exception.dart';
 import 'package:ryan_pujo_app/core/infrastructure/remote_response.dart';
 import 'package:ryan_pujo_app/user/infrastructure/datasource/user_remote_datasource_contract.dart';
 import 'package:ryan_pujo_app/user/infrastructure/user_dto.dart';
@@ -13,32 +11,30 @@ class UserRemoteDatasource implements UserRemoteDatasourceContract {
   final url = "http://10.0.2.2:4001/";
 
   @override
-  Future<UserDto> registerUser(UserDto user) async {
+  Future<RemoteResponse<UserDto>> registerUser(UserDto user) async {
     String uri = "${url}user";
     try {
       final res = await _dio.post(
         uri,
         data: user.toJson(),
       );
-      Map<String, dynamic> result;
-      UserDto? newUser;
-      if (res.statusCode == 201) {
-        result = res.data as Map<String, dynamic>;
-        newUser = UserDto.fromJson(result['data'] as Map<String, dynamic>);
-      }
-      return newUser!;
+      Map<String, dynamic> result = res.data as Map<String, dynamic>;
+      UserDto? newUser =
+          UserDto.fromJson(result['data'] as Map<String, dynamic>);
+      return RemoteResponse.withData(newUser);
     } on DioError catch (e) {
       if (e.isConnectionError) {
-        throw const SocketException("no connection available");
-      } else if (e.response != null) {
-        String message = (e.response?.data as Map<String, dynamic>)['error']!;
-        int code = e.response?.statusCode ?? 500;
-        throw RestApiException(code, message);
-      } else {
-        throw RestApiException(500, e.message!);
+        return const RemoteResponse.noConnection();
       }
-    } catch (e) {
-      throw RestApiException(500, e.toString());
+      if (e.response!.statusCode! < 500) {
+        final data = e.response?.data as Map<String, dynamic>;
+        if (data["code"] != null && data["code"] == 6) {
+          return const RemoteResponse.userAlreadyExist();
+        }
+        return const RemoteResponse.badRequest();
+      } else {
+        return RemoteResponse.internalError(e.response!.statusCode!);
+      }
     }
   }
 
@@ -46,27 +42,21 @@ class UserRemoteDatasource implements UserRemoteDatasourceContract {
   Future<RemoteResponse<UserDto>> getByUsername(String username) async {
     try {
       final res = await _dio.get("${url}user/$username");
-      Map<String, dynamic>? result;
-      if (res.statusCode == 200) {
-        result = res.data as Map<String, dynamic>;
-      }
-      if (result != null) {
-        return RemoteResponse.withData(
-            UserDto.fromJson(result["data"] as Map<String, dynamic>));
-      }
-      return const RemoteResponse.noDataFound();
+      Map<String, dynamic>? json = res.data as Map<String, dynamic>;
+      return RemoteResponse.withData(
+          UserDto.fromJson(json["data"] as Map<String, dynamic>));
     } on DioError catch (e) {
       if (e.isConnectionError) {
         return const RemoteResponse.noConnection();
-      } else if (e.response != null) {
+      }
+      if (e.response!.statusCode! < 500) {
         int? code = (e.response?.data as Map<String, dynamic>)['code'];
         if (code != null && code == 5) {
           return const RemoteResponse.noDataFound();
-        } else {
-          return const RemoteResponse.badRequest();
         }
+        return const RemoteResponse.badRequest();
       } else {
-        rethrow;
+        return RemoteResponse.internalError(e.response!.statusCode!);
       }
     }
   }
@@ -75,42 +65,53 @@ class UserRemoteDatasource implements UserRemoteDatasourceContract {
   Future<RemoteResponse<List<UserDto>>> getUsers() async {
     try {
       final response = await _dio.get("${url}user");
-      Map<String, List<UserDto>>? json;
-      if (response.statusCode == 200) {
-        json = response.data as Map<String, List<UserDto>>;
+      Map<String, List<dynamic>> json =
+          response.data as Map<String, List<dynamic>>;
+      var users = json["data"]!;
+      if (users.isEmpty) {
+        return const RemoteResponse.noDataFound();
       }
-      return RemoteResponse.withData(json!["data"]!);
+      return RemoteResponse.withData(users as List<UserDto>);
     } on DioError catch (e) {
       if (e.isConnectionError) {
         return const RemoteResponse.noConnection();
       }
-      return const RemoteResponse.badRequest();
+      if (e.response!.statusCode! < 500) {
+        return const RemoteResponse.badRequest();
+      }
+      return RemoteResponse.internalError(e.response!.statusCode!);
     }
   }
 
   @override
-  Future<RemoteResponse<String>> update(UserDto dto) async {
+  Future<RemoteResponse<Unit>> update(UserDto dto) async {
     try {
-      final response = await _dio.patch("${url}user");
-      return RemoteResponse.withData(response.data["data"]);
+      final _ = await _dio.patch("${url}user");
+      return const RemoteResponse.withoutData();
     } on DioError catch (e) {
       if (e.isConnectionError) {
         return const RemoteResponse.noConnection();
       }
-      return const RemoteResponse.badRequest();
+      if (e.response!.statusCode! < 500) {
+        return const RemoteResponse.badRequest();
+      }
+      return RemoteResponse.internalError(e.response!.statusCode!);
     }
   }
 
   @override
-  Future<RemoteResponse<String>> delete(String username) async {
+  Future<RemoteResponse<Unit>> delete(String username) async {
     try {
-      final response = await _dio.delete("${url}user");
-      return RemoteResponse.withData(response.data["data"]);
+      final _ = await _dio.delete("${url}user");
+      return const RemoteResponse.withoutData();
     } on DioError catch (e) {
       if (e.isConnectionError) {
         return const RemoteResponse.noConnection();
       }
-      return const RemoteResponse.badRequest();
+      if (e.response!.statusCode! < 500) {
+        return const RemoteResponse.badRequest();
+      }
+      return RemoteResponse.internalError(e.response!.statusCode!);
     }
   }
 }

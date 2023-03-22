@@ -33,13 +33,13 @@ void main() {
       build: () => UserBlocBloc(repository),
       act: (bloc) {
         bloc.add(RegisterEvent(user));
-        when(repository.registerUser(any)).thenAnswer((realInvocation) async =>
-            left(const Failure.serverFailure("message", 400)));
+        when(repository.registerUser(any)).thenAnswer(
+            (realInvocation) async => left(const Failure.serverFailure(400)));
       },
       expect: () => const <UserBlocState>[
         UserBlocState.loadingState(user: null, users: []),
         UserBlocState.failureState(
-            users: [], failure: Failure.serverFailure("message", 400)),
+            users: [], failure: Failure.serverFailure(400)),
       ],
     );
 
@@ -51,9 +51,9 @@ void main() {
         when(repository.registerUser(any))
             .thenAnswer((realInvocation) async => right(user));
       },
-      expect: () => const <UserBlocState>[
-        UserBlocState.loadingState(user: null, users: []),
-        UserBlocState.loadedState(users: []),
+      expect: () => <UserBlocState>[
+        const UserBlocState.loadingState(user: null, users: []),
+        UserBlocState.loadedState(users: [], user: user),
       ],
     );
   });

@@ -50,6 +50,7 @@ dependencies:
   material_design_icons_flutter: ^6.0.7096
   firebase_ui_oauth_google: ^1.0.23
   email_validator: ^2.1.17
+  connectivity_plus: ^3.0.3
 
 dev_dependencies:
   flutter_test:

@@ -20,24 +20,33 @@ mixin _$RemoteResponse<T> {
   TResult when<TResult extends Object?>({
     required TResult Function() noConnection,
     required TResult Function(T data) withData,
+    required TResult Function() withoutData,
     required TResult Function() noDataFound,
     required TResult Function() badRequest,
+    required TResult Function() userAlreadyExist,
+    required TResult Function(int code) internalError,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? noConnection,
     TResult? Function(T data)? withData,
+    TResult? Function()? withoutData,
     TResult? Function()? noDataFound,
     TResult? Function()? badRequest,
+    TResult? Function()? userAlreadyExist,
+    TResult? Function(int code)? internalError,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? noConnection,
     TResult Function(T data)? withData,
+    TResult Function()? withoutData,
     TResult Function()? noDataFound,
     TResult Function()? badRequest,
+    TResult Function()? userAlreadyExist,
+    TResult Function(int code)? internalError,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -45,24 +54,33 @@ mixin _$RemoteResponse<T> {
   TResult map<TResult extends Object?>({
     required TResult Function(NoConnection<T> value) noConnection,
     required TResult Function(WithData<T> value) withData,
+    required TResult Function(WithoutData<T> value) withoutData,
     required TResult Function(NoDataFound<T> value) noDataFound,
     required TResult Function(BadRequest<T> value) badRequest,
+    required TResult Function(_UserAlreadyExist<T> value) userAlreadyExist,
+    required TResult Function(_InternalError<T> value) internalError,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(NoConnection<T> value)? noConnection,
     TResult? Function(WithData<T> value)? withData,
+    TResult? Function(WithoutData<T> value)? withoutData,
     TResult? Function(NoDataFound<T> value)? noDataFound,
     TResult? Function(BadRequest<T> value)? badRequest,
+    TResult? Function(_UserAlreadyExist<T> value)? userAlreadyExist,
+    TResult? Function(_InternalError<T> value)? internalError,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(NoConnection<T> value)? noConnection,
     TResult Function(WithData<T> value)? withData,
+    TResult Function(WithoutData<T> value)? withoutData,
     TResult Function(NoDataFound<T> value)? noDataFound,
     TResult Function(BadRequest<T> value)? badRequest,
+    TResult Function(_UserAlreadyExist<T> value)? userAlreadyExist,
+    TResult Function(_InternalError<T> value)? internalError,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -126,8 +144,11 @@ class _$NoConnection<T> extends NoConnection<T> {
   TResult when<TResult extends Object?>({
     required TResult Function() noConnection,
     required TResult Function(T data) withData,
+    required TResult Function() withoutData,
     required TResult Function() noDataFound,
     required TResult Function() badRequest,
+    required TResult Function() userAlreadyExist,
+    required TResult Function(int code) internalError,
   }) {
     return noConnection();
   }
@@ -137,8 +158,11 @@ class _$NoConnection<T> extends NoConnection<T> {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? noConnection,
     TResult? Function(T data)? withData,
+    TResult? Function()? withoutData,
     TResult? Function()? noDataFound,
     TResult? Function()? badRequest,
+    TResult? Function()? userAlreadyExist,
+    TResult? Function(int code)? internalError,
   }) {
     return noConnection?.call();
   }
@@ -148,8 +172,11 @@ class _$NoConnection<T> extends NoConnection<T> {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? noConnection,
     TResult Function(T data)? withData,
+    TResult Function()? withoutData,
     TResult Function()? noDataFound,
     TResult Function()? badRequest,
+    TResult Function()? userAlreadyExist,
+    TResult Function(int code)? internalError,
     required TResult orElse(),
   }) {
     if (noConnection != null) {
@@ -163,8 +190,11 @@ class _$NoConnection<T> extends NoConnection<T> {
   TResult map<TResult extends Object?>({
     required TResult Function(NoConnection<T> value) noConnection,
     required TResult Function(WithData<T> value) withData,
+    required TResult Function(WithoutData<T> value) withoutData,
     required TResult Function(NoDataFound<T> value) noDataFound,
     required TResult Function(BadRequest<T> value) badRequest,
+    required TResult Function(_UserAlreadyExist<T> value) userAlreadyExist,
+    required TResult Function(_InternalError<T> value) internalError,
   }) {
     return noConnection(this);
   }
@@ -174,8 +204,11 @@ class _$NoConnection<T> extends NoConnection<T> {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(NoConnection<T> value)? noConnection,
     TResult? Function(WithData<T> value)? withData,
+    TResult? Function(WithoutData<T> value)? withoutData,
     TResult? Function(NoDataFound<T> value)? noDataFound,
     TResult? Function(BadRequest<T> value)? badRequest,
+    TResult? Function(_UserAlreadyExist<T> value)? userAlreadyExist,
+    TResult? Function(_InternalError<T> value)? internalError,
   }) {
     return noConnection?.call(this);
   }
@@ -185,8 +218,11 @@ class _$NoConnection<T> extends NoConnection<T> {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(NoConnection<T> value)? noConnection,
     TResult Function(WithData<T> value)? withData,
+    TResult Function(WithoutData<T> value)? withoutData,
     TResult Function(NoDataFound<T> value)? noDataFound,
     TResult Function(BadRequest<T> value)? badRequest,
+    TResult Function(_UserAlreadyExist<T> value)? userAlreadyExist,
+    TResult Function(_InternalError<T> value)? internalError,
     required TResult orElse(),
   }) {
     if (noConnection != null) {
@@ -268,8 +304,11 @@ class _$WithData<T> extends WithData<T> {
   TResult when<TResult extends Object?>({
     required TResult Function() noConnection,
     required TResult Function(T data) withData,
+    required TResult Function() withoutData,
     required TResult Function() noDataFound,
     required TResult Function() badRequest,
+    required TResult Function() userAlreadyExist,
+    required TResult Function(int code) internalError,
   }) {
     return withData(data);
   }
@@ -279,8 +318,11 @@ class _$WithData<T> extends WithData<T> {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? noConnection,
     TResult? Function(T data)? withData,
+    TResult? Function()? withoutData,
     TResult? Function()? noDataFound,
     TResult? Function()? badRequest,
+    TResult? Function()? userAlreadyExist,
+    TResult? Function(int code)? internalError,
   }) {
     return withData?.call(data);
   }
@@ -290,8 +332,11 @@ class _$WithData<T> extends WithData<T> {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? noConnection,
     TResult Function(T data)? withData,
+    TResult Function()? withoutData,
     TResult Function()? noDataFound,
     TResult Function()? badRequest,
+    TResult Function()? userAlreadyExist,
+    TResult Function(int code)? internalError,
     required TResult orElse(),
   }) {
     if (withData != null) {
@@ -305,8 +350,11 @@ class _$WithData<T> extends WithData<T> {
   TResult map<TResult extends Object?>({
     required TResult Function(NoConnection<T> value) noConnection,
     required TResult Function(WithData<T> value) withData,
+    required TResult Function(WithoutData<T> value) withoutData,
     required TResult Function(NoDataFound<T> value) noDataFound,
     required TResult Function(BadRequest<T> value) badRequest,
+    required TResult Function(_UserAlreadyExist<T> value) userAlreadyExist,
+    required TResult Function(_InternalError<T> value) internalError,
   }) {
     return withData(this);
   }
@@ -316,8 +364,11 @@ class _$WithData<T> extends WithData<T> {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(NoConnection<T> value)? noConnection,
     TResult? Function(WithData<T> value)? withData,
+    TResult? Function(WithoutData<T> value)? withoutData,
     TResult? Function(NoDataFound<T> value)? noDataFound,
     TResult? Function(BadRequest<T> value)? badRequest,
+    TResult? Function(_UserAlreadyExist<T> value)? userAlreadyExist,
+    TResult? Function(_InternalError<T> value)? internalError,
   }) {
     return withData?.call(this);
   }
@@ -327,8 +378,11 @@ class _$WithData<T> extends WithData<T> {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(NoConnection<T> value)? noConnection,
     TResult Function(WithData<T> value)? withData,
+    TResult Function(WithoutData<T> value)? withoutData,
     TResult Function(NoDataFound<T> value)? noDataFound,
     TResult Function(BadRequest<T> value)? badRequest,
+    TResult Function(_UserAlreadyExist<T> value)? userAlreadyExist,
+    TResult Function(_InternalError<T> value)? internalError,
     required TResult orElse(),
   }) {
     if (withData != null) {
@@ -346,6 +400,139 @@ abstract class WithData<T> extends RemoteResponse<T> {
   @JsonKey(ignore: true)
   _$$WithDataCopyWith<T, _$WithData<T>> get copyWith =>
       throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$WithoutDataCopyWith<T, $Res> {
+  factory _$$WithoutDataCopyWith(
+          _$WithoutData<T> value, $Res Function(_$WithoutData<T>) then) =
+      __$$WithoutDataCopyWithImpl<T, $Res>;
+}
+
+/// @nodoc
+class __$$WithoutDataCopyWithImpl<T, $Res>
+    extends _$RemoteResponseCopyWithImpl<T, $Res, _$WithoutData<T>>
+    implements _$$WithoutDataCopyWith<T, $Res> {
+  __$$WithoutDataCopyWithImpl(
+      _$WithoutData<T> _value, $Res Function(_$WithoutData<T>) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$WithoutData<T> extends WithoutData<T> {
+  const _$WithoutData() : super._();
+
+  @override
+  String toString() {
+    return 'RemoteResponse<$T>.withoutData()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$WithoutData<T>);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() noConnection,
+    required TResult Function(T data) withData,
+    required TResult Function() withoutData,
+    required TResult Function() noDataFound,
+    required TResult Function() badRequest,
+    required TResult Function() userAlreadyExist,
+    required TResult Function(int code) internalError,
+  }) {
+    return withoutData();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? noConnection,
+    TResult? Function(T data)? withData,
+    TResult? Function()? withoutData,
+    TResult? Function()? noDataFound,
+    TResult? Function()? badRequest,
+    TResult? Function()? userAlreadyExist,
+    TResult? Function(int code)? internalError,
+  }) {
+    return withoutData?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? noConnection,
+    TResult Function(T data)? withData,
+    TResult Function()? withoutData,
+    TResult Function()? noDataFound,
+    TResult Function()? badRequest,
+    TResult Function()? userAlreadyExist,
+    TResult Function(int code)? internalError,
+    required TResult orElse(),
+  }) {
+    if (withoutData != null) {
+      return withoutData();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(NoConnection<T> value) noConnection,
+    required TResult Function(WithData<T> value) withData,
+    required TResult Function(WithoutData<T> value) withoutData,
+    required TResult Function(NoDataFound<T> value) noDataFound,
+    required TResult Function(BadRequest<T> value) badRequest,
+    required TResult Function(_UserAlreadyExist<T> value) userAlreadyExist,
+    required TResult Function(_InternalError<T> value) internalError,
+  }) {
+    return withoutData(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(NoConnection<T> value)? noConnection,
+    TResult? Function(WithData<T> value)? withData,
+    TResult? Function(WithoutData<T> value)? withoutData,
+    TResult? Function(NoDataFound<T> value)? noDataFound,
+    TResult? Function(BadRequest<T> value)? badRequest,
+    TResult? Function(_UserAlreadyExist<T> value)? userAlreadyExist,
+    TResult? Function(_InternalError<T> value)? internalError,
+  }) {
+    return withoutData?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(NoConnection<T> value)? noConnection,
+    TResult Function(WithData<T> value)? withData,
+    TResult Function(WithoutData<T> value)? withoutData,
+    TResult Function(NoDataFound<T> value)? noDataFound,
+    TResult Function(BadRequest<T> value)? badRequest,
+    TResult Function(_UserAlreadyExist<T> value)? userAlreadyExist,
+    TResult Function(_InternalError<T> value)? internalError,
+    required TResult orElse(),
+  }) {
+    if (withoutData != null) {
+      return withoutData(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class WithoutData<T> extends RemoteResponse<T> {
+  const factory WithoutData() = _$WithoutData<T>;
+  const WithoutData._() : super._();
 }
 
 /// @nodoc
@@ -388,8 +575,11 @@ class _$NoDataFound<T> extends NoDataFound<T> {
   TResult when<TResult extends Object?>({
     required TResult Function() noConnection,
     required TResult Function(T data) withData,
+    required TResult Function() withoutData,
     required TResult Function() noDataFound,
     required TResult Function() badRequest,
+    required TResult Function() userAlreadyExist,
+    required TResult Function(int code) internalError,
   }) {
     return noDataFound();
   }
@@ -399,8 +589,11 @@ class _$NoDataFound<T> extends NoDataFound<T> {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? noConnection,
     TResult? Function(T data)? withData,
+    TResult? Function()? withoutData,
     TResult? Function()? noDataFound,
     TResult? Function()? badRequest,
+    TResult? Function()? userAlreadyExist,
+    TResult? Function(int code)? internalError,
   }) {
     return noDataFound?.call();
   }
@@ -410,8 +603,11 @@ class _$NoDataFound<T> extends NoDataFound<T> {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? noConnection,
     TResult Function(T data)? withData,
+    TResult Function()? withoutData,
     TResult Function()? noDataFound,
     TResult Function()? badRequest,
+    TResult Function()? userAlreadyExist,
+    TResult Function(int code)? internalError,
     required TResult orElse(),
   }) {
     if (noDataFound != null) {
@@ -425,8 +621,11 @@ class _$NoDataFound<T> extends NoDataFound<T> {
   TResult map<TResult extends Object?>({
     required TResult Function(NoConnection<T> value) noConnection,
     required TResult Function(WithData<T> value) withData,
+    required TResult Function(WithoutData<T> value) withoutData,
     required TResult Function(NoDataFound<T> value) noDataFound,
     required TResult Function(BadRequest<T> value) badRequest,
+    required TResult Function(_UserAlreadyExist<T> value) userAlreadyExist,
+    required TResult Function(_InternalError<T> value) internalError,
   }) {
     return noDataFound(this);
   }
@@ -436,8 +635,11 @@ class _$NoDataFound<T> extends NoDataFound<T> {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(NoConnection<T> value)? noConnection,
     TResult? Function(WithData<T> value)? withData,
+    TResult? Function(WithoutData<T> value)? withoutData,
     TResult? Function(NoDataFound<T> value)? noDataFound,
     TResult? Function(BadRequest<T> value)? badRequest,
+    TResult? Function(_UserAlreadyExist<T> value)? userAlreadyExist,
+    TResult? Function(_InternalError<T> value)? internalError,
   }) {
     return noDataFound?.call(this);
   }
@@ -447,8 +649,11 @@ class _$NoDataFound<T> extends NoDataFound<T> {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(NoConnection<T> value)? noConnection,
     TResult Function(WithData<T> value)? withData,
+    TResult Function(WithoutData<T> value)? withoutData,
     TResult Function(NoDataFound<T> value)? noDataFound,
     TResult Function(BadRequest<T> value)? badRequest,
+    TResult Function(_UserAlreadyExist<T> value)? userAlreadyExist,
+    TResult Function(_InternalError<T> value)? internalError,
     required TResult orElse(),
   }) {
     if (noDataFound != null) {
@@ -503,8 +708,11 @@ class _$BadRequest<T> extends BadRequest<T> {
   TResult when<TResult extends Object?>({
     required TResult Function() noConnection,
     required TResult Function(T data) withData,
+    required TResult Function() withoutData,
     required TResult Function() noDataFound,
     required TResult Function() badRequest,
+    required TResult Function() userAlreadyExist,
+    required TResult Function(int code) internalError,
   }) {
     return badRequest();
   }
@@ -514,8 +722,11 @@ class _$BadRequest<T> extends BadRequest<T> {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? noConnection,
     TResult? Function(T data)? withData,
+    TResult? Function()? withoutData,
     TResult? Function()? noDataFound,
     TResult? Function()? badRequest,
+    TResult? Function()? userAlreadyExist,
+    TResult? Function(int code)? internalError,
   }) {
     return badRequest?.call();
   }
@@ -525,8 +736,11 @@ class _$BadRequest<T> extends BadRequest<T> {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? noConnection,
     TResult Function(T data)? withData,
+    TResult Function()? withoutData,
     TResult Function()? noDataFound,
     TResult Function()? badRequest,
+    TResult Function()? userAlreadyExist,
+    TResult Function(int code)? internalError,
     required TResult orElse(),
   }) {
     if (badRequest != null) {
@@ -540,8 +754,11 @@ class _$BadRequest<T> extends BadRequest<T> {
   TResult map<TResult extends Object?>({
     required TResult Function(NoConnection<T> value) noConnection,
     required TResult Function(WithData<T> value) withData,
+    required TResult Function(WithoutData<T> value) withoutData,
     required TResult Function(NoDataFound<T> value) noDataFound,
     required TResult Function(BadRequest<T> value) badRequest,
+    required TResult Function(_UserAlreadyExist<T> value) userAlreadyExist,
+    required TResult Function(_InternalError<T> value) internalError,
   }) {
     return badRequest(this);
   }
@@ -551,8 +768,11 @@ class _$BadRequest<T> extends BadRequest<T> {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(NoConnection<T> value)? noConnection,
     TResult? Function(WithData<T> value)? withData,
+    TResult? Function(WithoutData<T> value)? withoutData,
     TResult? Function(NoDataFound<T> value)? noDataFound,
     TResult? Function(BadRequest<T> value)? badRequest,
+    TResult? Function(_UserAlreadyExist<T> value)? userAlreadyExist,
+    TResult? Function(_InternalError<T> value)? internalError,
   }) {
     return badRequest?.call(this);
   }
@@ -562,8 +782,11 @@ class _$BadRequest<T> extends BadRequest<T> {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(NoConnection<T> value)? noConnection,
     TResult Function(WithData<T> value)? withData,
+    TResult Function(WithoutData<T> value)? withoutData,
     TResult Function(NoDataFound<T> value)? noDataFound,
     TResult Function(BadRequest<T> value)? badRequest,
+    TResult Function(_UserAlreadyExist<T> value)? userAlreadyExist,
+    TResult Function(_InternalError<T> value)? internalError,
     required TResult orElse(),
   }) {
     if (badRequest != null) {
@@ -576,4 +799,301 @@ class _$BadRequest<T> extends BadRequest<T> {
 abstract class BadRequest<T> extends RemoteResponse<T> {
   const factory BadRequest() = _$BadRequest<T>;
   const BadRequest._() : super._();
+}
+
+/// @nodoc
+abstract class _$$_UserAlreadyExistCopyWith<T, $Res> {
+  factory _$$_UserAlreadyExistCopyWith(_$_UserAlreadyExist<T> value,
+          $Res Function(_$_UserAlreadyExist<T>) then) =
+      __$$_UserAlreadyExistCopyWithImpl<T, $Res>;
+}
+
+/// @nodoc
+class __$$_UserAlreadyExistCopyWithImpl<T, $Res>
+    extends _$RemoteResponseCopyWithImpl<T, $Res, _$_UserAlreadyExist<T>>
+    implements _$$_UserAlreadyExistCopyWith<T, $Res> {
+  __$$_UserAlreadyExistCopyWithImpl(_$_UserAlreadyExist<T> _value,
+      $Res Function(_$_UserAlreadyExist<T>) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$_UserAlreadyExist<T> extends _UserAlreadyExist<T> {
+  const _$_UserAlreadyExist() : super._();
+
+  @override
+  String toString() {
+    return 'RemoteResponse<$T>.userAlreadyExist()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$_UserAlreadyExist<T>);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() noConnection,
+    required TResult Function(T data) withData,
+    required TResult Function() withoutData,
+    required TResult Function() noDataFound,
+    required TResult Function() badRequest,
+    required TResult Function() userAlreadyExist,
+    required TResult Function(int code) internalError,
+  }) {
+    return userAlreadyExist();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? noConnection,
+    TResult? Function(T data)? withData,
+    TResult? Function()? withoutData,
+    TResult? Function()? noDataFound,
+    TResult? Function()? badRequest,
+    TResult? Function()? userAlreadyExist,
+    TResult? Function(int code)? internalError,
+  }) {
+    return userAlreadyExist?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? noConnection,
+    TResult Function(T data)? withData,
+    TResult Function()? withoutData,
+    TResult Function()? noDataFound,
+    TResult Function()? badRequest,
+    TResult Function()? userAlreadyExist,
+    TResult Function(int code)? internalError,
+    required TResult orElse(),
+  }) {
+    if (userAlreadyExist != null) {
+      return userAlreadyExist();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(NoConnection<T> value) noConnection,
+    required TResult Function(WithData<T> value) withData,
+    required TResult Function(WithoutData<T> value) withoutData,
+    required TResult Function(NoDataFound<T> value) noDataFound,
+    required TResult Function(BadRequest<T> value) badRequest,
+    required TResult Function(_UserAlreadyExist<T> value) userAlreadyExist,
+    required TResult Function(_InternalError<T> value) internalError,
+  }) {
+    return userAlreadyExist(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(NoConnection<T> value)? noConnection,
+    TResult? Function(WithData<T> value)? withData,
+    TResult? Function(WithoutData<T> value)? withoutData,
+    TResult? Function(NoDataFound<T> value)? noDataFound,
+    TResult? Function(BadRequest<T> value)? badRequest,
+    TResult? Function(_UserAlreadyExist<T> value)? userAlreadyExist,
+    TResult? Function(_InternalError<T> value)? internalError,
+  }) {
+    return userAlreadyExist?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(NoConnection<T> value)? noConnection,
+    TResult Function(WithData<T> value)? withData,
+    TResult Function(WithoutData<T> value)? withoutData,
+    TResult Function(NoDataFound<T> value)? noDataFound,
+    TResult Function(BadRequest<T> value)? badRequest,
+    TResult Function(_UserAlreadyExist<T> value)? userAlreadyExist,
+    TResult Function(_InternalError<T> value)? internalError,
+    required TResult orElse(),
+  }) {
+    if (userAlreadyExist != null) {
+      return userAlreadyExist(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _UserAlreadyExist<T> extends RemoteResponse<T> {
+  const factory _UserAlreadyExist() = _$_UserAlreadyExist<T>;
+  const _UserAlreadyExist._() : super._();
+}
+
+/// @nodoc
+abstract class _$$_InternalErrorCopyWith<T, $Res> {
+  factory _$$_InternalErrorCopyWith(
+          _$_InternalError<T> value, $Res Function(_$_InternalError<T>) then) =
+      __$$_InternalErrorCopyWithImpl<T, $Res>;
+  @useResult
+  $Res call({int code});
+}
+
+/// @nodoc
+class __$$_InternalErrorCopyWithImpl<T, $Res>
+    extends _$RemoteResponseCopyWithImpl<T, $Res, _$_InternalError<T>>
+    implements _$$_InternalErrorCopyWith<T, $Res> {
+  __$$_InternalErrorCopyWithImpl(
+      _$_InternalError<T> _value, $Res Function(_$_InternalError<T>) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? code = null,
+  }) {
+    return _then(_$_InternalError<T>(
+      null == code
+          ? _value.code
+          : code // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_InternalError<T> extends _InternalError<T> {
+  const _$_InternalError(this.code) : super._();
+
+  @override
+  final int code;
+
+  @override
+  String toString() {
+    return 'RemoteResponse<$T>.internalError(code: $code)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_InternalError<T> &&
+            (identical(other.code, code) || other.code == code));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, code);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_InternalErrorCopyWith<T, _$_InternalError<T>> get copyWith =>
+      __$$_InternalErrorCopyWithImpl<T, _$_InternalError<T>>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() noConnection,
+    required TResult Function(T data) withData,
+    required TResult Function() withoutData,
+    required TResult Function() noDataFound,
+    required TResult Function() badRequest,
+    required TResult Function() userAlreadyExist,
+    required TResult Function(int code) internalError,
+  }) {
+    return internalError(code);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? noConnection,
+    TResult? Function(T data)? withData,
+    TResult? Function()? withoutData,
+    TResult? Function()? noDataFound,
+    TResult? Function()? badRequest,
+    TResult? Function()? userAlreadyExist,
+    TResult? Function(int code)? internalError,
+  }) {
+    return internalError?.call(code);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? noConnection,
+    TResult Function(T data)? withData,
+    TResult Function()? withoutData,
+    TResult Function()? noDataFound,
+    TResult Function()? badRequest,
+    TResult Function()? userAlreadyExist,
+    TResult Function(int code)? internalError,
+    required TResult orElse(),
+  }) {
+    if (internalError != null) {
+      return internalError(code);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(NoConnection<T> value) noConnection,
+    required TResult Function(WithData<T> value) withData,
+    required TResult Function(WithoutData<T> value) withoutData,
+    required TResult Function(NoDataFound<T> value) noDataFound,
+    required TResult Function(BadRequest<T> value) badRequest,
+    required TResult Function(_UserAlreadyExist<T> value) userAlreadyExist,
+    required TResult Function(_InternalError<T> value) internalError,
+  }) {
+    return internalError(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(NoConnection<T> value)? noConnection,
+    TResult? Function(WithData<T> value)? withData,
+    TResult? Function(WithoutData<T> value)? withoutData,
+    TResult? Function(NoDataFound<T> value)? noDataFound,
+    TResult? Function(BadRequest<T> value)? badRequest,
+    TResult? Function(_UserAlreadyExist<T> value)? userAlreadyExist,
+    TResult? Function(_InternalError<T> value)? internalError,
+  }) {
+    return internalError?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(NoConnection<T> value)? noConnection,
+    TResult Function(WithData<T> value)? withData,
+    TResult Function(WithoutData<T> value)? withoutData,
+    TResult Function(NoDataFound<T> value)? noDataFound,
+    TResult Function(BadRequest<T> value)? badRequest,
+    TResult Function(_UserAlreadyExist<T> value)? userAlreadyExist,
+    TResult Function(_InternalError<T> value)? internalError,
+    required TResult orElse(),
+  }) {
+    if (internalError != null) {
+      return internalError(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _InternalError<T> extends RemoteResponse<T> {
+  const factory _InternalError(final int code) = _$_InternalError<T>;
+  const _InternalError._() : super._();
+
+  int get code;
+  @JsonKey(ignore: true)
+  _$$_InternalErrorCopyWith<T, _$_InternalError<T>> get copyWith =>
+      throw _privateConstructorUsedError;
 }

@@ -7,4 +7,7 @@ abstract class UserRepositoryContract {
   Future<Either<Failure, User>> registerUser(UserDto dto);
   Future<bool> isUsernameAvailable(String username);
   Future<Either<Failure, User>> getByUsername(String username);
+  Future<Either<Failure, List<User>>> getUsers();
+  Future<Either<Failure, Unit>> update(UserDto dto);
+  Future<Either<Failure, Unit>> delete(String username);
 }
