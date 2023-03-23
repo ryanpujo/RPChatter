@@ -7,6 +7,8 @@ import 'package:go_router/go_router.dart';
 import 'package:ryan_pujo_app/auth/application/bloc/auth_bloc.dart';
 import 'package:ryan_pujo_app/auth/application/bloc/auth_event.dart';
 import 'package:ryan_pujo_app/auth/presentation/sign_in_page.dart';
+import 'package:ryan_pujo_app/core/application/bloc/connection_status_bloc.dart';
+import 'package:ryan_pujo_app/core/connection_status.dart';
 import 'package:ryan_pujo_app/firebase_options.dart';
 import 'package:ryan_pujo_app/init.dart';
 import 'package:ryan_pujo_app/user/application/bloc/user_bloc_bloc.dart';
@@ -20,7 +22,7 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   init();
-
+  ConnectionStatus.instance.initialize();
   runApp(const MyApp());
 }
 
@@ -77,6 +79,9 @@ class MyApp extends StatelessWidget {
           create: (context) => AuthBloc(
               locator<FirebaseAuth>(), locator<UserRepositoryContract>())
             ..add(const AuthEvent.isAuthenticated()),
+        ),
+        BlocProvider(
+          create: (context) => ConnectionStatusBloc(),
         )
       ],
       child: BlocListener<AuthBloc, auth.AuthState>(

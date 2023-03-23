@@ -2,12 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:reactive_forms/reactive_forms.dart';
+import 'package:ryan_pujo_app/core/presentation/connection_warning.dart';
 
 import '../../core/presentation/submit_button.dart';
 import '../../core/presentation/custom_text_form_field.dart';
 import '../application/bloc/auth_bloc.dart';
 import '../application/bloc/auth_event.dart';
-import 'error_text.dart';
+import '../../core/presentation/error_text.dart';
 import 'register_clickable_text.dart';
 
 class SignInForm extends StatefulWidget {
@@ -27,6 +28,7 @@ class _SignInFormState extends State<SignInForm> {
     "username": FormControl(validators: [Validators.required]),
     "password": FormControl(validators: [Validators.required]),
   });
+  bool hasConnection = false;
 
   @override
   void dispose() {
@@ -58,6 +60,10 @@ class _SignInFormState extends State<SignInForm> {
             ErrorText(
               errorText: widget.errorMessage,
             ),
+          ConnectionWarning(
+            onConnectionChange: (isConnected) =>
+                setState(() => hasConnection = isConnected),
+          ),
           const CustomTextFormField(
             label: "Username/Email",
             icon: Icon(MdiIcons.account),
@@ -77,14 +83,16 @@ class _SignInFormState extends State<SignInForm> {
           ),
           SubmitButton(
             label: "Sign in",
-            onPressed: () {
-              context.read<AuthBloc>().add(
-                    AuthEvent.signIn(
-                      formGroup.control("username").value,
-                      formGroup.control("password").value,
-                    ),
-                  );
-            },
+            onPressed: hasConnection
+                ? () {
+                    context.read<AuthBloc>().add(
+                          AuthEvent.signIn(
+                            formGroup.control("username").value,
+                            formGroup.control("password").value,
+                          ),
+                        );
+                  }
+                : null,
           )
         ],
       ),
