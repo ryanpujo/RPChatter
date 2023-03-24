@@ -56,7 +56,7 @@ class UserBlocBloc extends Bloc<UserBlocEvent, UserBlocState> {
     Emitter<UserBlocState> emit,
   ) async {
     emit(UserBlocState.loadingState(users: state.users));
-    event.maybeWhen(
+    await event.maybeWhen(
       orElse: () {},
       getByUsername: (username) async {
         final leftOrRight = await _repository.getByUsername(username);
@@ -77,7 +77,9 @@ class UserBlocBloc extends Bloc<UserBlocEvent, UserBlocState> {
               },
             );
           },
-          (r) => emit(UserBlocState.loadedState(users: state.users, user: r)),
+          (r) {
+            emit(UserBlocState.loadedState(users: state.users, user: r));
+          },
         );
       },
     );

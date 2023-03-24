@@ -50,47 +50,43 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     await event.maybeMap(
       orElse: () {},
       signIn: (value) async {
+        final username = formGroup.control("username").value;
         try {
           emit(const AuthState.loading());
-          if (EmailValidator.validate(formGroup.control("username").value)) {
-            final cred = await _authenticator.signInWithEmailAndPassword(
-              email: formGroup.control("username").value,
-              password: formGroup.control("password").value,
-            );
-            if (cred.user!.emailVerified) {
-              emit(const AuthState.authenticated());
+          if (!EmailValidator.validate(formGroup.control("username").value)) {
+            final email = await getEmail(formGroup.control("username").value);
+            if (!EmailValidator.validate(email)) {
+              emit(AuthState.failure(email));
               return;
             }
-            emit(const AuthState.unVerified());
-          } else {
-            final res = await _userRepository
-                .getByUsername(formGroup.control("username").value);
-            await res.fold(
-              (l) {
-                l.maybeMap(
-                  orElse: () {},
-                  clientFailure: (value) =>
-                      emit(AuthState.failure(value.message)),
-                );
-              },
-              (r) async {
-                final cred = await _authenticator.signInWithEmailAndPassword(
-                  email: r.email,
-                  password: formGroup.control("password").value,
-                );
-                if (cred.user!.emailVerified) {
-                  emit(const AuthState.authenticated());
-                  return;
-                }
-                emit(const AuthState.unVerified());
-              },
-            );
+            formGroup.control("username").value = email;
           }
+          final cred = await _authenticator.signInWithEmailAndPassword(
+            email: formGroup.control("username").value,
+            password: formGroup.control("password").value,
+          );
+          formGroup.control("username").value = username;
+          if (cred.user!.emailVerified) {
+            emit(const AuthState.authenticated());
+            return;
+          }
+          emit(const AuthState.unVerified());
         } on FirebaseAuthException catch (e) {
+          formGroup.control("username").value = username;
           emit(AuthState.failure(e.code));
         }
       },
     );
+  }
+
+  Future<String> getEmail(String username) async {
+    final leftOrRight = await _userRepository.getByUsername(username);
+    return leftOrRight.fold((l) {
+      return l.map(
+        serverFailure: (value) => value.errorCode.toString(),
+        clientFailure: (value) => value.message,
+      );
+    }, (r) => r.email);
   }
 
   @override

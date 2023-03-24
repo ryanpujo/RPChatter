@@ -4,11 +4,11 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 import 'package:reactive_forms/reactive_forms.dart';
 import 'package:ryan_pujo_app/core/presentation/connection_warning.dart';
 
-import '../../core/presentation/submit_button.dart';
 import '../../core/presentation/custom_text_form_field.dart';
+import '../../core/presentation/submit_button.dart';
 import '../application/bloc/auth_bloc.dart';
-import '../application/bloc/auth_event.dart';
 import '../../core/presentation/error_text.dart';
+import '../application/bloc/auth_event.dart';
 import 'register_clickable_text.dart';
 
 class SignInForm extends StatelessWidget {
@@ -67,7 +67,7 @@ class SignInForm extends StatelessWidget {
                     const AuthEvent.signIn(),
                   );
             },
-          )
+          ),
         ],
       ),
     );
