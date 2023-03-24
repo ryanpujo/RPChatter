@@ -18,22 +18,19 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$ConnectionStatusEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(Map<ConnectivityResult, bool> connectivity)
-        checkConnection,
+    required TResult Function(Map<dynamic, bool> connectivity) checkConnection,
     required TResult Function() startCheckConnection,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(Map<ConnectivityResult, bool> connectivity)?
-        checkConnection,
+    TResult? Function(Map<dynamic, bool> connectivity)? checkConnection,
     TResult? Function()? startCheckConnection,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(Map<ConnectivityResult, bool> connectivity)?
-        checkConnection,
+    TResult Function(Map<dynamic, bool> connectivity)? checkConnection,
     TResult Function()? startCheckConnection,
     required TResult orElse(),
   }) =>
@@ -84,7 +81,7 @@ abstract class _$$_CheckConnectionCopyWith<$Res> {
           _$_CheckConnection value, $Res Function(_$_CheckConnection) then) =
       __$$_CheckConnectionCopyWithImpl<$Res>;
   @useResult
-  $Res call({Map<ConnectivityResult, bool> connectivity});
+  $Res call({Map<dynamic, bool> connectivity});
 }
 
 /// @nodoc
@@ -104,7 +101,7 @@ class __$$_CheckConnectionCopyWithImpl<$Res>
       null == connectivity
           ? _value._connectivity
           : connectivity // ignore: cast_nullable_to_non_nullable
-              as Map<ConnectivityResult, bool>,
+              as Map<dynamic, bool>,
     ));
   }
 }
@@ -112,13 +109,13 @@ class __$$_CheckConnectionCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_CheckConnection extends _CheckConnection {
-  const _$_CheckConnection(final Map<ConnectivityResult, bool> connectivity)
+  const _$_CheckConnection(final Map<dynamic, bool> connectivity)
       : _connectivity = connectivity,
         super._();
 
-  final Map<ConnectivityResult, bool> _connectivity;
+  final Map<dynamic, bool> _connectivity;
   @override
-  Map<ConnectivityResult, bool> get connectivity {
+  Map<dynamic, bool> get connectivity {
     if (_connectivity is EqualUnmodifiableMapView) return _connectivity;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableMapView(_connectivity);
@@ -151,8 +148,7 @@ class _$_CheckConnection extends _CheckConnection {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(Map<ConnectivityResult, bool> connectivity)
-        checkConnection,
+    required TResult Function(Map<dynamic, bool> connectivity) checkConnection,
     required TResult Function() startCheckConnection,
   }) {
     return checkConnection(connectivity);
@@ -161,8 +157,7 @@ class _$_CheckConnection extends _CheckConnection {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(Map<ConnectivityResult, bool> connectivity)?
-        checkConnection,
+    TResult? Function(Map<dynamic, bool> connectivity)? checkConnection,
     TResult? Function()? startCheckConnection,
   }) {
     return checkConnection?.call(connectivity);
@@ -171,8 +166,7 @@ class _$_CheckConnection extends _CheckConnection {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(Map<ConnectivityResult, bool> connectivity)?
-        checkConnection,
+    TResult Function(Map<dynamic, bool> connectivity)? checkConnection,
     TResult Function()? startCheckConnection,
     required TResult orElse(),
   }) {
@@ -215,11 +209,11 @@ class _$_CheckConnection extends _CheckConnection {
 }
 
 abstract class _CheckConnection extends ConnectionStatusEvent {
-  const factory _CheckConnection(
-      final Map<ConnectivityResult, bool> connectivity) = _$_CheckConnection;
+  const factory _CheckConnection(final Map<dynamic, bool> connectivity) =
+      _$_CheckConnection;
   const _CheckConnection._() : super._();
 
-  Map<ConnectivityResult, bool> get connectivity;
+  Map<dynamic, bool> get connectivity;
   @JsonKey(ignore: true)
   _$$_CheckConnectionCopyWith<_$_CheckConnection> get copyWith =>
       throw _privateConstructorUsedError;
@@ -263,8 +257,7 @@ class _$_StartCheckConnection extends _StartCheckConnection {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(Map<ConnectivityResult, bool> connectivity)
-        checkConnection,
+    required TResult Function(Map<dynamic, bool> connectivity) checkConnection,
     required TResult Function() startCheckConnection,
   }) {
     return startCheckConnection();
@@ -273,8 +266,7 @@ class _$_StartCheckConnection extends _StartCheckConnection {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(Map<ConnectivityResult, bool> connectivity)?
-        checkConnection,
+    TResult? Function(Map<dynamic, bool> connectivity)? checkConnection,
     TResult? Function()? startCheckConnection,
   }) {
     return startCheckConnection?.call();
@@ -283,8 +275,7 @@ class _$_StartCheckConnection extends _StartCheckConnection {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(Map<ConnectivityResult, bool> connectivity)?
-        checkConnection,
+    TResult Function(Map<dynamic, bool> connectivity)? checkConnection,
     TResult Function()? startCheckConnection,
     required TResult orElse(),
   }) {

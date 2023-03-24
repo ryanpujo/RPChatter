@@ -14,7 +14,7 @@ class ConnectionStatusBloc
         startCheckConnection: (value) {
           _connectionStatus.onConnectionChange.listen((event) {
             add(ConnectionStatusEvent.checkConnection(event));
-          });
+          }, cancelOnError: false);
         },
         checkConnection: (event) => _checkConnection(event, emit),
       );
@@ -41,6 +41,9 @@ class ConnectionStatusBloc
           case ConnectivityResult.none:
           default:
             emit(const ConnectionStatusState.noneConnectivity());
+        }
+        if (event.connectivity["isCancelled"]!) {
+          _connectionStatus.initialize();
         }
       },
       startCheckConnection: (value) {},
