@@ -19,22 +19,25 @@ void main() {
   setUp(() {
     repository = MockUserRepositoryContract();
   });
+  UserBlocBloc builder() => UserBlocBloc(repository);
+  User user = const User(
+    fName: "sdsds",
+    lName: "Dfsdfsd",
+    username: "sdfdsfds",
+    email: "sdfs",
+    password: "Sdfsffsf",
+  );
 
   group("register event", () {
-    User user = const User(
-      fName: "sdsds",
-      lName: "Dfsdfsd",
-      username: "sdfdsfds",
-      email: "sdfs",
-      password: "Sdfsffsf",
-    );
     blocTest<UserBlocBloc, UserBlocState>(
       'should emits [loadingState, serverFailure].',
-      build: () => UserBlocBloc(repository),
-      act: (bloc) {
-        bloc.add(RegisterEvent(user));
+      build: builder,
+      setUp: () {
         when(repository.registerUser(any)).thenAnswer(
             (realInvocation) async => left(const Failure.serverFailure(400)));
+      },
+      act: (bloc) {
+        bloc.add(UserBlocEvent.register(user));
       },
       expect: () => const <UserBlocState>[
         UserBlocState.loadingState(user: null, users: []),
@@ -44,16 +47,221 @@ void main() {
     );
 
     blocTest<UserBlocBloc, UserBlocState>(
-      'should emits [loadingState, loadedState].',
-      build: () => UserBlocBloc(repository),
+      'should emits [loadingState, clientFailure].',
+      build: builder,
+      setUp: () {
+        when(repository.registerUser(any)).thenAnswer((realInvocation) async =>
+            left(const Failure.clientFailure("message")));
+      },
       act: (bloc) {
-        bloc.add(RegisterEvent(user));
+        bloc.add(UserBlocEvent.register(user));
+      },
+      expect: () => const <UserBlocState>[
+        UserBlocState.loadingState(users: []),
+        UserBlocState.failureState(
+            users: [], failure: Failure.clientFailure("message")),
+      ],
+    );
+
+    blocTest<UserBlocBloc, UserBlocState>(
+      'should emits [loadingState, loadedState].',
+      build: builder,
+      setUp: () {
         when(repository.registerUser(any))
             .thenAnswer((realInvocation) async => right(user));
+      },
+      act: (bloc) {
+        bloc.add(UserBlocEvent.register(user));
       },
       expect: () => <UserBlocState>[
         const UserBlocState.loadingState(user: null, users: []),
         UserBlocState.loadedState(users: [], user: user),
+      ],
+    );
+  });
+
+  group("getByUsername", () {
+    blocTest(
+      "should emit loaded state",
+      build: builder,
+      setUp: () {
+        when(repository.getByUsername(any))
+            .thenAnswer((realInvocation) async => right(user));
+      },
+      act: (bloc) => bloc.add(const UserBlocEvent.getByUsername("username")),
+      expect: () => [
+        const UserBlocState.loadingState(users: []),
+        UserBlocState.loadedState(users: [], user: user)
+      ],
+    );
+
+    blocTest(
+      "should emit failure state with client failure",
+      build: builder,
+      setUp: () {
+        when(repository.getByUsername(any)).thenAnswer((realInvocation) async =>
+            left(const Failure.clientFailure("message")));
+      },
+      act: (bloc) => bloc.add(const UserBlocEvent.getByUsername("username")),
+      expect: () => [
+        const UserBlocState.loadingState(users: []),
+        const UserBlocState.failureState(
+            users: [], failure: Failure.clientFailure("message"))
+      ],
+    );
+
+    blocTest(
+      "should emit failure state with server failure",
+      build: builder,
+      setUp: () {
+        when(repository.getByUsername(any)).thenAnswer(
+            (realInvocation) async => left(const Failure.serverFailure(500)));
+      },
+      act: (bloc) => bloc.add(const UserBlocEvent.getByUsername("username")),
+      expect: () => [
+        const UserBlocState.loadingState(users: []),
+        const UserBlocState.failureState(
+            users: [], failure: Failure.serverFailure(500))
+      ],
+    );
+  });
+
+  group("getUsers", () {
+    final users = [user, user];
+
+    blocTest(
+      "should emit loaded state with users",
+      build: builder,
+      setUp: () {
+        when(repository.getUsers())
+            .thenAnswer((realInvocation) async => right(users));
+      },
+      act: (bloc) => bloc.add(const UserBlocEvent.getUsers()),
+      expect: () => [
+        const UserBlocState.loadingState(users: []),
+        UserBlocState.loadedState(users: users)
+      ],
+    );
+
+    blocTest(
+      "should emit failure state with clientfailure",
+      build: builder,
+      setUp: () {
+        when(repository.getUsers()).thenAnswer((realInvocation) async =>
+            left(const Failure.clientFailure("message")));
+      },
+      act: (bloc) => bloc.add(const UserBlocEvent.getUsers()),
+      expect: () => [
+        const UserBlocState.loadingState(users: []),
+        const UserBlocState.failureState(
+            users: [], failure: Failure.clientFailure("message"))
+      ],
+    );
+
+    blocTest(
+      "should emit failure state with serverfailure",
+      build: builder,
+      setUp: () {
+        when(repository.getUsers()).thenAnswer(
+            (realInvocation) async => left(const Failure.serverFailure(500)));
+      },
+      act: (bloc) => bloc.add(const UserBlocEvent.getUsers()),
+      expect: () => [
+        const UserBlocState.loadingState(users: []),
+        const UserBlocState.failureState(
+            users: [], failure: Failure.serverFailure(500))
+      ],
+    );
+  });
+
+  group("update", () {
+    blocTest(
+      "should emit loaded state",
+      build: builder,
+      setUp: () {
+        when(repository.update(any))
+            .thenAnswer((realInvocation) async => right(unit));
+      },
+      act: (bloc) => bloc.add(UserBlocEvent.update(user)),
+      expect: () => [
+        const UserBlocState.loadingState(users: []),
+        const UserBlocState.loadedState(users: [])
+      ],
+    );
+
+    blocTest(
+      "should emit failure state with clientfailure",
+      build: builder,
+      setUp: () {
+        when(repository.update(any)).thenAnswer((realInvocation) async =>
+            left(const Failure.clientFailure("message")));
+      },
+      act: (bloc) => bloc.add(UserBlocEvent.update(user)),
+      expect: () => [
+        const UserBlocState.loadingState(users: []),
+        const UserBlocState.failureState(
+            users: [], failure: Failure.clientFailure("message"))
+      ],
+    );
+
+    blocTest(
+      "should emit failure state with serverfailure",
+      build: builder,
+      setUp: () {
+        when(repository.update(any)).thenAnswer(
+            (realInvocation) async => left(const Failure.serverFailure(500)));
+      },
+      act: (bloc) => bloc.add(UserBlocEvent.update(user)),
+      expect: () => [
+        const UserBlocState.loadingState(users: []),
+        const UserBlocState.failureState(
+            users: [], failure: Failure.serverFailure(500))
+      ],
+    );
+  });
+
+  group("delete", () {
+    blocTest(
+      "should emit failure state with clientfailure",
+      build: builder,
+      setUp: () {
+        when(repository.delete(any)).thenAnswer((realInvocation) async =>
+            left(const Failure.clientFailure("message")));
+      },
+      act: (bloc) => bloc.add(const UserBlocEvent.delete("user")),
+      expect: () => [
+        const UserBlocState.loadingState(users: []),
+        const UserBlocState.failureState(
+            users: [], failure: Failure.clientFailure("message"))
+      ],
+    );
+
+    blocTest(
+      "should emit failure state with servertfailure",
+      build: builder,
+      setUp: () {
+        when(repository.delete(any)).thenAnswer(
+            (realInvocation) async => left(const Failure.serverFailure(500)));
+      },
+      act: (bloc) => bloc.add(const UserBlocEvent.delete("user")),
+      expect: () => [
+        const UserBlocState.loadingState(users: []),
+        const UserBlocState.failureState(
+            users: [], failure: Failure.serverFailure(500))
+      ],
+    );
+
+    blocTest(
+      "should emit loaded state",
+      build: builder,
+      setUp: () {
+        when(repository.delete(any))
+            .thenAnswer((realInvocation) async => right(unit));
+      },
+      act: (bloc) => bloc.add(const UserBlocEvent.delete("user")),
+      expect: () => [
+        const UserBlocState.loadingState(users: []),
+        const UserBlocState.loadedState(users: [])
       ],
     );
   });
