@@ -16,46 +16,46 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$ConnectionStatusEvent {
-  Map<ConnectivityResult, bool> get connectivity =>
-      throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(Map<ConnectivityResult, bool> connectivity)
         checkConnection,
+    required TResult Function() startCheckConnection,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(Map<ConnectivityResult, bool> connectivity)?
         checkConnection,
+    TResult? Function()? startCheckConnection,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(Map<ConnectivityResult, bool> connectivity)?
         checkConnection,
+    TResult Function()? startCheckConnection,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_CheckConnection value) checkConnection,
+    required TResult Function(_StartCheckConnection value) startCheckConnection,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_CheckConnection value)? checkConnection,
+    TResult? Function(_StartCheckConnection value)? startCheckConnection,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_CheckConnection value)? checkConnection,
+    TResult Function(_StartCheckConnection value)? startCheckConnection,
     required TResult orElse(),
   }) =>
-      throw _privateConstructorUsedError;
-
-  @JsonKey(ignore: true)
-  $ConnectionStatusEventCopyWith<ConnectionStatusEvent> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -64,8 +64,6 @@ abstract class $ConnectionStatusEventCopyWith<$Res> {
   factory $ConnectionStatusEventCopyWith(ConnectionStatusEvent value,
           $Res Function(ConnectionStatusEvent) then) =
       _$ConnectionStatusEventCopyWithImpl<$Res, ConnectionStatusEvent>;
-  @useResult
-  $Res call({Map<ConnectivityResult, bool> connectivity});
 }
 
 /// @nodoc
@@ -78,28 +76,13 @@ class _$ConnectionStatusEventCopyWithImpl<$Res,
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? connectivity = null,
-  }) {
-    return _then(_value.copyWith(
-      connectivity: null == connectivity
-          ? _value.connectivity
-          : connectivity // ignore: cast_nullable_to_non_nullable
-              as Map<ConnectivityResult, bool>,
-    ) as $Val);
-  }
 }
 
 /// @nodoc
-abstract class _$$_CheckConnectionCopyWith<$Res>
-    implements $ConnectionStatusEventCopyWith<$Res> {
+abstract class _$$_CheckConnectionCopyWith<$Res> {
   factory _$$_CheckConnectionCopyWith(
           _$_CheckConnection value, $Res Function(_$_CheckConnection) then) =
       __$$_CheckConnectionCopyWithImpl<$Res>;
-  @override
   @useResult
   $Res call({Map<ConnectivityResult, bool> connectivity});
 }
@@ -170,6 +153,7 @@ class _$_CheckConnection extends _CheckConnection {
   TResult when<TResult extends Object?>({
     required TResult Function(Map<ConnectivityResult, bool> connectivity)
         checkConnection,
+    required TResult Function() startCheckConnection,
   }) {
     return checkConnection(connectivity);
   }
@@ -179,6 +163,7 @@ class _$_CheckConnection extends _CheckConnection {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(Map<ConnectivityResult, bool> connectivity)?
         checkConnection,
+    TResult? Function()? startCheckConnection,
   }) {
     return checkConnection?.call(connectivity);
   }
@@ -188,6 +173,7 @@ class _$_CheckConnection extends _CheckConnection {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(Map<ConnectivityResult, bool> connectivity)?
         checkConnection,
+    TResult Function()? startCheckConnection,
     required TResult orElse(),
   }) {
     if (checkConnection != null) {
@@ -200,6 +186,7 @@ class _$_CheckConnection extends _CheckConnection {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_CheckConnection value) checkConnection,
+    required TResult Function(_StartCheckConnection value) startCheckConnection,
   }) {
     return checkConnection(this);
   }
@@ -208,6 +195,7 @@ class _$_CheckConnection extends _CheckConnection {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_CheckConnection value)? checkConnection,
+    TResult? Function(_StartCheckConnection value)? startCheckConnection,
   }) {
     return checkConnection?.call(this);
   }
@@ -216,6 +204,7 @@ class _$_CheckConnection extends _CheckConnection {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_CheckConnection value)? checkConnection,
+    TResult Function(_StartCheckConnection value)? startCheckConnection,
     required TResult orElse(),
   }) {
     if (checkConnection != null) {
@@ -230,10 +219,114 @@ abstract class _CheckConnection extends ConnectionStatusEvent {
       final Map<ConnectivityResult, bool> connectivity) = _$_CheckConnection;
   const _CheckConnection._() : super._();
 
-  @override
   Map<ConnectivityResult, bool> get connectivity;
-  @override
   @JsonKey(ignore: true)
   _$$_CheckConnectionCopyWith<_$_CheckConnection> get copyWith =>
       throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_StartCheckConnectionCopyWith<$Res> {
+  factory _$$_StartCheckConnectionCopyWith(_$_StartCheckConnection value,
+          $Res Function(_$_StartCheckConnection) then) =
+      __$$_StartCheckConnectionCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$_StartCheckConnectionCopyWithImpl<$Res>
+    extends _$ConnectionStatusEventCopyWithImpl<$Res, _$_StartCheckConnection>
+    implements _$$_StartCheckConnectionCopyWith<$Res> {
+  __$$_StartCheckConnectionCopyWithImpl(_$_StartCheckConnection _value,
+      $Res Function(_$_StartCheckConnection) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$_StartCheckConnection extends _StartCheckConnection {
+  const _$_StartCheckConnection() : super._();
+
+  @override
+  String toString() {
+    return 'ConnectionStatusEvent.startCheckConnection()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$_StartCheckConnection);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(Map<ConnectivityResult, bool> connectivity)
+        checkConnection,
+    required TResult Function() startCheckConnection,
+  }) {
+    return startCheckConnection();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(Map<ConnectivityResult, bool> connectivity)?
+        checkConnection,
+    TResult? Function()? startCheckConnection,
+  }) {
+    return startCheckConnection?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(Map<ConnectivityResult, bool> connectivity)?
+        checkConnection,
+    TResult Function()? startCheckConnection,
+    required TResult orElse(),
+  }) {
+    if (startCheckConnection != null) {
+      return startCheckConnection();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_CheckConnection value) checkConnection,
+    required TResult Function(_StartCheckConnection value) startCheckConnection,
+  }) {
+    return startCheckConnection(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_CheckConnection value)? checkConnection,
+    TResult? Function(_StartCheckConnection value)? startCheckConnection,
+  }) {
+    return startCheckConnection?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_CheckConnection value)? checkConnection,
+    TResult Function(_StartCheckConnection value)? startCheckConnection,
+    required TResult orElse(),
+  }) {
+    if (startCheckConnection != null) {
+      return startCheckConnection(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _StartCheckConnection extends ConnectionStatusEvent {
+  const factory _StartCheckConnection() = _$_StartCheckConnection;
+  const _StartCheckConnection._() : super._();
 }

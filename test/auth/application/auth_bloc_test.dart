@@ -87,7 +87,7 @@ void main() {
           (realInvocation) async => right(user.toUser()),
         );
       },
-      act: (bloc) => bloc.add(const AuthEvent.signIn("fddf", "dfddd")),
+      act: (bloc) => bloc.add(const AuthEvent.signIn()),
       expect: () => [const AuthState.failure("invalid-email")],
     );
 
@@ -109,7 +109,7 @@ void main() {
           (realInvocation) async => right(user.toUser()),
         );
       },
-      act: (bloc) => bloc.add(const AuthEvent.signIn("fddf", "dfddd")),
+      act: (bloc) => bloc.add(const AuthEvent.signIn()),
       verify: (bloc) {
         verify(mockUserRepository.getByUsername(any)).called(1);
       },
@@ -131,7 +131,7 @@ void main() {
         when(mockUserCredential.user).thenReturn(mockUser);
         when(mockUser.emailVerified).thenReturn(true);
       },
-      act: (bloc) => bloc.add(const AuthEvent.signIn("fddf@dfdf.dff", "dfddd")),
+      act: (bloc) => bloc.add(const AuthEvent.signIn()),
       verify: (bloc) {
         verifyZeroInteractions(mockUserRepository);
       },
@@ -155,7 +155,7 @@ void main() {
           (realInvocation) async => right(user.toUser()),
         );
       },
-      act: (bloc) => bloc.add(const AuthEvent.signIn("fddf", "dfddd")),
+      act: (bloc) => bloc.add(const AuthEvent.signIn()),
       verify: (bloc) {
         verify(mockUserRepository.getByUsername(any)).called(1);
       },
@@ -177,7 +177,7 @@ void main() {
         when(mockUserCredential.user).thenReturn(mockUser);
         when(mockUser.emailVerified).thenReturn(false);
       },
-      act: (bloc) => bloc.add(const AuthEvent.signIn("fddf@dfdf.dff", "dfddd")),
+      act: (bloc) => bloc.add(const AuthEvent.signIn()),
       verify: (bloc) {
         verifyZeroInteractions(mockUserRepository);
       },

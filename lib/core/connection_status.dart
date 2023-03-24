@@ -18,9 +18,6 @@ class ConnectionStatus {
     ping.stream.listen((event) async {
       final result = await _connectivity.checkConnectivity();
       await checkConnection(result);
-    }, onError: (_) async {
-      final result = await _connectivity.checkConnectivity();
-      await checkConnection(result);
     });
   }
 

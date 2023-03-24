@@ -8,6 +8,7 @@ import 'package:ryan_pujo_app/auth/application/bloc/auth_bloc.dart';
 import 'package:ryan_pujo_app/auth/application/bloc/auth_event.dart';
 import 'package:ryan_pujo_app/auth/presentation/sign_in_page.dart';
 import 'package:ryan_pujo_app/core/application/bloc/connection_status_bloc.dart';
+import 'package:ryan_pujo_app/core/application/bloc/connection_status_event.dart';
 import 'package:ryan_pujo_app/core/connection_status.dart';
 import 'package:ryan_pujo_app/firebase_options.dart';
 import 'package:ryan_pujo_app/init.dart';
@@ -81,7 +82,8 @@ class MyApp extends StatelessWidget {
             ..add(const AuthEvent.isAuthenticated()),
         ),
         BlocProvider(
-          create: (context) => ConnectionStatusBloc(),
+          create: (context) => ConnectionStatusBloc(ConnectionStatus.instance)
+            ..add(const ConnectionStatusEvent.startCheckConnection()),
         )
       ],
       child: BlocListener<AuthBloc, auth.AuthState>(

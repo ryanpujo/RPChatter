@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:reactive_forms/reactive_forms.dart';
 import 'package:ryan_pujo_app/user/infrastructure/repository/user_repo_contract.dart';
 
 import 'auth_event.dart';
@@ -21,6 +22,10 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
   final FirebaseAuth _authenticator;
   final UserRepositoryContract _userRepository;
+  final formGroup = FormGroup({
+    "username": FormControl(validators: [Validators.required]),
+    "password": FormControl(validators: [Validators.required]),
+  });
 
   Future<void> _isAuthenticated(
       AuthEvent event, Emitter<AuthState> emit) async {
@@ -47,10 +52,10 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       signIn: (value) async {
         try {
           emit(const AuthState.loading());
-          if (EmailValidator.validate(value.username)) {
+          if (EmailValidator.validate(formGroup.control("username").value)) {
             final cred = await _authenticator.signInWithEmailAndPassword(
-              email: value.username,
-              password: value.password,
+              email: formGroup.control("username").value,
+              password: formGroup.control("password").value,
             );
             if (cred.user!.emailVerified) {
               emit(const AuthState.authenticated());
@@ -58,7 +63,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
             }
             emit(const AuthState.unVerified());
           } else {
-            final res = await _userRepository.getByUsername(value.username);
+            final res = await _userRepository
+                .getByUsername(formGroup.control("username").value);
             await res.fold(
               (l) {
                 l.maybeMap(
@@ -70,7 +76,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
               (r) async {
                 final cred = await _authenticator.signInWithEmailAndPassword(
                   email: r.email,
-                  password: value.password,
+                  password: formGroup.control("password").value,
                 );
                 if (cred.user!.emailVerified) {
                   emit(const AuthState.authenticated());
@@ -85,5 +91,11 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         }
       },
     );
+  }
+
+  @override
+  Future<void> close() {
+    formGroup.dispose();
+    return super.close();
   }
 }

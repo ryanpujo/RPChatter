@@ -4,9 +4,11 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:ryan_pujo_app/core/application/bloc/connection_status_bloc.dart';
 import 'package:ryan_pujo_app/core/application/bloc/connection_status_event.dart';
 import 'package:ryan_pujo_app/core/application/bloc/connection_status_state.dart';
+import 'package:ryan_pujo_app/core/connection_status.dart';
 
 void main() {
-  ConnectionStatusBloc builder() => ConnectionStatusBloc();
+  ConnectionStatusBloc builder() =>
+      ConnectionStatusBloc(ConnectionStatus.instance);
 
   dynamic act(
           ConnectionStatusBloc bloc, Map<ConnectivityResult, bool> result) =>

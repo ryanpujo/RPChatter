@@ -11,7 +11,7 @@ import '../application/bloc/auth_event.dart';
 import '../../core/presentation/error_text.dart';
 import 'register_clickable_text.dart';
 
-class SignInForm extends StatefulWidget {
+class SignInForm extends StatelessWidget {
   const SignInForm({
     super.key,
     required this.errorMessage,
@@ -20,27 +20,9 @@ class SignInForm extends StatefulWidget {
   final String errorMessage;
 
   @override
-  State<SignInForm> createState() => _SignInFormState();
-}
-
-class _SignInFormState extends State<SignInForm> {
-  final formGroup = FormGroup({
-    "username": FormControl(validators: [Validators.required]),
-    "password": FormControl(validators: [Validators.required]),
-  });
-  bool hasConnection = false;
-
-  @override
-  void dispose() {
-    super.dispose();
-    formGroup.reset();
-    formGroup.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return ReactiveForm(
-      formGroup: formGroup,
+      formGroup: context.read<AuthBloc>().formGroup,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -56,14 +38,11 @@ class _SignInFormState extends State<SignInForm> {
           const SizedBox(
             height: 10,
           ),
-          if (widget.errorMessage != "")
+          if (errorMessage != "")
             ErrorText(
-              errorText: widget.errorMessage,
+              errorText: errorMessage,
             ),
-          ConnectionWarning(
-            onConnectionChange: (isConnected) =>
-                setState(() => hasConnection = isConnected),
-          ),
+          const ConnectionWarning(),
           const CustomTextFormField(
             label: "Username/Email",
             icon: Icon(MdiIcons.account),
@@ -83,16 +62,11 @@ class _SignInFormState extends State<SignInForm> {
           ),
           SubmitButton(
             label: "Sign in",
-            onPressed: hasConnection
-                ? () {
-                    context.read<AuthBloc>().add(
-                          AuthEvent.signIn(
-                            formGroup.control("username").value,
-                            formGroup.control("password").value,
-                          ),
-                        );
-                  }
-                : null,
+            onPressed: () {
+              context.read<AuthBloc>().add(
+                    const AuthEvent.signIn(),
+                  );
+            },
           )
         ],
       ),

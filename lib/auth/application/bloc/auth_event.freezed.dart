@@ -20,21 +20,21 @@ mixin _$AuthEvent {
   TResult when<TResult extends Object?>({
     required TResult Function() isAuthenticated,
     required TResult Function() signOut,
-    required TResult Function(String username, String password) signIn,
+    required TResult Function() signIn,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? isAuthenticated,
     TResult? Function()? signOut,
-    TResult? Function(String username, String password)? signIn,
+    TResult? Function()? signIn,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? isAuthenticated,
     TResult Function()? signOut,
-    TResult Function(String username, String password)? signIn,
+    TResult Function()? signIn,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -119,7 +119,7 @@ class _$_isAuthenticated extends _isAuthenticated {
   TResult when<TResult extends Object?>({
     required TResult Function() isAuthenticated,
     required TResult Function() signOut,
-    required TResult Function(String username, String password) signIn,
+    required TResult Function() signIn,
   }) {
     return isAuthenticated();
   }
@@ -129,7 +129,7 @@ class _$_isAuthenticated extends _isAuthenticated {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? isAuthenticated,
     TResult? Function()? signOut,
-    TResult? Function(String username, String password)? signIn,
+    TResult? Function()? signIn,
   }) {
     return isAuthenticated?.call();
   }
@@ -139,7 +139,7 @@ class _$_isAuthenticated extends _isAuthenticated {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? isAuthenticated,
     TResult Function()? signOut,
-    TResult Function(String username, String password)? signIn,
+    TResult Function()? signIn,
     required TResult orElse(),
   }) {
     if (isAuthenticated != null) {
@@ -227,7 +227,7 @@ class _$_SignOut extends _SignOut {
   TResult when<TResult extends Object?>({
     required TResult Function() isAuthenticated,
     required TResult Function() signOut,
-    required TResult Function(String username, String password) signIn,
+    required TResult Function() signIn,
   }) {
     return signOut();
   }
@@ -237,7 +237,7 @@ class _$_SignOut extends _SignOut {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? isAuthenticated,
     TResult? Function()? signOut,
-    TResult? Function(String username, String password)? signIn,
+    TResult? Function()? signIn,
   }) {
     return signOut?.call();
   }
@@ -247,7 +247,7 @@ class _$_SignOut extends _SignOut {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? isAuthenticated,
     TResult Function()? signOut,
-    TResult Function(String username, String password)? signIn,
+    TResult Function()? signIn,
     required TResult orElse(),
   }) {
     if (signOut != null) {
@@ -300,8 +300,6 @@ abstract class _SignOut extends AuthEvent {
 abstract class _$$_SignInCopyWith<$Res> {
   factory _$$_SignInCopyWith(_$_SignIn value, $Res Function(_$_SignIn) then) =
       __$$_SignInCopyWithImpl<$Res>;
-  @useResult
-  $Res call({String username, String password});
 }
 
 /// @nodoc
@@ -310,69 +308,35 @@ class __$$_SignInCopyWithImpl<$Res>
     implements _$$_SignInCopyWith<$Res> {
   __$$_SignInCopyWithImpl(_$_SignIn _value, $Res Function(_$_SignIn) _then)
       : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? username = null,
-    Object? password = null,
-  }) {
-    return _then(_$_SignIn(
-      null == username
-          ? _value.username
-          : username // ignore: cast_nullable_to_non_nullable
-              as String,
-      null == password
-          ? _value.password
-          : password // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
-  }
 }
 
 /// @nodoc
 
 class _$_SignIn extends _SignIn {
-  const _$_SignIn(this.username, this.password) : super._();
-
-  @override
-  final String username;
-  @override
-  final String password;
+  const _$_SignIn() : super._();
 
   @override
   String toString() {
-    return 'AuthEvent.signIn(username: $username, password: $password)';
+    return 'AuthEvent.signIn()';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$_SignIn &&
-            (identical(other.username, username) ||
-                other.username == username) &&
-            (identical(other.password, password) ||
-                other.password == password));
+        (other.runtimeType == runtimeType && other is _$_SignIn);
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, username, password);
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$_SignInCopyWith<_$_SignIn> get copyWith =>
-      __$$_SignInCopyWithImpl<_$_SignIn>(this, _$identity);
+  int get hashCode => runtimeType.hashCode;
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() isAuthenticated,
     required TResult Function() signOut,
-    required TResult Function(String username, String password) signIn,
+    required TResult Function() signIn,
   }) {
-    return signIn(username, password);
+    return signIn();
   }
 
   @override
@@ -380,9 +344,9 @@ class _$_SignIn extends _SignIn {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? isAuthenticated,
     TResult? Function()? signOut,
-    TResult? Function(String username, String password)? signIn,
+    TResult? Function()? signIn,
   }) {
-    return signIn?.call(username, password);
+    return signIn?.call();
   }
 
   @override
@@ -390,11 +354,11 @@ class _$_SignIn extends _SignIn {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? isAuthenticated,
     TResult Function()? signOut,
-    TResult Function(String username, String password)? signIn,
+    TResult Function()? signIn,
     required TResult orElse(),
   }) {
     if (signIn != null) {
-      return signIn(username, password);
+      return signIn();
     }
     return orElse();
   }
@@ -435,13 +399,6 @@ class _$_SignIn extends _SignIn {
 }
 
 abstract class _SignIn extends AuthEvent {
-  const factory _SignIn(final String username, final String password) =
-      _$_SignIn;
+  const factory _SignIn() = _$_SignIn;
   const _SignIn._() : super._();
-
-  String get username;
-  String get password;
-  @JsonKey(ignore: true)
-  _$$_SignInCopyWith<_$_SignIn> get copyWith =>
-      throw _privateConstructorUsedError;
 }

@@ -8,4 +8,6 @@ class ConnectionStatusEvent with _$ConnectionStatusEvent {
   const ConnectionStatusEvent._();
   const factory ConnectionStatusEvent.checkConnection(
       Map<ConnectivityResult, bool> connectivity) = _CheckConnection;
+  const factory ConnectionStatusEvent.startCheckConnection() =
+      _StartCheckConnection;
 }
