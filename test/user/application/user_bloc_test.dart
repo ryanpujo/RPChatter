@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:firebase_auth/firebase_auth.dart' as fire_auth;
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
@@ -12,14 +13,17 @@ import 'package:bloc_test/bloc_test.dart';
 
 import 'user_bloc_test.mocks.dart';
 
-@GenerateNiceMocks([MockSpec<UserRepositoryContract>()])
+@GenerateNiceMocks(
+    [MockSpec<UserRepositoryContract>(), MockSpec<fire_auth.FirebaseAuth>()])
 void main() {
   late MockUserRepositoryContract repository;
+  late MockFirebaseAuth auth;
 
   setUp(() {
     repository = MockUserRepositoryContract();
+    auth = MockFirebaseAuth();
   });
-  UserBlocBloc builder() => UserBlocBloc(repository);
+  UserBlocBloc builder() => UserBlocBloc(repository, auth);
   User user = const User(
     fName: "sdsds",
     lName: "Dfsdfsd",

@@ -40,13 +40,14 @@ final _route = GoRouter(
         actions: [
           EmailVerifiedAction(
             () {
-              context.go("homepage");
+              context.read<AuthBloc>().add(const AuthEvent.signOut());
+              context.read<AuthBloc>().add(const AuthEvent.signIn());
             },
           ),
           AuthCancelledAction(
             (context) {
               FirebaseAuth.instance.signOut();
-              context.go("/sign-in");
+              context.go("/");
             },
           ),
         ],
@@ -74,8 +75,8 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-            create: (context) =>
-                UserBlocBloc(locator<UserRepositoryContract>())),
+            create: (context) => UserBlocBloc(
+                locator<UserRepositoryContract>(), locator<FirebaseAuth>())),
         BlocProvider(
           create: (context) => AuthBloc(
               locator<FirebaseAuth>(), locator<UserRepositoryContract>())

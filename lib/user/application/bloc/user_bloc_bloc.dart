@@ -1,5 +1,7 @@
 import 'package:bloc/bloc.dart';
+import 'package:firebase_auth/firebase_auth.dart' as auth;
 import 'package:reactive_forms/reactive_forms.dart';
+import 'package:ryan_pujo_app/core/infrastructure/failure/failure.dart';
 import 'package:ryan_pujo_app/init.dart';
 import 'package:ryan_pujo_app/user/application/bloc/user_bloc_state.dart';
 import 'package:ryan_pujo_app/user/infrastructure/repository/user_repo_contract.dart';
@@ -9,10 +11,10 @@ import '../../domain/user.dart';
 import 'user_bloc_event.dart';
 
 class UserBlocBloc extends Bloc<UserBlocEvent, UserBlocState> {
-  UserBlocBloc(this._repository)
+  UserBlocBloc(this._repository, this._firebaseAuth)
       : super(const UserBlocState.initialState(user: null, users: [])) {
     on<UserBlocEvent>((event, emit) async {
-      event.map(
+      await event.map(
         register: (event) async => await _registerUser(event, emit),
         getByUsername: (event) async => await _getByUsername(event, emit),
         getUsers: (event) async => await _getUsers(event, emit),
@@ -22,6 +24,7 @@ class UserBlocBloc extends Bloc<UserBlocEvent, UserBlocState> {
     });
   }
   final UserRepositoryContract _repository;
+  final auth.FirebaseAuth _firebaseAuth;
 
   static Future<Map<String, dynamic>?> _uniqueUsername(
       AbstractControl<dynamic> control) async {
@@ -54,35 +57,44 @@ class UserBlocBloc extends Bloc<UserBlocEvent, UserBlocState> {
     Emitter<UserBlocState> emit,
   ) async {
     emit(UserBlocState.loadingState(user: state.user, users: state.users));
-    event.maybeWhen(
+    await event.maybeWhen(
       orElse: () {},
       register: () async {
-        final user = User(
-          fName: formGroup.control("fname").value,
-          lName: formGroup.control("lname").value,
-          username: formGroup.control("username").value,
-          email: formGroup.control("email").value,
-          password: formGroup.control("password").value,
-        );
-        final failureOrSuccess =
-            await _repository.registerUser(UserDto.fromDomain(user));
+        try {
+          await _firebaseAuth.createUserWithEmailAndPassword(
+            email: formGroup.control("email").value,
+            password: formGroup.control("password").value,
+          );
+          final user = User(
+            fName: formGroup.control("fname").value,
+            lName: formGroup.control("lname").value,
+            username: formGroup.control("username").value,
+            email: formGroup.control("email").value,
+            password: formGroup.control("password").value,
+          );
+          final failureOrSuccess =
+              await _repository.registerUser(UserDto.fromDomain(user));
 
-        failureOrSuccess.fold(
-          (l) {
-            l.map(
-              serverFailure: (value) => emit(UserBlocState.failureState(
-                  users: state.users, failure: value)),
-              clientFailure: (value) => emit(UserBlocState.failureState(
-                  users: state.users, failure: value)),
-            );
-          },
-          (r) => emit(
-            UserBlocState.loadedState(
-              users: state.users,
-              user: r,
+          failureOrSuccess.fold(
+            (l) {
+              l.map(
+                serverFailure: (value) => emit(UserBlocState.failureState(
+                    users: state.users, failure: value)),
+                clientFailure: (value) => emit(UserBlocState.failureState(
+                    users: state.users, failure: value)),
+              );
+            },
+            (r) => emit(
+              UserBlocState.loadedState(
+                users: state.users,
+                user: r,
+              ),
             ),
-          ),
-        );
+          );
+        } on auth.FirebaseAuthException catch (e) {
+          emit(UserBlocState.failureState(
+              users: state.users, failure: Failure.clientFailure(e.code)));
+        }
       },
     );
   }
