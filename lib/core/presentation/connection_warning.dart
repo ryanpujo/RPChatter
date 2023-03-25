@@ -11,22 +11,19 @@ class ConnectionWarning extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<ConnectionStatusBloc, ConnectionStatusState>(
-      builder: (context, state) {
-        return state.when(
-          initial: () => const SizedBox(),
-          mobileConnectivity: (isConnected) {
-            return isConnected
-                ? const SizedBox()
-                : ErrorText(errorText: warningMessage);
-          },
-          wifiConnectivity: (isConnected) {
-            return isConnected
-                ? const SizedBox()
-                : ErrorText(errorText: warningMessage);
-          },
-          noneConnectivity: () => const ErrorText(errorText: "you are offline"),
+    return BlocSelector<ConnectionStatusBloc, ConnectionStatusState, bool>(
+      selector: (state) {
+        return state.maybeWhen(
+          orElse: () => false,
+          mobileConnectivity: (isConnected) => isConnected,
+          wifiConnectivity: (isConnected) => isConnected,
+          noneConnectivity: () => false,
         );
+      },
+      builder: (context, isConnected) {
+        return isConnected
+            ? const SizedBox()
+            : ErrorText(errorText: warningMessage);
       },
     );
   }

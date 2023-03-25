@@ -2,22 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:reactive_forms/reactive_forms.dart';
+import 'package:ryan_pujo_app/auth/application/bloc/auth_state.dart';
 import 'package:ryan_pujo_app/core/presentation/connection_warning.dart';
+import 'package:ryan_pujo_app/core/presentation/error_text.dart';
 
 import '../../core/presentation/custom_text_form_field.dart';
 import '../../core/presentation/submit_button.dart';
 import '../application/bloc/auth_bloc.dart';
-import '../../core/presentation/error_text.dart';
 import '../application/bloc/auth_event.dart';
 import 'register_clickable_text.dart';
 
 class SignInForm extends StatelessWidget {
   const SignInForm({
     super.key,
-    required this.errorMessage,
   });
-
-  final String errorMessage;
 
   @override
   Widget build(BuildContext context) {
@@ -38,10 +36,19 @@ class SignInForm extends StatelessWidget {
           const SizedBox(
             height: 10,
           ),
-          if (errorMessage != "")
-            ErrorText(
-              errorText: errorMessage,
-            ),
+          BlocSelector<AuthBloc, AuthState, String>(
+            selector: (state) {
+              return state.maybeWhen(
+                orElse: () => "",
+                failure: (message) => message,
+              );
+            },
+            builder: (context, state) {
+              return state == ""
+                  ? const SizedBox()
+                  : ErrorText(errorText: state);
+            },
+          ),
           const ConnectionWarning(),
           const CustomTextFormField(
             label: "Username/Email",
@@ -60,12 +67,25 @@ class SignInForm extends StatelessWidget {
           const SizedBox(
             height: 15,
           ),
-          SubmitButton(
-            label: "Sign in",
-            onPressed: () {
-              context.read<AuthBloc>().add(
-                    const AuthEvent.signIn(),
-                  );
+          BlocSelector<AuthBloc, AuthState, bool>(
+            selector: (state) {
+              return state.maybeMap(
+                orElse: () => false,
+                loading: (value) => true,
+              );
+            },
+            builder: (context, isLoading) {
+              return SubmitButton(
+                label: "Sign in",
+                icon: const Icon(MdiIcons.login),
+                onPressed: isLoading
+                    ? null
+                    : () {
+                        context.read<AuthBloc>().add(
+                              const AuthEvent.signIn(),
+                            );
+                      },
+              );
             },
           ),
         ],

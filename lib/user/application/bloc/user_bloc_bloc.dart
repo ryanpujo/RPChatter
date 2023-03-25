@@ -1,8 +1,11 @@
 import 'package:bloc/bloc.dart';
+import 'package:reactive_forms/reactive_forms.dart';
+import 'package:ryan_pujo_app/init.dart';
 import 'package:ryan_pujo_app/user/application/bloc/user_bloc_state.dart';
 import 'package:ryan_pujo_app/user/infrastructure/repository/user_repo_contract.dart';
 import 'package:ryan_pujo_app/user/infrastructure/user_dto.dart';
 
+import '../../domain/user.dart';
 import 'user_bloc_event.dart';
 
 class UserBlocBloc extends Bloc<UserBlocEvent, UserBlocState> {
@@ -20,6 +23,32 @@ class UserBlocBloc extends Bloc<UserBlocEvent, UserBlocState> {
   }
   final UserRepositoryContract _repository;
 
+  static Future<Map<String, dynamic>?> _uniqueUsername(
+      AbstractControl<dynamic> control) async {
+    UserRepositoryContract repository = locator<UserRepositoryContract>();
+    final error = {"username already been used": false};
+    final isUnique = await repository.isUsernameAvailable(control.value);
+    if (!isUnique) {
+      control.markAllAsTouched();
+      return error;
+    }
+    return null;
+  }
+
+  final formGroup = FormGroup({
+    "fname": FormControl<String>(validators: [Validators.required]),
+    "lname": FormControl<String>(validators: [Validators.required]),
+    "username": FormControl<String>(
+      validators: [Validators.required],
+      asyncValidators: [_uniqueUsername],
+    ),
+    "email": FormControl<String>(validators: [
+      Validators.email,
+      Validators.required,
+    ]),
+    "password": FormControl<String>(validators: [Validators.required])
+  });
+
   Future<void> _registerUser(
     UserBlocEvent event,
     Emitter<UserBlocState> emit,
@@ -27,7 +56,14 @@ class UserBlocBloc extends Bloc<UserBlocEvent, UserBlocState> {
     emit(UserBlocState.loadingState(user: state.user, users: state.users));
     event.maybeWhen(
       orElse: () {},
-      register: (user) async {
+      register: () async {
+        final user = User(
+          fName: formGroup.control("fname").value,
+          lName: formGroup.control("lname").value,
+          username: formGroup.control("username").value,
+          email: formGroup.control("email").value,
+          password: formGroup.control("password").value,
+        );
         final failureOrSuccess =
             await _repository.registerUser(UserDto.fromDomain(user));
 
@@ -148,5 +184,11 @@ class UserBlocBloc extends Bloc<UserBlocEvent, UserBlocState> {
         }, (r) => emit(UserBlocState.loadedState(users: state.users)));
       },
     );
+  }
+
+  @override
+  Future<void> close() {
+    formGroup.dispose();
+    return super.close();
   }
 }

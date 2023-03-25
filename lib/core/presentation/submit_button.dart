@@ -8,22 +8,27 @@ class SubmitButton extends StatelessWidget {
     super.key,
     this.onPressed,
     required this.label,
+    required this.icon,
   });
 
   final void Function()? onPressed;
   final String label;
+  final Icon icon;
 
   @override
   Widget build(BuildContext context) {
     final form = ReactiveForm.of(context);
-    bool isConnected = false;
-    final state = context.watch<ConnectionStatusBloc>().state;
-    state.maybeWhen(
-      orElse: () => isConnected = false,
-      mobileConnectivity: (value) => isConnected = value,
-      wifiConnectivity: (value) => isConnected = value,
+    final isConnected = context.select<ConnectionStatusBloc, bool>(
+      (value) {
+        return value.state.maybeWhen(
+          orElse: () => false,
+          mobileConnectivity: (isConnected) => isConnected,
+          wifiConnectivity: (isConnected) => isConnected,
+          noneConnectivity: () => false,
+        );
+      },
     );
-    return ElevatedButton(
+    return ElevatedButton.icon(
       style: ButtonStyle(
         backgroundColor: MaterialStateProperty.resolveWith((states) {
           if (states.contains(MaterialState.pressed)) {
@@ -33,7 +38,8 @@ class SubmitButton extends StatelessWidget {
         }),
       ),
       onPressed: form != null && form.valid && isConnected ? onPressed : null,
-      child: Text(label),
+      label: Text(label),
+      icon: icon,
     );
   }
 }

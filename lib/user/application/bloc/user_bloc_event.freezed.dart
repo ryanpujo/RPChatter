@@ -18,7 +18,7 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$UserBlocEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(User user) register,
+    required TResult Function() register,
     required TResult Function(String username) getByUsername,
     required TResult Function() getUsers,
     required TResult Function(User user) update,
@@ -27,7 +27,7 @@ mixin _$UserBlocEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(User user)? register,
+    TResult? Function()? register,
     TResult? Function(String username)? getByUsername,
     TResult? Function()? getUsers,
     TResult? Function(User user)? update,
@@ -36,7 +36,7 @@ mixin _$UserBlocEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(User user)? register,
+    TResult Function()? register,
     TResult Function(String username)? getByUsername,
     TResult Function()? getUsers,
     TResult Function(User user)? update,
@@ -97,10 +97,6 @@ abstract class _$$_RegisterEventCopyWith<$Res> {
   factory _$$_RegisterEventCopyWith(
           _$_RegisterEvent value, $Res Function(_$_RegisterEvent) then) =
       __$$_RegisterEventCopyWithImpl<$Res>;
-  @useResult
-  $Res call({User user});
-
-  $UserCopyWith<$Res> get user;
 }
 
 /// @nodoc
@@ -110,87 +106,55 @@ class __$$_RegisterEventCopyWithImpl<$Res>
   __$$_RegisterEventCopyWithImpl(
       _$_RegisterEvent _value, $Res Function(_$_RegisterEvent) _then)
       : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? user = null,
-  }) {
-    return _then(_$_RegisterEvent(
-      null == user
-          ? _value.user
-          : user // ignore: cast_nullable_to_non_nullable
-              as User,
-    ));
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $UserCopyWith<$Res> get user {
-    return $UserCopyWith<$Res>(_value.user, (value) {
-      return _then(_value.copyWith(user: value));
-    });
-  }
 }
 
 /// @nodoc
 
 class _$_RegisterEvent implements _RegisterEvent {
-  const _$_RegisterEvent(this.user);
-
-  @override
-  final User user;
+  const _$_RegisterEvent();
 
   @override
   String toString() {
-    return 'UserBlocEvent.register(user: $user)';
+    return 'UserBlocEvent.register()';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$_RegisterEvent &&
-            (identical(other.user, user) || other.user == user));
+        (other.runtimeType == runtimeType && other is _$_RegisterEvent);
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, user);
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$_RegisterEventCopyWith<_$_RegisterEvent> get copyWith =>
-      __$$_RegisterEventCopyWithImpl<_$_RegisterEvent>(this, _$identity);
+  int get hashCode => runtimeType.hashCode;
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(User user) register,
+    required TResult Function() register,
     required TResult Function(String username) getByUsername,
     required TResult Function() getUsers,
     required TResult Function(User user) update,
     required TResult Function(String username) delete,
   }) {
-    return register(user);
+    return register();
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(User user)? register,
+    TResult? Function()? register,
     TResult? Function(String username)? getByUsername,
     TResult? Function()? getUsers,
     TResult? Function(User user)? update,
     TResult? Function(String username)? delete,
   }) {
-    return register?.call(user);
+    return register?.call();
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(User user)? register,
+    TResult Function()? register,
     TResult Function(String username)? getByUsername,
     TResult Function()? getUsers,
     TResult Function(User user)? update,
@@ -198,7 +162,7 @@ class _$_RegisterEvent implements _RegisterEvent {
     required TResult orElse(),
   }) {
     if (register != null) {
-      return register(user);
+      return register();
     }
     return orElse();
   }
@@ -245,12 +209,7 @@ class _$_RegisterEvent implements _RegisterEvent {
 }
 
 abstract class _RegisterEvent implements UserBlocEvent {
-  const factory _RegisterEvent(final User user) = _$_RegisterEvent;
-
-  User get user;
-  @JsonKey(ignore: true)
-  _$$_RegisterEventCopyWith<_$_RegisterEvent> get copyWith =>
-      throw _privateConstructorUsedError;
+  const factory _RegisterEvent() = _$_RegisterEvent;
 }
 
 /// @nodoc
@@ -318,7 +277,7 @@ class _$_GetByUsername implements _GetByUsername {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(User user) register,
+    required TResult Function() register,
     required TResult Function(String username) getByUsername,
     required TResult Function() getUsers,
     required TResult Function(User user) update,
@@ -330,7 +289,7 @@ class _$_GetByUsername implements _GetByUsername {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(User user)? register,
+    TResult? Function()? register,
     TResult? Function(String username)? getByUsername,
     TResult? Function()? getUsers,
     TResult? Function(User user)? update,
@@ -342,7 +301,7 @@ class _$_GetByUsername implements _GetByUsername {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(User user)? register,
+    TResult Function()? register,
     TResult Function(String username)? getByUsername,
     TResult Function()? getUsers,
     TResult Function(User user)? update,
@@ -443,7 +402,7 @@ class _$_GetUsers implements _GetUsers {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(User user) register,
+    required TResult Function() register,
     required TResult Function(String username) getByUsername,
     required TResult Function() getUsers,
     required TResult Function(User user) update,
@@ -455,7 +414,7 @@ class _$_GetUsers implements _GetUsers {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(User user)? register,
+    TResult? Function()? register,
     TResult? Function(String username)? getByUsername,
     TResult? Function()? getUsers,
     TResult? Function(User user)? update,
@@ -467,7 +426,7 @@ class _$_GetUsers implements _GetUsers {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(User user)? register,
+    TResult Function()? register,
     TResult Function(String username)? getByUsername,
     TResult Function()? getUsers,
     TResult Function(User user)? update,
@@ -597,7 +556,7 @@ class _$_Update implements _Update {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(User user) register,
+    required TResult Function() register,
     required TResult Function(String username) getByUsername,
     required TResult Function() getUsers,
     required TResult Function(User user) update,
@@ -609,7 +568,7 @@ class _$_Update implements _Update {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(User user)? register,
+    TResult? Function()? register,
     TResult? Function(String username)? getByUsername,
     TResult? Function()? getUsers,
     TResult? Function(User user)? update,
@@ -621,7 +580,7 @@ class _$_Update implements _Update {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(User user)? register,
+    TResult Function()? register,
     TResult Function(String username)? getByUsername,
     TResult Function()? getUsers,
     TResult Function(User user)? update,
@@ -747,7 +706,7 @@ class _$_Delete implements _Delete {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(User user) register,
+    required TResult Function() register,
     required TResult Function(String username) getByUsername,
     required TResult Function() getUsers,
     required TResult Function(User user) update,
@@ -759,7 +718,7 @@ class _$_Delete implements _Delete {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(User user)? register,
+    TResult? Function()? register,
     TResult? Function(String username)? getByUsername,
     TResult? Function()? getUsers,
     TResult? Function(User user)? update,
@@ -771,7 +730,7 @@ class _$_Delete implements _Delete {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(User user)? register,
+    TResult Function()? register,
     TResult Function(String username)? getByUsername,
     TResult Function()? getUsers,
     TResult Function(User user)? update,

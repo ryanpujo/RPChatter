@@ -37,7 +37,7 @@ void main() {
             (realInvocation) async => left(const Failure.serverFailure(400)));
       },
       act: (bloc) {
-        bloc.add(UserBlocEvent.register(user));
+        bloc.add(const UserBlocEvent.register());
       },
       expect: () => const <UserBlocState>[
         UserBlocState.loadingState(user: null, users: []),
@@ -54,7 +54,7 @@ void main() {
             left(const Failure.clientFailure("message")));
       },
       act: (bloc) {
-        bloc.add(UserBlocEvent.register(user));
+        bloc.add(const UserBlocEvent.register());
       },
       expect: () => const <UserBlocState>[
         UserBlocState.loadingState(users: []),
@@ -71,7 +71,7 @@ void main() {
             .thenAnswer((realInvocation) async => right(user));
       },
       act: (bloc) {
-        bloc.add(UserBlocEvent.register(user));
+        bloc.add(const UserBlocEvent.register());
       },
       expect: () => <UserBlocState>[
         const UserBlocState.loadingState(user: null, users: []),
