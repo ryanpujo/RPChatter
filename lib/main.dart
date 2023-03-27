@@ -40,8 +40,8 @@ final _route = GoRouter(
         actions: [
           EmailVerifiedAction(
             () {
-              context.read<AuthBloc>().add(const AuthEvent.signOut());
-              context.read<AuthBloc>().add(const AuthEvent.signIn());
+              context.read<AuthBloc>().add(const AuthEvent.verifyingEmail());
+              context.go("/homepage");
             },
           ),
           AuthCancelledAction(
@@ -80,7 +80,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(
           create: (context) => AuthBloc(
               locator<FirebaseAuth>(), locator<UserRepositoryContract>())
-            ..add(const AuthEvent.isAuthenticated()),
+            ..add(const AuthEvent.checkAuthentication()),
         ),
         BlocProvider(
           create: (context) => ConnectionStatusBloc(ConnectionStatus.instance)

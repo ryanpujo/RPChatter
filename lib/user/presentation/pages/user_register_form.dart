@@ -47,6 +47,11 @@ class UserRegisterForm extends StatelessWidget {
                               .control("password")
                               .value;
                       context.read<AuthBloc>().add(const AuthEvent.signIn());
+                      context
+                          .read<UserBlocBloc>()
+                          .formGroup
+                          .control("password")
+                          .value = "";
                     },
                   );
                 },

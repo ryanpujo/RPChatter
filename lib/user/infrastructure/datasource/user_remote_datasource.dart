@@ -8,11 +8,12 @@ import 'package:ryan_pujo_app/user/infrastructure/user_dto.dart';
 class UserRemoteDatasource implements UserRemoteDatasourceContract {
   final Dio _dio;
   const UserRemoteDatasource(this._dio);
+  final realUrl = "http://192.168.117.61:4001/";
   final url = "http://10.0.2.2:4001/";
 
   @override
   Future<RemoteResponse<UserDto>> registerUser(UserDto user) async {
-    String uri = "${url}user";
+    String uri = "${realUrl}user";
     try {
       final res = await _dio.post(
         uri,
@@ -41,7 +42,7 @@ class UserRemoteDatasource implements UserRemoteDatasourceContract {
   @override
   Future<RemoteResponse<UserDto>> getByUsername(String username) async {
     try {
-      final res = await _dio.get("${url}user/$username");
+      final res = await _dio.get("${realUrl}user/$username");
       Map<String, dynamic>? json = res.data as Map<String, dynamic>;
       return RemoteResponse.withData(
           UserDto.fromJson(json["data"] as Map<String, dynamic>));

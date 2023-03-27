@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:bloc/bloc.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -16,10 +18,23 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
             await _isAuthenticated(isAuthenticatedEvent, emit),
         signOut: (value) async => await _signOut(event, emit),
         signIn: (value) async => await _signIn(event, emit),
+        verifyingEmail: (value) {
+          final user = _authenticator.currentUser;
+          if (user!.emailVerified) {
+            emit(const AuthState.authenticated());
+          }
+          emit(const AuthState.unVerified());
+        },
+        checkAuthentication: (value) {
+          firebaseSubscription = _authenticator.userChanges().listen((user) {
+            add(AuthEvent.isAuthenticated(user));
+          });
+        },
       );
     });
   }
 
+  late final StreamSubscription<User?> firebaseSubscription;
   final FirebaseAuth _authenticator;
   final UserRepositoryContract _userRepository;
   final formGroup = FormGroup({
@@ -29,28 +44,30 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
   Future<void> _isAuthenticated(
       AuthEvent event, Emitter<AuthState> emit) async {
-    final user = _authenticator.currentUser;
-    if (user != null) {
-      if (!user.emailVerified) {
-        emit(const AuthState.unVerified());
-        return;
-      }
-      emit(const AuthState.authenticated());
-      return;
-    }
-    emit(const AuthState.unAuthenticated());
+    event.maybeWhen(
+      orElse: () {},
+      isAuthenticated: (user) {
+        if (user != null) {
+          emit(const AuthState.authenticated());
+          return;
+        }
+        emit(const AuthState.unAuthenticated());
+      },
+    );
   }
 
   Future<void> _signOut(AuthEvent event, Emitter<AuthState> emit) async {
     await _authenticator.signOut();
-    emit(const AuthState.unAuthenticated());
   }
 
   Future<void> _signIn(AuthEvent event, Emitter<AuthState> emit) async {
     await event.maybeMap(
       orElse: () {},
       signIn: (value) async {
-        final username = formGroup.control("username").value;
+        String username = formGroup.control("username").value;
+        String password = formGroup.control("password").value;
+        formGroup.control("username").value = "";
+        formGroup.control("password").value = "";
         try {
           emit(const AuthState.loading());
           if (!EmailValidator.validate(formGroup.control("username").value)) {
@@ -59,20 +76,13 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
               emit(AuthState.failure(email));
               return;
             }
-            formGroup.control("username").value = email;
+            username = email;
           }
-          final cred = await _authenticator.signInWithEmailAndPassword(
-            email: formGroup.control("username").value,
-            password: formGroup.control("password").value,
+          final _ = await _authenticator.signInWithEmailAndPassword(
+            email: username,
+            password: password,
           );
-          formGroup.control("username").value = username;
-          if (cred.user!.emailVerified) {
-            emit(const AuthState.authenticated());
-            return;
-          }
-          emit(const AuthState.unVerified());
         } on FirebaseAuthException catch (e) {
-          formGroup.control("username").value = username;
           emit(AuthState.failure(e.code));
         }
       },
@@ -92,6 +102,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   @override
   Future<void> close() {
     formGroup.dispose();
+    firebaseSubscription.cancel();
     return super.close();
   }
 }
