@@ -45,13 +45,13 @@ dependencies:
   reactive_forms: ^14.1.0
   firebase_core: ^2.7.1
   firebase_auth: ^4.2.2
-  firebase_ui_auth: ^1.1.16
   go_router: ^6.2.0
   material_design_icons_flutter: ^6.0.7096
   firebase_ui_oauth_google: ^1.0.23
   email_validator: ^2.1.17
   connectivity_plus: ^3.0.3
   dart_ping: ^8.0.1
+  flutter_countdown_timer: ^4.1.0
 
 dev_dependencies:
   flutter_test:

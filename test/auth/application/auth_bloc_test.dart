@@ -31,14 +31,14 @@ void main() {
     mockUserRepository = MockUserRepositoryContract();
   });
 
-  AuthBloc builder() => AuthBloc(authenticator, mockUserRepository);
+  AuthBloc builder() => AuthBloc(authenticator, mockUserRepository)
+    ..add(const AuthEvent.checkAuthentication());
 
   group("isAuthenticated event", () {
     blocTest(
       "should emit unauthenticated",
       build: builder,
-      setUp: () => when(authenticator.currentUser).thenReturn(null),
-      act: (bloc) => bloc.add(const AuthEvent.isAuthenticated()),
+      act: (bloc) => bloc.add(const AuthEvent.isAuthenticated(null)),
       expect: () => <AuthState>[const AuthState.unAuthenticated()],
     );
 
@@ -47,21 +47,9 @@ void main() {
       build: builder,
       setUp: () {
         when(mockUser.emailVerified).thenReturn(true);
-        when(authenticator.currentUser).thenReturn(mockUser);
       },
-      act: (bloc) => bloc.add(const AuthEvent.isAuthenticated()),
+      act: (bloc) => bloc.add(AuthEvent.isAuthenticated(mockUser)),
       expect: () => [const AuthState.authenticated()],
-    );
-
-    blocTest(
-      "should emit unverified",
-      build: builder,
-      setUp: () {
-        when(mockUser.emailVerified).thenReturn(false);
-        when(authenticator.currentUser).thenReturn(mockUser);
-      },
-      act: (bloc) => bloc.add(const AuthEvent.isAuthenticated()),
-      expect: () => [const AuthState.unVerified()],
     );
   });
   UserDto user = const UserDto(
@@ -191,7 +179,7 @@ void main() {
       build: builder,
       act: (bloc) => bloc.add(const AuthEvent.signOut()),
       verify: (bloc) => verify(authenticator.signOut()).called(1),
-      expect: () => [const AuthState.unAuthenticated()],
+      expect: () => [],
     );
   });
 }

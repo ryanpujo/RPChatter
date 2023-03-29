@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:bloc/bloc.dart';
 import 'package:firebase_auth/firebase_auth.dart' as auth;
 import 'package:reactive_forms/reactive_forms.dart';
@@ -61,7 +63,7 @@ class UserBlocBloc extends Bloc<UserBlocEvent, UserBlocState> {
       orElse: () {},
       register: () async {
         try {
-          await _firebaseAuth.createUserWithEmailAndPassword(
+          final cred = await _firebaseAuth.createUserWithEmailAndPassword(
             email: formGroup.control("email").value,
             password: formGroup.control("password").value,
           );
@@ -75,7 +77,7 @@ class UserBlocBloc extends Bloc<UserBlocEvent, UserBlocState> {
           final failureOrSuccess =
               await _repository.registerUser(UserDto.fromDomain(user));
 
-          failureOrSuccess.fold(
+          await failureOrSuccess.fold(
             (l) {
               l.map(
                 serverFailure: (value) => emit(UserBlocState.failureState(
@@ -84,12 +86,18 @@ class UserBlocBloc extends Bloc<UserBlocEvent, UserBlocState> {
                     users: state.users, failure: value)),
               );
             },
-            (r) => emit(
-              UserBlocState.loadedState(
+            (r) async {
+              await _firebaseAuth.signInWithEmailAndPassword(
+                email: formGroup.control("email").value,
+                password: formGroup.control("password").value,
+              );
+              await cred.user!.sendEmailVerification();
+              emit(UserBlocState.loadedState(
                 users: state.users,
                 user: r,
-              ),
-            ),
+                cred: cred,
+              ));
+            },
           );
         } on auth.FirebaseAuthException catch (e) {
           emit(UserBlocState.failureState(

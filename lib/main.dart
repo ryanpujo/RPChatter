@@ -1,6 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -17,6 +16,7 @@ import 'package:ryan_pujo_app/user/infrastructure/repository/user_repo_contract.
 import 'package:ryan_pujo_app/user/presentation/pages/user_register_form.dart';
 
 import 'auth/application/bloc/auth_state.dart' as auth;
+import 'auth/presentation/verification_page.dart';
 import 'user/presentation/pages/homepage.dart';
 
 Future<void> main() async {
@@ -35,24 +35,9 @@ final _route = GoRouter(
       builder: (context, state) => Homepage(),
     ),
     GoRoute(
-      path: "/email-verification",
-      builder: (context, state) => EmailVerificationScreen(
-        actions: [
-          EmailVerifiedAction(
-            () {
-              context.read<AuthBloc>().add(const AuthEvent.signOut());
-              context.read<AuthBloc>().add(const AuthEvent.signIn());
-            },
-          ),
-          AuthCancelledAction(
-            (context) {
-              FirebaseAuth.instance.signOut();
-              context.go("/");
-            },
-          ),
-        ],
-      ),
-    ),
+        path: "/email-verification",
+        pageBuilder: (context, state) =>
+            const MaterialPage(child: VerificationPage())),
     GoRoute(
       path: "/",
       builder: (context, state) => const SignInPage(),
@@ -80,7 +65,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(
           create: (context) => AuthBloc(
               locator<FirebaseAuth>(), locator<UserRepositoryContract>())
-            ..add(const AuthEvent.isAuthenticated()),
+            ..add(const AuthEvent.checkAuthentication()),
         ),
         BlocProvider(
           create: (context) => ConnectionStatusBloc(ConnectionStatus.instance)

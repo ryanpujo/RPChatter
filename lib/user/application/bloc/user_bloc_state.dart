@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart' as auth;
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:ryan_pujo_app/core/infrastructure/failure/failure.dart';
 import 'package:ryan_pujo_app/user/domain/user.dart';
@@ -13,6 +14,7 @@ class UserBlocState with _$UserBlocState {
   const factory UserBlocState.loadedState({
     User? user,
     required List<User> users,
+    auth.UserCredential? cred,
   }) = LoadedState;
   const factory UserBlocState.failureState(
       {User? user,
