@@ -2,43 +2,25 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:reactive_forms/reactive_forms.dart';
+import 'package:ryan_pujo_app/auth/application/bloc/auth_state.dart';
+import 'package:ryan_pujo_app/core/presentation/connection_warning.dart';
+import 'package:ryan_pujo_app/core/presentation/error_text.dart';
 
-import '../../core/presentation/submit_button.dart';
 import '../../core/presentation/custom_text_form_field.dart';
+import '../../core/presentation/submit_button.dart';
 import '../application/bloc/auth_bloc.dart';
 import '../application/bloc/auth_event.dart';
-import 'error_text.dart';
 import 'register_clickable_text.dart';
 
-class SignInForm extends StatefulWidget {
+class SignInForm extends StatelessWidget {
   const SignInForm({
     super.key,
-    required this.errorMessage,
   });
-
-  final String errorMessage;
-
-  @override
-  State<SignInForm> createState() => _SignInFormState();
-}
-
-class _SignInFormState extends State<SignInForm> {
-  final formGroup = FormGroup({
-    "username": FormControl(validators: [Validators.required]),
-    "password": FormControl(validators: [Validators.required]),
-  });
-
-  @override
-  void dispose() {
-    super.dispose();
-    formGroup.reset();
-    formGroup.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
     return ReactiveForm(
-      formGroup: formGroup,
+      formGroup: context.read<AuthBloc>().formGroup,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -54,10 +36,20 @@ class _SignInFormState extends State<SignInForm> {
           const SizedBox(
             height: 10,
           ),
-          if (widget.errorMessage != "")
-            ErrorText(
-              errorText: widget.errorMessage,
-            ),
+          BlocSelector<AuthBloc, AuthState, String>(
+            selector: (state) {
+              return state.maybeWhen(
+                orElse: () => "",
+                failure: (message) => message,
+              );
+            },
+            builder: (context, state) {
+              return state == ""
+                  ? const SizedBox()
+                  : ErrorText(errorText: state);
+            },
+          ),
+          const ConnectionWarning(),
           const CustomTextFormField(
             label: "Username/Email",
             icon: Icon(MdiIcons.account),
@@ -75,17 +67,27 @@ class _SignInFormState extends State<SignInForm> {
           const SizedBox(
             height: 15,
           ),
-          SubmitButton(
-            label: "Sign in",
-            onPressed: () {
-              context.read<AuthBloc>().add(
-                    AuthEvent.signIn(
-                      formGroup.control("username").value,
-                      formGroup.control("password").value,
-                    ),
-                  );
+          BlocSelector<AuthBloc, AuthState, bool>(
+            selector: (state) {
+              return state.maybeMap(
+                orElse: () => false,
+                loading: (value) => true,
+              );
             },
-          )
+            builder: (context, isLoading) {
+              return SubmitButton(
+                label: "Sign in",
+                icon: const Icon(MdiIcons.login),
+                onPressed: isLoading
+                    ? null
+                    : () {
+                        context.read<AuthBloc>().add(
+                              const AuthEvent.signIn(),
+                            );
+                      },
+              );
+            },
+          ),
         ],
       ),
     );

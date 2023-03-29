@@ -1,6 +1,9 @@
+import 'dart:async';
+
 import 'package:bloc/bloc.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:reactive_forms/reactive_forms.dart';
 import 'package:ryan_pujo_app/user/infrastructure/repository/user_repo_contract.dart';
 
 import 'auth_event.dart';
@@ -15,75 +18,89 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
             await _isAuthenticated(isAuthenticatedEvent, emit),
         signOut: (value) async => await _signOut(event, emit),
         signIn: (value) async => await _signIn(event, emit),
+        checkAuthentication: (value) {
+          firebaseSubscription = _authenticator.userChanges().listen((user) {
+            add(AuthEvent.isAuthenticated(user));
+          });
+        },
       );
     });
   }
 
+  late final StreamSubscription<User?> firebaseSubscription;
   final FirebaseAuth _authenticator;
+  FirebaseAuth get authenticator => _authenticator;
   final UserRepositoryContract _userRepository;
+  final formGroup = FormGroup({
+    "username": FormControl(validators: [Validators.required]),
+    "password": FormControl(validators: [Validators.required]),
+  });
 
   Future<void> _isAuthenticated(
       AuthEvent event, Emitter<AuthState> emit) async {
-    final user = _authenticator.currentUser;
-    if (user != null) {
-      if (!user.emailVerified) {
-        emit(const AuthState.unVerified());
-        return;
-      }
-      emit(const AuthState.authenticated());
-      return;
-    }
-    emit(const AuthState.unAuthenticated());
+    event.maybeWhen(
+      orElse: () {},
+      isAuthenticated: (user) {
+        if (user != null) {
+          if (!user.emailVerified) {
+            emit(const AuthState.unVerified());
+            return;
+          }
+          emit(const AuthState.authenticated());
+          return;
+        }
+        emit(const AuthState.unAuthenticated());
+      },
+    );
   }
 
   Future<void> _signOut(AuthEvent event, Emitter<AuthState> emit) async {
     await _authenticator.signOut();
-    emit(const AuthState.unAuthenticated());
   }
 
   Future<void> _signIn(AuthEvent event, Emitter<AuthState> emit) async {
     await event.maybeMap(
       orElse: () {},
       signIn: (value) async {
+        String username = formGroup.control("username").value;
+        String password = formGroup.control("password").value;
+        formGroup.control("username").value = "";
+        formGroup.control("password").value = "";
         try {
           emit(const AuthState.loading());
-          if (EmailValidator.validate(value.username)) {
-            final cred = await _authenticator.signInWithEmailAndPassword(
-              email: value.username,
-              password: value.password,
-            );
-            if (cred.user!.emailVerified) {
-              emit(const AuthState.authenticated());
+          if (!EmailValidator.validate(formGroup.control("username").value)) {
+            final email = await getEmail(formGroup.control("username").value);
+            if (!EmailValidator.validate(email)) {
+              emit(AuthState.failure(email));
               return;
             }
-            emit(const AuthState.unVerified());
-          } else {
-            final res = await _userRepository.getByUsername(value.username);
-            await res.fold(
-              (l) {
-                l.maybeMap(
-                  orElse: () {},
-                  clientFailure: (value) =>
-                      emit(AuthState.failure(value.message)),
-                );
-              },
-              (r) async {
-                final cred = await _authenticator.signInWithEmailAndPassword(
-                  email: r.email,
-                  password: value.password,
-                );
-                if (cred.user!.emailVerified) {
-                  emit(const AuthState.authenticated());
-                  return;
-                }
-                emit(const AuthState.unVerified());
-              },
-            );
+            username = email;
           }
+          final _ = await _authenticator.signInWithEmailAndPassword(
+            email: username,
+            password: password,
+          );
         } on FirebaseAuthException catch (e) {
           emit(AuthState.failure(e.code));
         }
       },
     );
+  }
+
+  Future<String> getEmail(String username) async {
+    final leftOrRight = await _userRepository.getByUsername(username);
+    return leftOrRight.fold((l) {
+      return l.map(
+        serverFailure: (value) => value.errorCode.toString(),
+        clientFailure: (value) => value.message,
+      );
+    }, (r) => r.email);
+  }
+
+  @override
+  Future<void> close() {
+    formGroup.dispose();
+    firebaseSubscription.cancel();
+    return super.close();
   }
 }

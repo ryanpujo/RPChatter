@@ -16,42 +16,61 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$UserBlocEvent {
-  User get user => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(User user) register,
+    required TResult Function() register,
+    required TResult Function(String username) getByUsername,
+    required TResult Function() getUsers,
+    required TResult Function(User user) update,
+    required TResult Function(String username) delete,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(User user)? register,
+    TResult? Function()? register,
+    TResult? Function(String username)? getByUsername,
+    TResult? Function()? getUsers,
+    TResult? Function(User user)? update,
+    TResult? Function(String username)? delete,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(User user)? register,
+    TResult Function()? register,
+    TResult Function(String username)? getByUsername,
+    TResult Function()? getUsers,
+    TResult Function(User user)? update,
+    TResult Function(String username)? delete,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(RegisterEvent value) register,
+    required TResult Function(_RegisterEvent value) register,
+    required TResult Function(_GetByUsername value) getByUsername,
+    required TResult Function(_GetUsers value) getUsers,
+    required TResult Function(_Update value) update,
+    required TResult Function(_Delete value) delete,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(RegisterEvent value)? register,
+    TResult? Function(_RegisterEvent value)? register,
+    TResult? Function(_GetByUsername value)? getByUsername,
+    TResult? Function(_GetUsers value)? getUsers,
+    TResult? Function(_Update value)? update,
+    TResult? Function(_Delete value)? delete,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(RegisterEvent value)? register,
+    TResult Function(_RegisterEvent value)? register,
+    TResult Function(_GetByUsername value)? getByUsername,
+    TResult Function(_GetUsers value)? getUsers,
+    TResult Function(_Update value)? update,
+    TResult Function(_Delete value)? delete,
     required TResult orElse(),
   }) =>
-      throw _privateConstructorUsedError;
-
-  @JsonKey(ignore: true)
-  $UserBlocEventCopyWith<UserBlocEvent> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -60,10 +79,6 @@ abstract class $UserBlocEventCopyWith<$Res> {
   factory $UserBlocEventCopyWith(
           UserBlocEvent value, $Res Function(UserBlocEvent) then) =
       _$UserBlocEventCopyWithImpl<$Res, UserBlocEvent>;
-  @useResult
-  $Res call({User user});
-
-  $UserCopyWith<$Res> get user;
 }
 
 /// @nodoc
@@ -75,119 +90,79 @@ class _$UserBlocEventCopyWithImpl<$Res, $Val extends UserBlocEvent>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? user = null,
-  }) {
-    return _then(_value.copyWith(
-      user: null == user
-          ? _value.user
-          : user // ignore: cast_nullable_to_non_nullable
-              as User,
-    ) as $Val);
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $UserCopyWith<$Res> get user {
-    return $UserCopyWith<$Res>(_value.user, (value) {
-      return _then(_value.copyWith(user: value) as $Val);
-    });
-  }
 }
 
 /// @nodoc
-abstract class _$$RegisterEventCopyWith<$Res>
-    implements $UserBlocEventCopyWith<$Res> {
-  factory _$$RegisterEventCopyWith(
-          _$RegisterEvent value, $Res Function(_$RegisterEvent) then) =
-      __$$RegisterEventCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call({User user});
-
-  @override
-  $UserCopyWith<$Res> get user;
+abstract class _$$_RegisterEventCopyWith<$Res> {
+  factory _$$_RegisterEventCopyWith(
+          _$_RegisterEvent value, $Res Function(_$_RegisterEvent) then) =
+      __$$_RegisterEventCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$RegisterEventCopyWithImpl<$Res>
-    extends _$UserBlocEventCopyWithImpl<$Res, _$RegisterEvent>
-    implements _$$RegisterEventCopyWith<$Res> {
-  __$$RegisterEventCopyWithImpl(
-      _$RegisterEvent _value, $Res Function(_$RegisterEvent) _then)
+class __$$_RegisterEventCopyWithImpl<$Res>
+    extends _$UserBlocEventCopyWithImpl<$Res, _$_RegisterEvent>
+    implements _$$_RegisterEventCopyWith<$Res> {
+  __$$_RegisterEventCopyWithImpl(
+      _$_RegisterEvent _value, $Res Function(_$_RegisterEvent) _then)
       : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? user = null,
-  }) {
-    return _then(_$RegisterEvent(
-      null == user
-          ? _value.user
-          : user // ignore: cast_nullable_to_non_nullable
-              as User,
-    ));
-  }
 }
 
 /// @nodoc
 
-class _$RegisterEvent implements RegisterEvent {
-  const _$RegisterEvent(this.user);
-
-  @override
-  final User user;
+class _$_RegisterEvent implements _RegisterEvent {
+  const _$_RegisterEvent();
 
   @override
   String toString() {
-    return 'UserBlocEvent.register(user: $user)';
+    return 'UserBlocEvent.register()';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$RegisterEvent &&
-            (identical(other.user, user) || other.user == user));
+        (other.runtimeType == runtimeType && other is _$_RegisterEvent);
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, user);
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$RegisterEventCopyWith<_$RegisterEvent> get copyWith =>
-      __$$RegisterEventCopyWithImpl<_$RegisterEvent>(this, _$identity);
+  int get hashCode => runtimeType.hashCode;
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(User user) register,
+    required TResult Function() register,
+    required TResult Function(String username) getByUsername,
+    required TResult Function() getUsers,
+    required TResult Function(User user) update,
+    required TResult Function(String username) delete,
   }) {
-    return register(user);
+    return register();
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(User user)? register,
+    TResult? Function()? register,
+    TResult? Function(String username)? getByUsername,
+    TResult? Function()? getUsers,
+    TResult? Function(User user)? update,
+    TResult? Function(String username)? delete,
   }) {
-    return register?.call(user);
+    return register?.call();
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(User user)? register,
+    TResult Function()? register,
+    TResult Function(String username)? getByUsername,
+    TResult Function()? getUsers,
+    TResult Function(User user)? update,
+    TResult Function(String username)? delete,
     required TResult orElse(),
   }) {
     if (register != null) {
-      return register(user);
+      return register();
     }
     return orElse();
   }
@@ -195,7 +170,11 @@ class _$RegisterEvent implements RegisterEvent {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(RegisterEvent value) register,
+    required TResult Function(_RegisterEvent value) register,
+    required TResult Function(_GetByUsername value) getByUsername,
+    required TResult Function(_GetUsers value) getUsers,
+    required TResult Function(_Update value) update,
+    required TResult Function(_Delete value) delete,
   }) {
     return register(this);
   }
@@ -203,7 +182,11 @@ class _$RegisterEvent implements RegisterEvent {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(RegisterEvent value)? register,
+    TResult? Function(_RegisterEvent value)? register,
+    TResult? Function(_GetByUsername value)? getByUsername,
+    TResult? Function(_GetUsers value)? getUsers,
+    TResult? Function(_Update value)? update,
+    TResult? Function(_Delete value)? delete,
   }) {
     return register?.call(this);
   }
@@ -211,7 +194,11 @@ class _$RegisterEvent implements RegisterEvent {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(RegisterEvent value)? register,
+    TResult Function(_RegisterEvent value)? register,
+    TResult Function(_GetByUsername value)? getByUsername,
+    TResult Function(_GetUsers value)? getUsers,
+    TResult Function(_Update value)? update,
+    TResult Function(_Delete value)? delete,
     required TResult orElse(),
   }) {
     if (register != null) {
@@ -221,13 +208,587 @@ class _$RegisterEvent implements RegisterEvent {
   }
 }
 
-abstract class RegisterEvent implements UserBlocEvent {
-  const factory RegisterEvent(final User user) = _$RegisterEvent;
+abstract class _RegisterEvent implements UserBlocEvent {
+  const factory _RegisterEvent() = _$_RegisterEvent;
+}
+
+/// @nodoc
+abstract class _$$_GetByUsernameCopyWith<$Res> {
+  factory _$$_GetByUsernameCopyWith(
+          _$_GetByUsername value, $Res Function(_$_GetByUsername) then) =
+      __$$_GetByUsernameCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String username});
+}
+
+/// @nodoc
+class __$$_GetByUsernameCopyWithImpl<$Res>
+    extends _$UserBlocEventCopyWithImpl<$Res, _$_GetByUsername>
+    implements _$$_GetByUsernameCopyWith<$Res> {
+  __$$_GetByUsernameCopyWithImpl(
+      _$_GetByUsername _value, $Res Function(_$_GetByUsername) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? username = null,
+  }) {
+    return _then(_$_GetByUsername(
+      null == username
+          ? _value.username
+          : username // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_GetByUsername implements _GetByUsername {
+  const _$_GetByUsername(this.username);
 
   @override
-  User get user;
+  final String username;
+
   @override
+  String toString() {
+    return 'UserBlocEvent.getByUsername(username: $username)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_GetByUsername &&
+            (identical(other.username, username) ||
+                other.username == username));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, username);
+
   @JsonKey(ignore: true)
-  _$$RegisterEventCopyWith<_$RegisterEvent> get copyWith =>
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_GetByUsernameCopyWith<_$_GetByUsername> get copyWith =>
+      __$$_GetByUsernameCopyWithImpl<_$_GetByUsername>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() register,
+    required TResult Function(String username) getByUsername,
+    required TResult Function() getUsers,
+    required TResult Function(User user) update,
+    required TResult Function(String username) delete,
+  }) {
+    return getByUsername(username);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? register,
+    TResult? Function(String username)? getByUsername,
+    TResult? Function()? getUsers,
+    TResult? Function(User user)? update,
+    TResult? Function(String username)? delete,
+  }) {
+    return getByUsername?.call(username);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? register,
+    TResult Function(String username)? getByUsername,
+    TResult Function()? getUsers,
+    TResult Function(User user)? update,
+    TResult Function(String username)? delete,
+    required TResult orElse(),
+  }) {
+    if (getByUsername != null) {
+      return getByUsername(username);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_RegisterEvent value) register,
+    required TResult Function(_GetByUsername value) getByUsername,
+    required TResult Function(_GetUsers value) getUsers,
+    required TResult Function(_Update value) update,
+    required TResult Function(_Delete value) delete,
+  }) {
+    return getByUsername(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_RegisterEvent value)? register,
+    TResult? Function(_GetByUsername value)? getByUsername,
+    TResult? Function(_GetUsers value)? getUsers,
+    TResult? Function(_Update value)? update,
+    TResult? Function(_Delete value)? delete,
+  }) {
+    return getByUsername?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_RegisterEvent value)? register,
+    TResult Function(_GetByUsername value)? getByUsername,
+    TResult Function(_GetUsers value)? getUsers,
+    TResult Function(_Update value)? update,
+    TResult Function(_Delete value)? delete,
+    required TResult orElse(),
+  }) {
+    if (getByUsername != null) {
+      return getByUsername(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _GetByUsername implements UserBlocEvent {
+  const factory _GetByUsername(final String username) = _$_GetByUsername;
+
+  String get username;
+  @JsonKey(ignore: true)
+  _$$_GetByUsernameCopyWith<_$_GetByUsername> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_GetUsersCopyWith<$Res> {
+  factory _$$_GetUsersCopyWith(
+          _$_GetUsers value, $Res Function(_$_GetUsers) then) =
+      __$$_GetUsersCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$_GetUsersCopyWithImpl<$Res>
+    extends _$UserBlocEventCopyWithImpl<$Res, _$_GetUsers>
+    implements _$$_GetUsersCopyWith<$Res> {
+  __$$_GetUsersCopyWithImpl(
+      _$_GetUsers _value, $Res Function(_$_GetUsers) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$_GetUsers implements _GetUsers {
+  const _$_GetUsers();
+
+  @override
+  String toString() {
+    return 'UserBlocEvent.getUsers()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$_GetUsers);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() register,
+    required TResult Function(String username) getByUsername,
+    required TResult Function() getUsers,
+    required TResult Function(User user) update,
+    required TResult Function(String username) delete,
+  }) {
+    return getUsers();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? register,
+    TResult? Function(String username)? getByUsername,
+    TResult? Function()? getUsers,
+    TResult? Function(User user)? update,
+    TResult? Function(String username)? delete,
+  }) {
+    return getUsers?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? register,
+    TResult Function(String username)? getByUsername,
+    TResult Function()? getUsers,
+    TResult Function(User user)? update,
+    TResult Function(String username)? delete,
+    required TResult orElse(),
+  }) {
+    if (getUsers != null) {
+      return getUsers();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_RegisterEvent value) register,
+    required TResult Function(_GetByUsername value) getByUsername,
+    required TResult Function(_GetUsers value) getUsers,
+    required TResult Function(_Update value) update,
+    required TResult Function(_Delete value) delete,
+  }) {
+    return getUsers(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_RegisterEvent value)? register,
+    TResult? Function(_GetByUsername value)? getByUsername,
+    TResult? Function(_GetUsers value)? getUsers,
+    TResult? Function(_Update value)? update,
+    TResult? Function(_Delete value)? delete,
+  }) {
+    return getUsers?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_RegisterEvent value)? register,
+    TResult Function(_GetByUsername value)? getByUsername,
+    TResult Function(_GetUsers value)? getUsers,
+    TResult Function(_Update value)? update,
+    TResult Function(_Delete value)? delete,
+    required TResult orElse(),
+  }) {
+    if (getUsers != null) {
+      return getUsers(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _GetUsers implements UserBlocEvent {
+  const factory _GetUsers() = _$_GetUsers;
+}
+
+/// @nodoc
+abstract class _$$_UpdateCopyWith<$Res> {
+  factory _$$_UpdateCopyWith(_$_Update value, $Res Function(_$_Update) then) =
+      __$$_UpdateCopyWithImpl<$Res>;
+  @useResult
+  $Res call({User user});
+
+  $UserCopyWith<$Res> get user;
+}
+
+/// @nodoc
+class __$$_UpdateCopyWithImpl<$Res>
+    extends _$UserBlocEventCopyWithImpl<$Res, _$_Update>
+    implements _$$_UpdateCopyWith<$Res> {
+  __$$_UpdateCopyWithImpl(_$_Update _value, $Res Function(_$_Update) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? user = null,
+  }) {
+    return _then(_$_Update(
+      null == user
+          ? _value.user
+          : user // ignore: cast_nullable_to_non_nullable
+              as User,
+    ));
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $UserCopyWith<$Res> get user {
+    return $UserCopyWith<$Res>(_value.user, (value) {
+      return _then(_value.copyWith(user: value));
+    });
+  }
+}
+
+/// @nodoc
+
+class _$_Update implements _Update {
+  const _$_Update(this.user);
+
+  @override
+  final User user;
+
+  @override
+  String toString() {
+    return 'UserBlocEvent.update(user: $user)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_Update &&
+            (identical(other.user, user) || other.user == user));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, user);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_UpdateCopyWith<_$_Update> get copyWith =>
+      __$$_UpdateCopyWithImpl<_$_Update>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() register,
+    required TResult Function(String username) getByUsername,
+    required TResult Function() getUsers,
+    required TResult Function(User user) update,
+    required TResult Function(String username) delete,
+  }) {
+    return update(user);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? register,
+    TResult? Function(String username)? getByUsername,
+    TResult? Function()? getUsers,
+    TResult? Function(User user)? update,
+    TResult? Function(String username)? delete,
+  }) {
+    return update?.call(user);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? register,
+    TResult Function(String username)? getByUsername,
+    TResult Function()? getUsers,
+    TResult Function(User user)? update,
+    TResult Function(String username)? delete,
+    required TResult orElse(),
+  }) {
+    if (update != null) {
+      return update(user);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_RegisterEvent value) register,
+    required TResult Function(_GetByUsername value) getByUsername,
+    required TResult Function(_GetUsers value) getUsers,
+    required TResult Function(_Update value) update,
+    required TResult Function(_Delete value) delete,
+  }) {
+    return update(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_RegisterEvent value)? register,
+    TResult? Function(_GetByUsername value)? getByUsername,
+    TResult? Function(_GetUsers value)? getUsers,
+    TResult? Function(_Update value)? update,
+    TResult? Function(_Delete value)? delete,
+  }) {
+    return update?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_RegisterEvent value)? register,
+    TResult Function(_GetByUsername value)? getByUsername,
+    TResult Function(_GetUsers value)? getUsers,
+    TResult Function(_Update value)? update,
+    TResult Function(_Delete value)? delete,
+    required TResult orElse(),
+  }) {
+    if (update != null) {
+      return update(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _Update implements UserBlocEvent {
+  const factory _Update(final User user) = _$_Update;
+
+  User get user;
+  @JsonKey(ignore: true)
+  _$$_UpdateCopyWith<_$_Update> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_DeleteCopyWith<$Res> {
+  factory _$$_DeleteCopyWith(_$_Delete value, $Res Function(_$_Delete) then) =
+      __$$_DeleteCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String username});
+}
+
+/// @nodoc
+class __$$_DeleteCopyWithImpl<$Res>
+    extends _$UserBlocEventCopyWithImpl<$Res, _$_Delete>
+    implements _$$_DeleteCopyWith<$Res> {
+  __$$_DeleteCopyWithImpl(_$_Delete _value, $Res Function(_$_Delete) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? username = null,
+  }) {
+    return _then(_$_Delete(
+      null == username
+          ? _value.username
+          : username // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_Delete implements _Delete {
+  const _$_Delete(this.username);
+
+  @override
+  final String username;
+
+  @override
+  String toString() {
+    return 'UserBlocEvent.delete(username: $username)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_Delete &&
+            (identical(other.username, username) ||
+                other.username == username));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, username);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_DeleteCopyWith<_$_Delete> get copyWith =>
+      __$$_DeleteCopyWithImpl<_$_Delete>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() register,
+    required TResult Function(String username) getByUsername,
+    required TResult Function() getUsers,
+    required TResult Function(User user) update,
+    required TResult Function(String username) delete,
+  }) {
+    return delete(username);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? register,
+    TResult? Function(String username)? getByUsername,
+    TResult? Function()? getUsers,
+    TResult? Function(User user)? update,
+    TResult? Function(String username)? delete,
+  }) {
+    return delete?.call(username);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? register,
+    TResult Function(String username)? getByUsername,
+    TResult Function()? getUsers,
+    TResult Function(User user)? update,
+    TResult Function(String username)? delete,
+    required TResult orElse(),
+  }) {
+    if (delete != null) {
+      return delete(username);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_RegisterEvent value) register,
+    required TResult Function(_GetByUsername value) getByUsername,
+    required TResult Function(_GetUsers value) getUsers,
+    required TResult Function(_Update value) update,
+    required TResult Function(_Delete value) delete,
+  }) {
+    return delete(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_RegisterEvent value)? register,
+    TResult? Function(_GetByUsername value)? getByUsername,
+    TResult? Function(_GetUsers value)? getUsers,
+    TResult? Function(_Update value)? update,
+    TResult? Function(_Delete value)? delete,
+  }) {
+    return delete?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_RegisterEvent value)? register,
+    TResult Function(_GetByUsername value)? getByUsername,
+    TResult Function(_GetUsers value)? getUsers,
+    TResult Function(_Update value)? update,
+    TResult Function(_Delete value)? delete,
+    required TResult orElse(),
+  }) {
+    if (delete != null) {
+      return delete(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _Delete implements UserBlocEvent {
+  const factory _Delete(final String username) = _$_Delete;
+
+  String get username;
+  @JsonKey(ignore: true)
+  _$$_DeleteCopyWith<_$_Delete> get copyWith =>
       throw _privateConstructorUsedError;
 }

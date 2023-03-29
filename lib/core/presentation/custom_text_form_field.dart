@@ -2,19 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
 class CustomTextFormField extends StatelessWidget {
-  const CustomTextFormField(
-      {super.key,
-      required this.label,
-      required this.icon,
-      this.onSaved,
-      this.obscureText = false,
-      this.enableSuggestions = true,
-      this.autoCorrect = true,
-      this.keyboardType,
-      required this.name,
-      this.onEditingComplete,
-      this.onChanged,
-      this.validationMessages});
+  const CustomTextFormField({
+    super.key,
+    required this.label,
+    required this.icon,
+    this.onSaved,
+    this.obscureText = false,
+    this.enableSuggestions = true,
+    this.autoCorrect = true,
+    this.keyboardType,
+    required this.name,
+    this.onEditingComplete,
+    this.onChanged,
+    this.validationMessages,
+  });
 
   final String label;
   final Icon icon;
