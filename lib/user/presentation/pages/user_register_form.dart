@@ -4,8 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:reactive_forms/reactive_forms.dart';
-import 'package:ryan_pujo_app/auth/application/bloc/auth_bloc.dart';
-import 'package:ryan_pujo_app/auth/application/bloc/auth_event.dart';
 import 'package:ryan_pujo_app/user/application/bloc/user_bloc_state.dart';
 
 import '../../application/bloc/user_bloc_bloc.dart';
@@ -30,29 +28,7 @@ class UserRegisterForm extends StatelessWidget {
                 listener: (context, state) {
                   state.maybeWhen(
                     orElse: () {},
-                    loadedState: (user, users) {
-                      context
-                          .read<AuthBloc>()
-                          .formGroup
-                          .control("username")
-                          .value = user!.email;
-                      context
-                              .read<AuthBloc>()
-                              .formGroup
-                              .control("password")
-                              .value =
-                          context
-                              .read<UserBlocBloc>()
-                              .formGroup
-                              .control("password")
-                              .value;
-                      context.read<AuthBloc>().add(const AuthEvent.signIn());
-                      context
-                          .read<UserBlocBloc>()
-                          .formGroup
-                          .control("password")
-                          .value = "";
-                    },
+                    loadedState: (user, users, cred) {},
                   );
                 },
                 child: Column(

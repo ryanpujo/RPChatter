@@ -9,6 +9,5 @@ class AuthEvent with _$AuthEvent {
   const factory AuthEvent.isAuthenticated(User? user) = _isAuthenticated;
   const factory AuthEvent.signOut() = _SignOut;
   const factory AuthEvent.signIn() = _SignIn;
-  const factory AuthEvent.verifyingEmail() = _VerifyingEmail;
   const factory AuthEvent.checkAuthentication() = _CheckAuthentication;
 }

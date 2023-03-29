@@ -18,13 +18,6 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
             await _isAuthenticated(isAuthenticatedEvent, emit),
         signOut: (value) async => await _signOut(event, emit),
         signIn: (value) async => await _signIn(event, emit),
-        verifyingEmail: (value) {
-          final user = _authenticator.currentUser;
-          if (user!.emailVerified) {
-            emit(const AuthState.authenticated());
-          }
-          emit(const AuthState.unVerified());
-        },
         checkAuthentication: (value) {
           firebaseSubscription = _authenticator.userChanges().listen((user) {
             add(AuthEvent.isAuthenticated(user));
@@ -36,6 +29,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
   late final StreamSubscription<User?> firebaseSubscription;
   final FirebaseAuth _authenticator;
+  FirebaseAuth get authenticator => _authenticator;
   final UserRepositoryContract _userRepository;
   final formGroup = FormGroup({
     "username": FormControl(validators: [Validators.required]),
@@ -48,6 +42,10 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       orElse: () {},
       isAuthenticated: (user) {
         if (user != null) {
+          if (!user.emailVerified) {
+            emit(const AuthState.unVerified());
+            return;
+          }
           emit(const AuthState.authenticated());
           return;
         }

@@ -21,7 +21,6 @@ mixin _$AuthEvent {
     required TResult Function(User? user) isAuthenticated,
     required TResult Function() signOut,
     required TResult Function() signIn,
-    required TResult Function() verifyingEmail,
     required TResult Function() checkAuthentication,
   }) =>
       throw _privateConstructorUsedError;
@@ -30,7 +29,6 @@ mixin _$AuthEvent {
     TResult? Function(User? user)? isAuthenticated,
     TResult? Function()? signOut,
     TResult? Function()? signIn,
-    TResult? Function()? verifyingEmail,
     TResult? Function()? checkAuthentication,
   }) =>
       throw _privateConstructorUsedError;
@@ -39,7 +37,6 @@ mixin _$AuthEvent {
     TResult Function(User? user)? isAuthenticated,
     TResult Function()? signOut,
     TResult Function()? signIn,
-    TResult Function()? verifyingEmail,
     TResult Function()? checkAuthentication,
     required TResult orElse(),
   }) =>
@@ -49,7 +46,6 @@ mixin _$AuthEvent {
     required TResult Function(_isAuthenticated value) isAuthenticated,
     required TResult Function(_SignOut value) signOut,
     required TResult Function(_SignIn value) signIn,
-    required TResult Function(_VerifyingEmail value) verifyingEmail,
     required TResult Function(_CheckAuthentication value) checkAuthentication,
   }) =>
       throw _privateConstructorUsedError;
@@ -58,7 +54,6 @@ mixin _$AuthEvent {
     TResult? Function(_isAuthenticated value)? isAuthenticated,
     TResult? Function(_SignOut value)? signOut,
     TResult? Function(_SignIn value)? signIn,
-    TResult? Function(_VerifyingEmail value)? verifyingEmail,
     TResult? Function(_CheckAuthentication value)? checkAuthentication,
   }) =>
       throw _privateConstructorUsedError;
@@ -67,7 +62,6 @@ mixin _$AuthEvent {
     TResult Function(_isAuthenticated value)? isAuthenticated,
     TResult Function(_SignOut value)? signOut,
     TResult Function(_SignIn value)? signIn,
-    TResult Function(_VerifyingEmail value)? verifyingEmail,
     TResult Function(_CheckAuthentication value)? checkAuthentication,
     required TResult orElse(),
   }) =>
@@ -158,7 +152,6 @@ class _$_isAuthenticated extends _isAuthenticated {
     required TResult Function(User? user) isAuthenticated,
     required TResult Function() signOut,
     required TResult Function() signIn,
-    required TResult Function() verifyingEmail,
     required TResult Function() checkAuthentication,
   }) {
     return isAuthenticated(user);
@@ -170,7 +163,6 @@ class _$_isAuthenticated extends _isAuthenticated {
     TResult? Function(User? user)? isAuthenticated,
     TResult? Function()? signOut,
     TResult? Function()? signIn,
-    TResult? Function()? verifyingEmail,
     TResult? Function()? checkAuthentication,
   }) {
     return isAuthenticated?.call(user);
@@ -182,7 +174,6 @@ class _$_isAuthenticated extends _isAuthenticated {
     TResult Function(User? user)? isAuthenticated,
     TResult Function()? signOut,
     TResult Function()? signIn,
-    TResult Function()? verifyingEmail,
     TResult Function()? checkAuthentication,
     required TResult orElse(),
   }) {
@@ -198,7 +189,6 @@ class _$_isAuthenticated extends _isAuthenticated {
     required TResult Function(_isAuthenticated value) isAuthenticated,
     required TResult Function(_SignOut value) signOut,
     required TResult Function(_SignIn value) signIn,
-    required TResult Function(_VerifyingEmail value) verifyingEmail,
     required TResult Function(_CheckAuthentication value) checkAuthentication,
   }) {
     return isAuthenticated(this);
@@ -210,7 +200,6 @@ class _$_isAuthenticated extends _isAuthenticated {
     TResult? Function(_isAuthenticated value)? isAuthenticated,
     TResult? Function(_SignOut value)? signOut,
     TResult? Function(_SignIn value)? signIn,
-    TResult? Function(_VerifyingEmail value)? verifyingEmail,
     TResult? Function(_CheckAuthentication value)? checkAuthentication,
   }) {
     return isAuthenticated?.call(this);
@@ -222,7 +211,6 @@ class _$_isAuthenticated extends _isAuthenticated {
     TResult Function(_isAuthenticated value)? isAuthenticated,
     TResult Function(_SignOut value)? signOut,
     TResult Function(_SignIn value)? signIn,
-    TResult Function(_VerifyingEmail value)? verifyingEmail,
     TResult Function(_CheckAuthentication value)? checkAuthentication,
     required TResult orElse(),
   }) {
@@ -283,7 +271,6 @@ class _$_SignOut extends _SignOut {
     required TResult Function(User? user) isAuthenticated,
     required TResult Function() signOut,
     required TResult Function() signIn,
-    required TResult Function() verifyingEmail,
     required TResult Function() checkAuthentication,
   }) {
     return signOut();
@@ -295,7 +282,6 @@ class _$_SignOut extends _SignOut {
     TResult? Function(User? user)? isAuthenticated,
     TResult? Function()? signOut,
     TResult? Function()? signIn,
-    TResult? Function()? verifyingEmail,
     TResult? Function()? checkAuthentication,
   }) {
     return signOut?.call();
@@ -307,7 +293,6 @@ class _$_SignOut extends _SignOut {
     TResult Function(User? user)? isAuthenticated,
     TResult Function()? signOut,
     TResult Function()? signIn,
-    TResult Function()? verifyingEmail,
     TResult Function()? checkAuthentication,
     required TResult orElse(),
   }) {
@@ -323,7 +308,6 @@ class _$_SignOut extends _SignOut {
     required TResult Function(_isAuthenticated value) isAuthenticated,
     required TResult Function(_SignOut value) signOut,
     required TResult Function(_SignIn value) signIn,
-    required TResult Function(_VerifyingEmail value) verifyingEmail,
     required TResult Function(_CheckAuthentication value) checkAuthentication,
   }) {
     return signOut(this);
@@ -335,7 +319,6 @@ class _$_SignOut extends _SignOut {
     TResult? Function(_isAuthenticated value)? isAuthenticated,
     TResult? Function(_SignOut value)? signOut,
     TResult? Function(_SignIn value)? signIn,
-    TResult? Function(_VerifyingEmail value)? verifyingEmail,
     TResult? Function(_CheckAuthentication value)? checkAuthentication,
   }) {
     return signOut?.call(this);
@@ -347,7 +330,6 @@ class _$_SignOut extends _SignOut {
     TResult Function(_isAuthenticated value)? isAuthenticated,
     TResult Function(_SignOut value)? signOut,
     TResult Function(_SignIn value)? signIn,
-    TResult Function(_VerifyingEmail value)? verifyingEmail,
     TResult Function(_CheckAuthentication value)? checkAuthentication,
     required TResult orElse(),
   }) {
@@ -402,7 +384,6 @@ class _$_SignIn extends _SignIn {
     required TResult Function(User? user) isAuthenticated,
     required TResult Function() signOut,
     required TResult Function() signIn,
-    required TResult Function() verifyingEmail,
     required TResult Function() checkAuthentication,
   }) {
     return signIn();
@@ -414,7 +395,6 @@ class _$_SignIn extends _SignIn {
     TResult? Function(User? user)? isAuthenticated,
     TResult? Function()? signOut,
     TResult? Function()? signIn,
-    TResult? Function()? verifyingEmail,
     TResult? Function()? checkAuthentication,
   }) {
     return signIn?.call();
@@ -426,7 +406,6 @@ class _$_SignIn extends _SignIn {
     TResult Function(User? user)? isAuthenticated,
     TResult Function()? signOut,
     TResult Function()? signIn,
-    TResult Function()? verifyingEmail,
     TResult Function()? checkAuthentication,
     required TResult orElse(),
   }) {
@@ -442,7 +421,6 @@ class _$_SignIn extends _SignIn {
     required TResult Function(_isAuthenticated value) isAuthenticated,
     required TResult Function(_SignOut value) signOut,
     required TResult Function(_SignIn value) signIn,
-    required TResult Function(_VerifyingEmail value) verifyingEmail,
     required TResult Function(_CheckAuthentication value) checkAuthentication,
   }) {
     return signIn(this);
@@ -454,7 +432,6 @@ class _$_SignIn extends _SignIn {
     TResult? Function(_isAuthenticated value)? isAuthenticated,
     TResult? Function(_SignOut value)? signOut,
     TResult? Function(_SignIn value)? signIn,
-    TResult? Function(_VerifyingEmail value)? verifyingEmail,
     TResult? Function(_CheckAuthentication value)? checkAuthentication,
   }) {
     return signIn?.call(this);
@@ -466,7 +443,6 @@ class _$_SignIn extends _SignIn {
     TResult Function(_isAuthenticated value)? isAuthenticated,
     TResult Function(_SignOut value)? signOut,
     TResult Function(_SignIn value)? signIn,
-    TResult Function(_VerifyingEmail value)? verifyingEmail,
     TResult Function(_CheckAuthentication value)? checkAuthentication,
     required TResult orElse(),
   }) {
@@ -480,127 +456,6 @@ class _$_SignIn extends _SignIn {
 abstract class _SignIn extends AuthEvent {
   const factory _SignIn() = _$_SignIn;
   const _SignIn._() : super._();
-}
-
-/// @nodoc
-abstract class _$$_VerifyingEmailCopyWith<$Res> {
-  factory _$$_VerifyingEmailCopyWith(
-          _$_VerifyingEmail value, $Res Function(_$_VerifyingEmail) then) =
-      __$$_VerifyingEmailCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$$_VerifyingEmailCopyWithImpl<$Res>
-    extends _$AuthEventCopyWithImpl<$Res, _$_VerifyingEmail>
-    implements _$$_VerifyingEmailCopyWith<$Res> {
-  __$$_VerifyingEmailCopyWithImpl(
-      _$_VerifyingEmail _value, $Res Function(_$_VerifyingEmail) _then)
-      : super(_value, _then);
-}
-
-/// @nodoc
-
-class _$_VerifyingEmail extends _VerifyingEmail {
-  const _$_VerifyingEmail() : super._();
-
-  @override
-  String toString() {
-    return 'AuthEvent.verifyingEmail()';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_VerifyingEmail);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(User? user) isAuthenticated,
-    required TResult Function() signOut,
-    required TResult Function() signIn,
-    required TResult Function() verifyingEmail,
-    required TResult Function() checkAuthentication,
-  }) {
-    return verifyingEmail();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(User? user)? isAuthenticated,
-    TResult? Function()? signOut,
-    TResult? Function()? signIn,
-    TResult? Function()? verifyingEmail,
-    TResult? Function()? checkAuthentication,
-  }) {
-    return verifyingEmail?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(User? user)? isAuthenticated,
-    TResult Function()? signOut,
-    TResult Function()? signIn,
-    TResult Function()? verifyingEmail,
-    TResult Function()? checkAuthentication,
-    required TResult orElse(),
-  }) {
-    if (verifyingEmail != null) {
-      return verifyingEmail();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_isAuthenticated value) isAuthenticated,
-    required TResult Function(_SignOut value) signOut,
-    required TResult Function(_SignIn value) signIn,
-    required TResult Function(_VerifyingEmail value) verifyingEmail,
-    required TResult Function(_CheckAuthentication value) checkAuthentication,
-  }) {
-    return verifyingEmail(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_isAuthenticated value)? isAuthenticated,
-    TResult? Function(_SignOut value)? signOut,
-    TResult? Function(_SignIn value)? signIn,
-    TResult? Function(_VerifyingEmail value)? verifyingEmail,
-    TResult? Function(_CheckAuthentication value)? checkAuthentication,
-  }) {
-    return verifyingEmail?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_isAuthenticated value)? isAuthenticated,
-    TResult Function(_SignOut value)? signOut,
-    TResult Function(_SignIn value)? signIn,
-    TResult Function(_VerifyingEmail value)? verifyingEmail,
-    TResult Function(_CheckAuthentication value)? checkAuthentication,
-    required TResult orElse(),
-  }) {
-    if (verifyingEmail != null) {
-      return verifyingEmail(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _VerifyingEmail extends AuthEvent {
-  const factory _VerifyingEmail() = _$_VerifyingEmail;
-  const _VerifyingEmail._() : super._();
 }
 
 /// @nodoc
@@ -644,7 +499,6 @@ class _$_CheckAuthentication extends _CheckAuthentication {
     required TResult Function(User? user) isAuthenticated,
     required TResult Function() signOut,
     required TResult Function() signIn,
-    required TResult Function() verifyingEmail,
     required TResult Function() checkAuthentication,
   }) {
     return checkAuthentication();
@@ -656,7 +510,6 @@ class _$_CheckAuthentication extends _CheckAuthentication {
     TResult? Function(User? user)? isAuthenticated,
     TResult? Function()? signOut,
     TResult? Function()? signIn,
-    TResult? Function()? verifyingEmail,
     TResult? Function()? checkAuthentication,
   }) {
     return checkAuthentication?.call();
@@ -668,7 +521,6 @@ class _$_CheckAuthentication extends _CheckAuthentication {
     TResult Function(User? user)? isAuthenticated,
     TResult Function()? signOut,
     TResult Function()? signIn,
-    TResult Function()? verifyingEmail,
     TResult Function()? checkAuthentication,
     required TResult orElse(),
   }) {
@@ -684,7 +536,6 @@ class _$_CheckAuthentication extends _CheckAuthentication {
     required TResult Function(_isAuthenticated value) isAuthenticated,
     required TResult Function(_SignOut value) signOut,
     required TResult Function(_SignIn value) signIn,
-    required TResult Function(_VerifyingEmail value) verifyingEmail,
     required TResult Function(_CheckAuthentication value) checkAuthentication,
   }) {
     return checkAuthentication(this);
@@ -696,7 +547,6 @@ class _$_CheckAuthentication extends _CheckAuthentication {
     TResult? Function(_isAuthenticated value)? isAuthenticated,
     TResult? Function(_SignOut value)? signOut,
     TResult? Function(_SignIn value)? signIn,
-    TResult? Function(_VerifyingEmail value)? verifyingEmail,
     TResult? Function(_CheckAuthentication value)? checkAuthentication,
   }) {
     return checkAuthentication?.call(this);
@@ -708,7 +558,6 @@ class _$_CheckAuthentication extends _CheckAuthentication {
     TResult Function(_isAuthenticated value)? isAuthenticated,
     TResult Function(_SignOut value)? signOut,
     TResult Function(_SignIn value)? signIn,
-    TResult Function(_VerifyingEmail value)? verifyingEmail,
     TResult Function(_CheckAuthentication value)? checkAuthentication,
     required TResult orElse(),
   }) {
